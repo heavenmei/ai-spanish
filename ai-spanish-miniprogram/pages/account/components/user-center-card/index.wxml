@@ -1,0 +1,29 @@
+<view class="user-center-card">
+  <!-- 已登录 -->
+  <block wx:if="{{hasUserInfo}}">
+    <view class="user-center-card__header">
+      <t-avatar
+        image="{{userInfo.avatar || defaultAvatarUrl}}"
+        class="user-center-card__header__avatar"
+      />
+
+      <view class="user-center-card__header__name"
+        >{{userInfo.name || '微信用户'}}</view
+      >
+      <view
+        class="user-center-card__header__transparent"
+        bind:tap="gotoUserEditPage"
+      ></view>
+    </view>
+  </block>
+  <!-- 未登录的情况 -->
+  <block wx:else>
+    <view class="user-center-card__header" bind:tap="gotoUserEditPage">
+      <t-avatar
+        image="{{userInfo.avatar || defaultAvatarUrl}}"
+        class="user-center-card__header__avatar"
+      />
+      <view class="user-center-card__header__name">{{'请登录'}}</view>
+    </view>
+  </block>
+</view>

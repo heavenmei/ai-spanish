@@ -1,0 +1,36 @@
+<t-navbar />
+
+<view class="container">
+  <view class="main">
+    <view class="logo">
+      <image
+        t-class="logo__img"
+        src="/images/logo.png"
+        style="height: 100px; width: 100px"
+      />
+      <view class="titleBar">
+        <view class="title">AI 西语</view>
+        <text class="subTitle"
+          >You can ask me anything. Start chatting with AI now.</text
+        >
+        <view class="subTitle">
+          <text> </text>
+        </view>
+      </view>
+    </view>
+
+    <view class="chatPanel">
+      <text class="label">情景对话</text>
+      <t-button theme="primary" size="large" block bind:tap="goChatStart"
+        >Get started</t-button
+      >
+    </view>
+
+    <view class="wordPanel">
+      <text class="label">背单词</text>
+      <t-button theme="primary" size="large" block bind:tap="gotoWord"
+        >Get started</t-button
+      >
+    </view>
+  </view>
+</view>

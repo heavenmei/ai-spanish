@@ -1,0 +1,53 @@
+<t-navbar
+  t-class-placeholder="t-navbar-placeholder"
+  t-class-content="t-navbar-content"
+  class="custom-navbar"
+>
+  <view slot="left" class="navbar-left">
+    <block>对话历史</block>
+    <t-icon
+      size="20"
+      bind:tap="goChatStart"
+      aria-role="button"
+      aria-label="添加"
+      name="add"
+      class="custom-navbar__icon"
+    />
+  </view>
+</t-navbar>
+
+<view class="container">
+  <view class="new-btn">
+    <t-button
+      theme="primary"
+      size="large"
+      block
+      bind:tap="goChatStart"
+      style="width: 100%"
+      >New Chat</t-button
+    >
+    <t-divider content="文字信息" />
+  </view>
+
+  <view class="message-card-list">
+    <block
+      wx:for="{{historyList}}"
+      wx:key="index"
+      wx:for-item="item"
+      wx:for-index="index"
+    >
+      <history-card
+        item="{{item}}"
+        bind:onDeleteHistory="onDeleteHistory"
+      ></history-card>
+    </block>
+
+    <t-load-more
+      t-class="no-more"
+      status="{{loadMoreStatus}}"
+      no-more-text="没有更多了"
+      color="#BBBBBB"
+      failedColor="#FA550F"
+    />
+  </view>
+</view>

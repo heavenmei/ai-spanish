@@ -1,0 +1,54 @@
+<wxs module="utils" src="../../../../utils/formatDate.wxs"></wxs>
+
+<view
+  class="card  {{isAiRes?'ai-card':'user-card'}}"
+  wx:if="{{text || filename}}"
+>
+  <!-- top -->
+  <view class="avatar">
+    <!-- avatar -->
+    <t-icon
+      name="{{isAiRes?'/images/robot.png':'/images/user.png'}}"
+      data-name="user"
+      size="48rpx"
+    />
+    <view
+      wx:if="{{filename}}"
+      class="wave"
+      data-filename="{{filename}}"
+      bindtap="playAudio"
+    >
+      <t-icon
+        name="play-circle-filled"
+        size="30rpx"
+        data-name="play-circle-filled"
+        data-id="{{cardId}}"
+      />
+
+      <label>{{seconds}}</label>
+      <image
+        src="{{speechIcon}}"
+        data-name="wave"
+        data-id="{{cardId}}"
+        style="width: 120px; height: 30rpx"
+      />
+    </view>
+  </view>
+  <!-- text -->
+  <view>{{text}}</view>
+  <!-- tool -->
+  <view class="tool">
+    <view>{{utils.format(updatedAt,'hh-mm-ss')}}</view>
+
+    <view style="display: flex; flex-direction: row-reverse; gap: 4px">
+      <t-icon name="share" size="16px" />
+      <t-icon
+        name="file-copy"
+        size="16px"
+        data-name="file-copy"
+        data-id="{{cardId}}"
+        bind:click="onIconTap"
+      />
+    </view>
+  </view>
+</view>

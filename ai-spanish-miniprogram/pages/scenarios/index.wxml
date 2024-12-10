@@ -1,0 +1,44 @@
+<t-navbar class="custom-navbar">
+  <view slot="left" class="navbar-left">
+    <block>聊天场景</block>
+    <t-icon
+      size="20"
+      bind:tap="goChatStart"
+      aria-role="button"
+      aria-label="添加"
+      name="add"
+      class="custom-navbar__icon"
+    />
+  </view>
+</t-navbar>
+
+<view class="container">
+  <t-tabs defaultValue="{{0}}" theme="tag">
+    <t-tab-panel
+      wx:for="{{tabList}}"
+      wx:for-index="index"
+      wx:key="index"
+      label="{{item.title}}"
+      value="{{item.id}}"
+    />
+  </t-tabs>
+  <view class="scenarios-list-wrap wr-class" id="{{independentID}}">
+    <block wx:for="{{modelList}}" wx:for-item="item" wx:key="index">
+      <scenario-card
+        id="{{item.id}}"
+        data="{{item}}"
+        class="scenario-card-inside"
+        data-index="{{index}}"
+        bind:thumb="onClickGoodsThumb"
+        bind:click="onClickGoods"
+        bind:add-cart="onAddCart"
+      />
+    </block>
+  </view>
+
+  <load-more
+    list-is-empty="{{!modelList.length}}"
+    status="{{modelListLoadStatus}}"
+    bind:retry="onReTry"
+  />
+</view>

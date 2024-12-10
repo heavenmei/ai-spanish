@@ -1,0 +1,17 @@
+{
+  "navigationBarTitleText": "聊天",
+  "onReachBottomDistance": 10,
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
+    "t-image": "/components/webp-image/index",
+    "load-more": "/components/load-more/index",
+    "message-card": "./components/message-card/index"
+  }
+}

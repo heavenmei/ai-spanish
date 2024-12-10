@@ -1,0 +1,63 @@
+
+.card{
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.user-card{
+  background-color: #FFE6BE;
+  justify-content: flex-end;
+  align-items: flex-end;
+ 
+}
+.user-card .avatar{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  gap:4px
+}
+.user-card .wave{
+  background-color: #fff;
+  display: flex;
+  gap:4px;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  padding: 4px;
+}
+.user-card .tool{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  color: #979797;
+  font-size: 12px;
+}
+
+
+.ai-card .avatar{
+  display: flex;
+  gap:4px
+}
+.ai-card .wave{
+  background-color: #FFE6BE;
+  display: flex;
+  justify-content: center;
+  gap:4px;
+  align-items: center;
+  border-radius: 12px;
+  padding: 4px;
+}
+.ai-card .tool{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #979797;
+  font-size: 12px;
+}

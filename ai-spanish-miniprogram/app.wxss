@@ -1,0 +1,33 @@
+@import 'style/iconfont.wxss';
+@import 'style/icon.wxss';
+
+@import 'style/theme.wxss';
+
+page {
+	--td-brand-color: #FFA31A;
+	--td-brand-color-active: #f7c98e;
+	--td-navbar-color: #000;
+	--td-navbar-bg-color: transparent;
+
+	--navigationBarHeight: 90px;
+
+	background-color: #f4dbb1;
+	background-image: url(https://s2.loli.net/2024/08/10/3x6wDj7s1OIXAeJ.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+}
+
+.container {
+	flex: 1;
+	background-color: #fff;
+	border-radius: 20px 20px 0px 0px;
+	padding: 24px 24px;
+
+	/* margin-top: var(--navigationBarHeight); */
+
+}

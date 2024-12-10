@@ -1,0 +1,118 @@
+<view class="container">
+  <view style="text-align: center; color: #b9b9b9" wx:if="{{pageLoading}}">
+    <t-loading theme="circular" size="40rpx" text="加载中..." inherit-color />
+  </view>
+
+  <!-- Container -->
+  <block>
+    <view wx:if="{{ messageList.length === 0}}">
+      <view class="title">{{chatOutput}}</view>
+    </view>
+
+    <scroll-view
+      id="message-list"
+      class="message-list-wrap scroll-content"
+      scroll-y="{{true}}"
+      scroll-with-animation="{{true}}"
+      scroll-into-view="{{scrollIntoViewId}}"
+      reverse="{{true}}"
+    >
+      <block
+        class="message-list"
+        wx:for="{{messageList}}"
+        wx:key="id"
+        wx:for-item="item"
+        wx:for-index="index"
+      >
+        <message-card
+          id="{{item.id}}"
+          cardId="{{item.id}}"
+          text="{{item.content}}"
+          speech="{{item.speech}}"
+          filename="{{item.filename}}"
+          seconds="{{'0:05'}}"
+          updatedAt="{{item.updatedAt}}"
+          isAiRes="{{item.isAiRes}}"
+          bind:playAudio="playAudio"
+        ></message-card>
+      </block>
+
+      <!-- last item -->
+      <view
+        wx:if="{{messageList.length > 0}}"
+        id="lastItem"
+        class="last-item"
+      ></view>
+    </scroll-view>
+
+    <load-more
+      list-is-empty="{{!messageList.length}}"
+      status="{{messageListLoadStatus}}"
+      bind:retry="onReTry"
+    />
+    <t-toast id="t-toast" />
+  </block>
+</view>
+
+<!-- Input -->
+<view class="bottom-input">
+  <view class="stop-btn" wx:if="{{isStop}}">
+    <t-button
+      theme="danger"
+      size="small"
+      variant="outline"
+      icon="stop-circle-filled"
+    >
+      Stop generating
+    </t-button>
+  </view>
+
+  <view class="chat-input-wrap">
+    <t-button theme="primary" shape="circle" bind:tap="changeType">
+      <t-icon
+        wx:if="{{!isSpeech}}"
+        name="microphone"
+        prefix="icon"
+        size="28rpx"
+      />
+      <t-icon wx:else name="sonic" prefix="icon" size="28rpx" />
+    </t-button>
+
+    <view wx:if="{{!isSpeech}}" class="chat-input">
+      <t-textarea
+        class="textarea"
+        placeholder="请输入文字"
+        disableDefaultPadding="{{true}}"
+        autosize="{{autosize}}"
+        value="{{inputText}}"
+        bind:change="handleInput"
+        bind:keyboardheightchange="onInputheightChange"
+      />
+    </view>
+
+    <view wx:if="{{isSpeech}}" style="flex: 1">
+      <t-button
+        theme="light"
+        style="width: 100%"
+        class="speech-button"
+        hover-class="button-hover"
+        hover-start-time="0"
+        bindtouchstart="onClickStartRecord"
+        bindtouchend="onClickStopRecord"
+      >
+        {{speechText}}
+      </t-button>
+    </view>
+
+    <!-- theme="text" -->
+    <t-button
+      wx:else
+      theme="primary"
+      shape="circle"
+      disabled="{{isSpeech || inputText==''}}"
+      bind:tap="sendText"
+    >
+      <t-icon name="send" prefix="icon" size="28rpx" />
+    </t-button>
+  </view>
+</view>

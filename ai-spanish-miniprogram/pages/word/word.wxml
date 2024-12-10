@@ -1,0 +1,288 @@
+<!-- <t-navbar
+  t-class-placeholder="t-navbar-placeholder"
+  t-class-content="t-navbar-content"
+  class="custom-navbar"
+>
+  <view slot="left" class="navbar-left">
+    <block>背单词</block>
+    <t-icon
+      size="20"
+      bind:tap="gotoWordSearch"
+      aria-role="button"
+      name="search"
+      class="custom-navbar__icon"
+    />
+  </view>
+</t-navbar> -->
+
+<t-navbar
+  t-class-placeholder="t-navbar-placeholder"
+  t-class-content="t-navbar-content"
+  t-class-capsule="t-class-capsule"
+  title="背单词"
+>
+  <view slot="capsule" class="custom-capsule">
+    <t-icon
+      size="40rpx"
+      bind:tap="onBack"
+      aria-role="button"
+      aria-label="返回"
+      name="chevron-left"
+      class="custom-capsule__icon back"
+    />
+    <t-icon
+      size="40rpx"
+      bind:tap="gotoWordSearch"
+      aria-role="button"
+      aria-label="搜索"
+      name="search"
+      class="custom-capsule__icon home"
+    />
+  </view>
+</t-navbar>
+
+<view class="startButtons">
+  <t-button theme="primary" size="large" data-type="learn" bind:tap="gotoLearn"
+    >学习 {{needToLearn}}</t-button
+  >
+  <t-button theme="light" size="large" data-type="review" bind:tap="gotoLearn"
+    >复习 {{needToReview}}</t-button
+  >
+</view>
+
+<view class="container">
+  <view class="bookCard contentWrap">
+    <text class="title">单词本</text>
+    <view class="cardTop">
+      <view class="bookWrapper">
+        <view class="book" bindtap="showBookList">
+          <view class="name">{{bkDetail.name}}</view>
+        </view>
+      </view>
+      <view class="dataWrapper">
+        <view
+          class="dataItem"
+          hover-class="wasTaped"
+          data-type="getBkLearnedWord"
+          bindtap="getWordList"
+        >
+          <view class="dataName">已学习</view>
+          <view class="dataValue"
+            >{{bkLearnData.learn}}<text class="unit"> 词</text></view
+          >
+        </view>
+        <view
+          class="dataItem"
+          hover-class="wasTaped"
+          data-type="getBkMasteredWord"
+          bindtap="getWordList"
+        >
+          <view class="dataName">已掌握</view>
+          <view class="dataValue"
+            >{{bkLearnData.master}}<text class="unit"> 词</text></view
+          >
+        </view>
+        <view
+          class="dataItem"
+          hover-class="wasTaped"
+          data-type="getBkUnlearnedWord"
+          bindtap="getWordList"
+        >
+          <view class="dataName">待学习</view>
+          <view class="dataValue"
+            >{{bkLearnData.notLearn}}<text class="unit"> 词</text></view
+          >
+        </view>
+        <view
+          class="dataItem"
+          hover-class="wasTaped"
+          data-type="getBkWord"
+          bindtap="getWordList"
+        >
+          <view class="dataName">总词量</view>
+          <view class="dataValue"
+            >{{bkDetail.total}}<text class="unit"> 词</text></view
+          >
+        </view>
+      </view>
+    </view>
+    <view class="cardBottom">
+      <view class="tips">点击词书可以进行切换哦</view>
+      <progress
+        class="learnProgress"
+        percent="{{bkLearnData.learn / bkDetail.total * 100}}"
+        border-radius="6rpx"
+        stroke-width="12rpx"
+        backgroundColor="#f0f0f0"
+        activeColor="#fd6802"
+        active-mode="backwards"
+      ></progress>
+      <view class="progressNum">
+        <view class="learned">已学习: {{bkLearnData.learn}}</view>
+        <view class="total">总词量: {{bkDetail.total}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="overview contentWrap">
+    <view class="title">总览</view>
+    <view class="dataWrapper forAllData">
+      <view
+        class="dataItem"
+        hover-class="wasTaped"
+        data-type="today"
+        bindtap="getWordList"
+      >
+        <view class="dataName"> <view class="dot"></view>今日学习&复习</view>
+        <view class="dataValue"
+          >{{todayLearnData.learn+todayLearnData.review}}
+          <text class="unit">词</text></view
+        >
+      </view>
+      <view
+        class="dataItem"
+        hover-class="wasTaped"
+        data-type="getLearnedWord"
+        bindtap="getWordList"
+      >
+        <view class="dataName"> <view class="dot"></view>累计学习</view>
+        <view class="dataValue"
+          >{{allLearnData.learn}} <text class="unit">词</text></view
+        >
+      </view>
+      <view
+        class="dataItem"
+        hover-class="wasTaped"
+        data-type="getReviewWord"
+        bindtap="getWordList"
+      >
+        <view class="dataName"> <view class="dot"></view>复习中</view>
+        <view class="dataValue"
+          >{{allLearnData.learn-allLearnData.master}}
+          <text class="unit">词</text></view
+        >
+      </view>
+      <view
+        class="dataItem"
+        hover-class="wasTaped"
+        data-type="getMasteredWord"
+        bindtap="getWordList"
+      >
+        <view class="dataName"> <view class="dot"></view>已掌握</view>
+        <view class="dataValue"
+          >{{allLearnData.master}} <text class="unit">词</text></view
+        >
+      </view>
+    </view>
+  </view>
+
+  <view class="dailyTask contentWrap">
+    <view class="title">每日任务</view>
+    <view class="mpprogressWrapper">
+      <t-progress
+        theme="circle"
+        percentage="{{learnPercentage}}"
+        class="mpProgress"
+        track-color="#f6f6f6"
+        color="#87cafe"
+        stroke-width="10"
+      >
+        <view class="learnData" slot="label">
+          <view class="num"
+            >{{todayLearnData.learn}}<text class="workload"
+              >/{{dailyTask.dailyLearn}}</text
+            ></view
+          >
+          <view class="dec">今日已学习</view>
+        </view>
+      </t-progress>
+      <t-progress
+        theme="circle"
+        percentage="{{reviewPercentage}}"
+        class="mpProgress"
+        track-color="#f6f6f6"
+        color="#ffc8cb"
+        stroke-width="10"
+      >
+        <view class="learnData" slot="label">
+          <view class="num"
+            >{{todayLearnData.review}}<text class="workload"
+              >/{{dailyTask.dailyReview}}</text
+            ></view
+          >
+          <view class="dec">今日已复习</view>
+        </view>
+      </t-progress>
+    </view>
+  </view>
+
+  <view class="favorite contentWrap">
+    <view class="title">收藏夹</view>
+    <view class="wordContainer" wx:if="{{notebookWord.length>0}}">
+      <view
+        class="word"
+        wx:for="{{notebookWord}}"
+        wx:key="index"
+        data-word_id="{{item.wordId}}"
+        hover-class="wasTaped"
+        bindtap="toWordDetail"
+        >{{item.word}}</view
+      >
+    </view>
+    <view class="tips" wx:if="{{notebookWord.length == 0}}"
+      >你还没有收藏词汇哦~</view
+    >
+    <view class="moreBtn" wx:if="{{notebookWord.length == 10}}">
+      <view
+        class="btn"
+        hover-class="wasTaped"
+        data-type="getNoteBookWord"
+        bindtap="getWordList"
+        >查看更多</view
+      >
+    </view>
+  </view>
+
+  <view class="calendar contentWrap">
+    <view class="title">日历</view>
+    <t-calendar
+      use-popup="{{false}}"
+      type="single"
+      value="{{value}}"
+      minDate="{{minDate}}"
+      maxDate="{{maxDate}}"
+      format="{{format}}"
+      class="calendar-content"
+      bind:select="handleConfirm"
+    />
+  </view>
+
+  <!-- <view class="history contentWrap">
+    <view class="title">历史</view>
+    <view class="eccanvasContainer">
+      <ec-canvas
+        id="word-history-chart"
+        canvas-id="mychart-bar"
+        ec="{{ ec }}"
+      ></ec-canvas>
+    </view>
+    <view class="dataWrapper forDailySum">
+      <view class="dataItem">
+        <view class="dataName">日期</view>
+        <view class="dataValue date">{{selectedDay.time}}</view>
+      </view>
+      <view class="dataItem">
+        <view class="dataName">学习</view>
+        <view class="dataValue"
+          >{{selectedDay.learn}}<text class="unit">词</text></view
+        >
+      </view>
+      <view class="dataItem">
+        <view class="dataName">复习</view>
+        <view class="dataValue"
+          >{{selectedDay.review}}<text class="unit">词</text></view
+        >
+      </view>
+    </view>
+  </view> -->
+</view>
