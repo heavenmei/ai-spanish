@@ -41,7 +41,7 @@ Page({
   async gotoWord() {
     if (!(await this.checkLogin())) return;
     wx.navigateTo({
-      url: `/pages/word/word`,
+      url: `/pages/word/index`,
     });
   },
 
