@@ -13,10 +13,10 @@ export const MenuData = [
       type: "statistics",
     },
     {
-      title: "积分",
+      title: "单词设置",
       tit: "",
       url: "",
-      type: "point",
+      type: "word",
     },
   ],
   [

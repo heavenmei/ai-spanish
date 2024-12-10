@@ -3,22 +3,22 @@
   <block wx:if="{{hasUserInfo}}">
     <view class="user-center-card__header">
       <t-avatar
-        image="{{userInfo.avatar || defaultAvatarUrl}}"
+        image="{{userInfo.avatarUrl || defaultAvatarUrl}}"
         class="user-center-card__header__avatar"
       />
 
       <view class="user-center-card__header__name"
-        >{{userInfo.name || '微信用户'}}</view
+        >{{userInfo.nickName || '微信用户'}}</view
       >
       <view
         class="user-center-card__header__transparent"
-        bind:tap="gotoUserEditPage"
+        bind:tap="login"
       ></view>
     </view>
   </block>
   <!-- 未登录的情况 -->
   <block wx:else>
-    <view class="user-center-card__header" bind:tap="gotoUserEditPage">
+    <view class="user-center-card__header" bind:tap="login">
       <t-avatar
         image="{{userInfo.avatar || defaultAvatarUrl}}"
         class="user-center-card__header__avatar"

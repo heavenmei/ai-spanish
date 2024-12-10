@@ -1,12 +1,9 @@
 import Toast from "tdesign-miniprogram/toast";
-import * as echarts from "../../ec-canvas/echarts";
-import { promisify } from "../../apis/request";
-import { login, logout, getStudyDuration } from "../../apis/index";
-import {
-  startDuration,
-  updateDuration,
-} from "../../common/recordStudyDuration";
+import * as echarts from "../../components/ec-canvas/echarts";
+import { getStudyDuration } from "../../apis/index";
+
 import { MenuData, getBarOption } from "./constants";
+import { loginProfile, logoutProfile } from "../../common/login";
 
 const app = getApp();
 
@@ -42,6 +39,16 @@ Page({
 
   onShow() {
     this.getTabBar().init();
+
+    const userinfo = wx.getStorageSync("userInfo");
+    if (userinfo.id) {
+      this.setData({
+        userInfo: userinfo,
+        hasUserInfo: true,
+      });
+
+      this.setChartData();
+    }
   },
   onPullDownRefresh() {
     this.setChartData();
@@ -95,13 +102,9 @@ Page({
         });
         break;
       }
-      case "point": {
-        Toast({
-          context: this,
-          selector: "#t-toast",
-          message: "你点击了积分菜单",
-          icon: "",
-          duration: 1000,
+      case "word": {
+        wx.navigateTo({
+          url: "/pages/settings/word-settings/wsetting",
         });
         break;
       }
@@ -153,56 +156,32 @@ Page({
     const { hasUserInfo } = this.data;
     if (hasUserInfo) {
       // wx.navigateTo({
-      //   url: "/pages/account/person-info/index",
+      //   url: "/pages/settings/person-info/index",
       // });
     } else {
       this.getUserProfile();
     }
   },
-  async getUserProfile() {
-    const res = await promisify(wx.getUserProfile)({
-      desc: "用于完善会员资料",
-    });
-    console.log("getUserProfile", res);
 
-    const { code } = await promisify(wx.login)();
-    console.log("code", code);
+  async login() {
+    if (wx.getStorageSync("userInfo").id) return;
 
-    const { data } = await login({
-      code,
-      ...res.userInfo,
-    });
-
-    wx.setStorageSync("userInfo", data);
-
-    const userId = data.id;
-    startDuration(app, userId);
+    await loginProfile(app);
     this.setChartData();
-
     this.setData({
-      userInfo: data,
+      userInfo: wx.getStorageSync("userInfo"),
       hasUserInfo: true,
     });
   },
 
   async logout() {
-    const res = await logout();
-    if (res.success) {
-      wx.showToast({
-        title: "退出成功",
-        icon: "success",
-      });
+    await logoutProfile(app);
+    this.barChart && this.barChart.dispose();
 
-      const userId = wx.getStorageSync("userInfo").id;
-      updateDuration(app, userId);
-      this.barChart && this.barChart.dispose();
-
-      wx.removeStorageSync("userInfo");
-      this.setData({
-        userInfo: {},
-        hasUserInfo: false,
-      });
-    }
+    this.setData({
+      userInfo: {},
+      hasUserInfo: false,
+    });
   },
 
   getVersionInfo() {

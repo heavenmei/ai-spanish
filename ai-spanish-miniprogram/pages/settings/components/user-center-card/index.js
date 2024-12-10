@@ -17,8 +17,8 @@ Component({
       "https://cdn-we-retail.ym.tencent.com/miniapp/usercenter/icon-user-center-avatar@2x.png",
   },
   methods: {
-    gotoUserEditPage() {
-      this.triggerEvent("gotoUserEditPage");
+    login() {
+      this.triggerEvent("login");
     },
   },
 });

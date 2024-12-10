@@ -3,7 +3,7 @@
     "pages/home/home",
     "pages/history/index",
     "pages/chat/index",
-    "pages/account/index",
+    "pages/settings/index",
     "pages/scenarios/index",
     "pages/list/index",
     "pages/word/word",
@@ -11,7 +11,8 @@
     "pages/word/review/review",
     "pages/word/list/list",
     "pages/word/detail/detail",
-    "pages/word/search/search"
+    "pages/word/search/search",
+    "pages/settings/word-settings/wsetting"
   ],
   "tabBar": {
     "custom": true,
@@ -29,7 +30,7 @@
         "text": "情景"
       },
       {
-        "pagePath": "pages/account/index",
+        "pagePath": "pages/settings/index",
         "text": "我的"
       }
     ]

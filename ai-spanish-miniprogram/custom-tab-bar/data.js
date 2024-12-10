@@ -17,6 +17,6 @@ export default [
   {
     icon: "person",
     text: "个人中心",
-    url: "pages/account/index",
+    url: "pages/settings/index",
   },
 ];

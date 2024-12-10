@@ -2,7 +2,7 @@
   <user-center-card
     userInfo="{{userInfo}}"
     hasUserInfo="{{hasUserInfo}}"
-    bind:gotoUserEditPage="gotoUserEditPage"
+    bind:login="login"
   />
 </view>
 <view class="container">

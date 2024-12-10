@@ -1,7 +1,5 @@
-// const rescontent = require("../../utils/response_content.js");
 import WordApi from "../../../apis/word";
 import word_utils from "../../../utils/word_utils.js";
-// const color = require("../../utils/color.js");
 
 const app = getApp();
 
@@ -22,7 +20,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    colorType: 0,
     learnedNum: 0,
     learnNum: 0,
     wordDetail: {},
@@ -91,7 +88,7 @@ Page({
     });
 
     // 初始化设置
-    const userSettings = app.globalData.userInfo.settings;
+    const userSettings = app.globalData.wordSettings;
     const settings = {};
     settings.repeat_times = !userSettings.learn_repeat_t
       ? 3
@@ -151,7 +148,6 @@ Page({
     this.settings.sample = chooseTransIndex != -1;
 
     this.setData({
-      colorType,
       repeatTimes: settings.repeat_times,
     });
   },
@@ -269,7 +265,6 @@ Page({
   },
 
   initTiming(type = "content") {
-    const { colorType } = this.data;
     const config = {
       canvasSize: {
         width: 80,
@@ -281,7 +276,7 @@ Page({
         {
           width: 8,
           animate: true,
-          fillStyle: color.deeperColorList[colorType],
+          // fillStyle: color.deeperColorList[colorType],
           lineCap: "round",
         },
       ],
@@ -779,7 +774,7 @@ Page({
 
   toDetail: function () {
     wx.navigateTo({
-      url: `../word_detail/word_detail?word_id=${this.data.wordDetail.word_id}&colorType=${this.data.colorType}`,
+      url: `../word_detail/word_detail?word_id=${this.data.wordDetail.word_id}`,
     });
   },
 
