@@ -118,10 +118,10 @@ Page({
         });
         break;
       }
-      case "service": {
-        this.openMakePhone();
-        break;
-      }
+      // case "service": {
+      //   this.openMakePhone();
+      //   break;
+      // }
 
       default: {
         Toast({
