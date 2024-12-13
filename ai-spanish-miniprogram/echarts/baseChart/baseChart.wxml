@@ -1,0 +1,7 @@
+<view style="height: {{height}};width:100%">
+  <ec-canvas
+    id="{{chartId}}"
+    canvas-id="{{canvasId}}"
+    ec="{{ ec }}"
+  ></ec-canvas>
+</view>

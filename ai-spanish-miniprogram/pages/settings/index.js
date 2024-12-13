@@ -1,5 +1,4 @@
 import Toast from "tdesign-miniprogram/toast";
-import * as echarts from "../../components/ec-canvas/echarts";
 import { getStudyDuration } from "../../apis/index";
 
 import { MenuData, getBarOption } from "./constants";
@@ -17,9 +16,7 @@ Page({
     showKefu: true,
     versionNo: "",
 
-    ecBar: {
-      lazyLoad: true,
-    },
+    option: {},
   },
 
   onReady() {
@@ -54,32 +51,14 @@ Page({
     this.setChartData();
   },
 
-  initBarChart(chartData) {
-    this.ecComponent.init((canvas, width, height, dpr) => {
-      const barChart = echarts.init(canvas, null, {
-        width: width,
-        height: height,
-        devicePixelRatio: dpr,
-      });
-      canvas.setChart(barChart);
-      const options = getBarOption(chartData);
-      barChart.setOption(options);
-      this.barChart = barChart;
-      return barChart;
-    });
-  },
-
   async setChartData() {
     if (!wx.getStorageSync("userInfo").id) return;
 
-    this.ecComponent = this.selectComponent("#study-chart");
-    if (!this.ecComponent) {
-      console.log("this.ecComponent is not ready");
-      return;
-    }
-
     const { data } = await getStudyDuration();
-    this.initBarChart(data);
+    const option = getBarOption(data);
+    this.setData({
+      option,
+    });
   },
 
   onClickCell({ currentTarget }) {
@@ -176,8 +155,6 @@ Page({
 
   async logout() {
     await logoutProfile(app);
-    this.barChart && this.barChart.dispose();
-
     this.setData({
       userInfo: {},
       hasUserInfo: false,

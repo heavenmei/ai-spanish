@@ -11,6 +11,9 @@
     "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
     "t-button": "tdesign-miniprogram/button/button",
     "user-center-card": "./components/user-center-card/index",
-    "ec-canvas": "../../components/ec-canvas/ec-canvas"
+    "t-chart": "/echarts/baseChart/baseChart"
+  },
+  "componentPlaceholder": {
+    "t-chart": "view"
   }
 }

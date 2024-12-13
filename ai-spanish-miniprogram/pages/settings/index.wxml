@@ -8,14 +8,10 @@
 <view class="container">
   <view>学习时长 (分钟)</view>
   <view class="chart">
-    <ec-canvas
-      id="study-chart"
-      canvas-id="study-chart"
-      ec="{{ ecBar }}"
-    ></ec-canvas>
     <view wx:if="{{!userInfo.id}}" class="chart-nodata"
       >登录可解锁学习时长</view
     >
+    <t-chart wx:else option="{{option}}" height="300rpx"></t-chart>
   </view>
 
   <view class="menuWrap">

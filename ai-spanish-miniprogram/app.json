@@ -23,8 +23,20 @@
       "name": "chat",
       "root": "pages/chat",
       "pages": ["index"]
+    },
+    {
+      "name": "echarts",
+      "root": "echarts",
+      "pages": ["ec-canvas/ec-canvas", "baseChart/baseChart"]
     }
   ],
+  "preloadRule": {
+    "pages/settings/index": {
+      "network": "all",
+      "packages": ["echarts"]
+    }
+  },
+
   "tabBar": {
     "custom": true,
     "list": [

@@ -1,4 +1,4 @@
-<wxs module="utils" src="../../utils/formatDate.wxs"></wxs>
+<wxs module="utils" src="../../../utils/formatDate.wxs"></wxs>
 
 <view class="message-card-item">
   <t-swipe-cell>
@@ -9,6 +9,7 @@
         <t-icon
           style="color: #f7c98e"
           name="more"
+          prefix="icon"
           size="24rpx"
           bind:click="navigateToTopic"
           data-topic="{{item.id}}"
@@ -16,7 +17,12 @@
       </view>
     </t-cell>
     <view slot="right" class="btn delete-btn" bind:tap="onDelete">
-      <t-icon class="padding-bottom" name="delete" size="38rpx"></t-icon>
+      <t-icon
+        class="padding-bottom"
+        name="delete"
+        prefix="icon"
+        size="38rpx"
+      ></t-icon>
     </view>
   </t-swipe-cell>
 </view>

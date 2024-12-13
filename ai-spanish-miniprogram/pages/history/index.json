@@ -1,13 +1,13 @@
 {
-	"navigationStyle": "custom",
-	"navigationBarTextStyle": "black",
-	"enablePullDownRefresh": true,
-	"usingComponents": {
-		"t-divider": "tdesign-miniprogram/divider/divider",
-		"t-navbar": "tdesign-miniprogram/navbar/navbar",
-		"t-button": "tdesign-miniprogram/button/button",
-		"t-icon": "tdesign-miniprogram/icon/icon",
-		"t-load-more": "/components/load-more/index",
-		"history-card": "/components/history-card/index"
-	}
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "t-divider": "tdesign-miniprogram/divider/divider",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-load-more": "/components/load-more/index",
+    "history-card": "./history-card/index"
+  }
 }

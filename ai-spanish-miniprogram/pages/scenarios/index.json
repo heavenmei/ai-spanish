@@ -7,6 +7,6 @@
     "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-button": "tdesign-miniprogram/button/button",
-    "scenario-card": "/components/scenario-card/index"
+    "scenario-card": "./scenario-card/index"
   }
 }

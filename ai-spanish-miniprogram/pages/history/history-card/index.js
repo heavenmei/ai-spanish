@@ -1,4 +1,4 @@
-import { formatTime } from "../../utils/util";
+import { formatTime } from "../../../utils/util";
 
 Component({
   options: {
