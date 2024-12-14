@@ -27,7 +27,11 @@ node src/test.js
 # run pg use docker
 docker run --name ai-spanish-postgres -e POSTGRES_PASSWORD=123456 -p 5432:5432  -d postgres
 
-npx drizzle-kit push
+# npx drizzle-kit push
+yarn db:push
+# 运行种子数据脚本
+# npx tsx src/db/seed.ts
+yarn db:seed
 ```
 
 ## Deploy

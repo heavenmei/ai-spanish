@@ -99,3 +99,10 @@ export const HistoryParamsSchema = z.object({
 export const OSSParamsSchema = z.object({
   filename: z.coerce.string().default(""),
 });
+
+export const LearningParamsSchema = z.object({
+  userId: z.coerce.string().default(""),
+  bookId: z.coerce.string().default(""),
+  groupSize: z.coerce.number().default(0),
+  sample: z.coerce.boolean().default(false),
+});

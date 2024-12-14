@@ -1,19 +1,20 @@
+
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { getCookie, setCookie } from "hono/cookie";
 import { ContextVariables } from "./utils";
 import { lucia } from "./auth";
-import * as audio from "./routes/audio";
-import * as chat from "./routes/chat";
-import * as history from "./routes/history";
-import * as message from "./routes/message";
-import * as scenario from "./routes/scenario";
-import * as user from "./routes/user";
+import * as audio from './routes/audio';
+import * as book from './routes/book';
+import * as chat from './routes/chat';
+import * as history from './routes/history';
+import * as message from './routes/message';
+import * as scenario from './routes/scenario';
+import * as user from './routes/user';
 
 import log4js from "log4js";
 import log4jsConfig from "./config/log4js.json";
 log4js.configure(log4jsConfig);
-const logger = log4js.getLogger("app");
 
 const app = new Hono<{ Variables: ContextVariables }>();
 
@@ -58,6 +59,14 @@ app.post("/api/audio/iat_xunfei", audio.iat_xunfei);
 app.post("/api/audio/tts_xunfei", audio.tts_xunfei);
 app.post("/api/audio/tts_youdao", audio.tts_youdao);
 app.get("/api/audio/testOSS", audio.testOSS);
+app.post("/api/book/changeWordBook", book.changeWordBook);
+app.get("/api/book/getAllWBData", book.getAllWBData);
+app.get("/api/book/getSingleWBData", book.getSingleWBData);
+app.get("/api/book/getWBLearnData", book.getWBLearnData);
+app.get("/api/book/getAllLearnData", book.getAllLearnData);
+app.get("/api/book/getTodayLearnData", book.getTodayLearnData);
+app.get("/api/book/getBasicLearningData", book.getBasicLearningData);
+app.get("/api/book/getLearningData", book.getLearningData);
 app.post("/api/chat/chat", chat.chat);
 app.post("/api/chat/chatText", chat.chatText);
 app.post("/api/chat/chatAudio", chat.chatAudio);

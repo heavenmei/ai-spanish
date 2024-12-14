@@ -1,4 +1,9 @@
-import { get, post, uploadFile } from "./request";
+import { get, post } from "./request";
+
+// 更换词书
+export const changeWordBook = (payload) => {
+  return post("/api/book/changeWordBook", payload);
+};
 
 export const getAllWBData = (payload) => {
   return get("/api/book/getAllWBData", payload);

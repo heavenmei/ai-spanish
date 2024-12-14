@@ -1,4 +1,4 @@
-import WordApi from "../../../apis/word";
+import WordApi, { getLearningData } from "../../../apis/word";
 import word_utils from "../../../utils/word_utils.js";
 
 const app = getApp();
@@ -153,8 +153,7 @@ Page({
   },
 
   async initLearningData() {
-    console.log("before getting data", new Date().getTime());
-    const learnDataRes = await WordApi.getLearningData({
+    const learnDataRes = await getLearningData({
       user_id: app.globalData.userInfo.user_id,
       wd_bk_id: app.globalData.userInfo.l_book_id,
       groupSize: this.settings.group_size,

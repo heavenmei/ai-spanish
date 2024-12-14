@@ -8,6 +8,7 @@
     "t-progress": "tdesign-miniprogram/progress/progress",
     "t-button": "tdesign-miniprogram/button/button",
     "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-popup": "tdesign-miniprogram/popup/popup",
     "t-navbar": "tdesign-miniprogram/navbar/navbar"
   }
 }

@@ -6,21 +6,24 @@ App({
   globalData: {
     userInfo: {},
     wordSettings: {
-      // learn_repeat_t: 3,
-      // group_size: 10,
-      // learn_first_m: 'chooseTrans',
-      // learn_second_m: 'recallTrans',
-      // learn_third_m: 'recallWord',
-      // learn_fourth_m: 'recallTrans',
-      // timing: true,
-      // timing_duration: 1000,
-      // autoplay: false,
-      // type: 1,
-      // review_repeat_t: 2,
-      // review_first_m: 'recallTrans',
-      // review_second_m: 'chooseTrans',
-      // review_second_m: 'recallWord',
-      // review_third_m: 'recallTrans',
+      groupSize: 10,
+      dailyLearn: 1,
+      dailyReview: 1,
+
+      learn_repeat_t: 3,
+      learn_first_m: "chooseTrans",
+      learn_second_m: "recallTrans",
+      learn_third_m: "recallWord",
+      learn_fourth_m: "recallTrans",
+      timing: true,
+      timing_duration: 1000,
+      autoplay: false,
+      type: 1,
+      review_repeat_t: 2,
+      review_first_m: "recallTrans",
+      review_second_m: "chooseTrans",
+      review_second_m: "recallWord",
+      review_third_m: "recallTrans",
     },
 
     // 学习时长
@@ -32,6 +35,7 @@ App({
   onLaunch: async function () {
     const res = await getUserInfo();
     res && wx.setStorageSync("userInfo", res.data);
+    this.globalData.userInfo = res.data;
   },
   onShow: function () {
     updateManager();

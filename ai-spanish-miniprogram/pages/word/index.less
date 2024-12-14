@@ -414,3 +414,77 @@
     width: 300rpx;
   }
 }
+
+// * bookList popup
+.changeBookWrapper {
+  width: 750rpx;
+  height: 600rpx;
+  margin-top: 50rpx;
+
+  .book {
+    width: 750rpx;
+    height: 160rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 10rpx;
+
+    .bookCover {
+      // margin-top: 30rpx;
+      margin-left: 20rpx;
+      margin-right: 40rpx;
+      width: 106rpx; //遵循A4纸21*27.9的比例
+      height: 140rpx;
+      background-color: rgb(37, 134, 229);
+      background-color: rgb(105, 149, 194);
+      border-radius: 10rpx;
+
+      .name {
+        width: 28rpx;
+        height: 100rpx;
+        font-size: 28rpx;
+        // line-height: 50rpx;
+        color: #ffffff;
+        margin-left: 10rpx;
+        margin-top: 10rpx;
+        font-weight: 600;
+      }
+    }
+
+    .info {
+      width: 70%;
+      height: 160rpx;
+      position: relative;
+      font-weight: 600;
+
+      .bookName {
+        color: #757575;
+        font-size: 28rpx;
+        margin-top: 10rpx;
+        font-weight: 700;
+      }
+
+      .des {
+        margin-top: 10rpx;
+        font-size: 22rpx;
+        color: #8a8a8a;
+      }
+
+      .total {
+        position: absolute;
+        bottom: 10rpx;
+        font-size: 22rpx;
+        color: #8a8a8a;
+
+        .num {
+          font-size: 26rpx;
+        }
+      }
+    }
+  }
+
+  .wasTaped {
+    background-color: rgba(150, 150, 150, 0.1);
+  }
+}

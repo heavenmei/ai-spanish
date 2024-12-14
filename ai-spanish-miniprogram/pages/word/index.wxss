@@ -341,3 +341,64 @@
 .startButtons button {
   width: 300rpx;
 }
+.changeBookWrapper {
+  width: 750rpx;
+  height: 600rpx;
+  margin-top: 50rpx;
+}
+.changeBookWrapper .book {
+  width: 750rpx;
+  height: 160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10rpx;
+}
+.changeBookWrapper .book .bookCover {
+  margin-left: 20rpx;
+  margin-right: 40rpx;
+  width: 106rpx;
+  height: 140rpx;
+  background-color: #2586e5;
+  background-color: #6995c2;
+  border-radius: 10rpx;
+}
+.changeBookWrapper .book .bookCover .name {
+  width: 28rpx;
+  height: 100rpx;
+  font-size: 28rpx;
+  color: #ffffff;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+  font-weight: 600;
+}
+.changeBookWrapper .book .info {
+  width: 70%;
+  height: 160rpx;
+  position: relative;
+  font-weight: 600;
+}
+.changeBookWrapper .book .info .bookName {
+  color: #757575;
+  font-size: 28rpx;
+  margin-top: 10rpx;
+  font-weight: 700;
+}
+.changeBookWrapper .book .info .des {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: #8a8a8a;
+}
+.changeBookWrapper .book .info .total {
+  position: absolute;
+  bottom: 10rpx;
+  font-size: 22rpx;
+  color: #8a8a8a;
+}
+.changeBookWrapper .book .info .total .num {
+  font-size: 26rpx;
+}
+.changeBookWrapper .wasTaped {
+  background-color: rgba(150, 150, 150, 0.1);
+}
