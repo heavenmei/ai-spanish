@@ -6,25 +6,24 @@
   <view class="progress">{{learnedNum}} / {{learnNum}}</view>
 </view>
 
+<!-- 单词 -->
 <view class="wordWrapper" bindtap="playVoice" wx:if="{{!learnDone}}">
-  <view class="word word-color-{{colorType}}" wx:if="{{ wordMode == 0 }}"
-    >{{wordDetail.word}}</view
-  >
+  <view class="word" wx:if="{{ wordMode == 0 }}">{{wordDetail.word}}</view>
   <view class="repeatTime" wx:if="{{ wordMode == 0 }}">
     <view
-      class="times first {{ thisWordRepeatTime>=1? 'bg-color-light-'+colorType : 'bg' }}"
+      class="times first {{ thisWordRepeatTime>=1? 'bg-done' : 'bg' }}"
       wx:if="{{ repeatTimes>1 }}"
     ></view>
     <view
-      class="times {{ thisWordRepeatTime>=2? 'bg-color-light-'+colorType : 'bg' }}"
+      class="times {{ thisWordRepeatTime>=2? 'bg-done' : 'bg' }}"
       wx:if="{{ repeatTimes>=2 }}"
     ></view>
     <view
-      class="times {{ thisWordRepeatTime>=3? 'bg-color-light-'+colorType : 'bg' }}"
+      class="times {{ thisWordRepeatTime>=3? 'bg-done' : 'bg' }}"
       wx:if="{{ repeatTimes>=3 }}"
     ></view>
     <view
-      class="times {{ thisWordRepeatTime==4? 'bg-color-light-'+colorType : 'bg' }}"
+      class="times {{ thisWordRepeatTime==4? 'bg-done' : 'bg' }}"
       wx:if="{{ repeatTimes==4 }}"
     ></view>
   </view>
@@ -33,28 +32,13 @@
     wx:if="{{ wordMode == 0 && wordDetail.phonetic.length > 0 }}"
     >/ {{wordDetail.phonetic}} / <text class="voice iconfont icon-sound"></text
   ></view>
-  <view
-    class="timing"
-    wx:if="{{ wordMode == 1 }}"
-    catchtap="{{ isBtnActive? 'showWord':'' }}"
-  >
-    <mpProgress
-      class="progress"
-      config="{{wordTimingConfig}}"
-      reset="{{wordTimingReset}}"
-      isStop="{{wordTimingStop}}"
-      percentage="{{100}}"
-      bindtimingOut="timingOut"
-      data-type="word"
-    ></mpProgress>
-    <!-- <button class="resetbtn" type="primary" bindtap="resetCanvasFunc">reset</button> -->
-  </view>
-  <view class="timing" wx:if="{{ wordMode == 2 }}">
+  <view class="timing" wx:if="{{ wordMode == 1 }}">
     <view class="model"></view>
     <view class="model phonetic"></view>
   </view>
 </view>
 
+<!-- 内容 -->
 <view class="content" wx:if="{{!learnDone}}">
   <view class="chooseCorrect" wx:if="{{ contentMode == 0 }}">
     <view
@@ -65,14 +49,16 @@
       data-index="{{index}}"
       bindtap="{{ isBtnActive? 'checkChoice':'' }}"
     >
-      <view class="pos">{{wrongTransWordList[item].translation.pos}}</view>
-      <view class="meaning">
-        {{wrongTransWordList[item].translation.meaning}}</view
-      >
+      <view class="pos">{{wrongTransWordList[item].pos}}</view>
+      <view class="meaning"> {{wrongTransWordList[item].translation}}</view>
     </view>
   </view>
   <view class="translationWrapper" wx:if="{{ contentMode == 1 }}">
-    <view class="transRow" wx:for="{{wordDetail.shortTrans}}" wx:key="index">
+    <view class="transRow">
+      <view class="pos">{{wordDetail.pos}}</view>
+      <view class="meaning">{{wordDetail.translation}} </view>
+    </view>
+    <!-- <view class="transRow" wx:for="{{wordDetail.shortTrans}}" wx:key="index">
       <view class="pos" wx:if="{{ item.pos != '' }}">{{item.pos}}</view>
       <view
         class="meaning {{ item.more? 'moreBtn':'' }}"
@@ -80,28 +66,11 @@
         hover-class="{{ item.more? 'tapedText':'' }}"
         >{{item.meaning}}
       </view>
-    </view>
+    </view> -->
   </view>
   <view
     class="timing"
     wx:if="{{ contentMode == 2 }}"
-    bindtap="{{ isBtnActive? 'showTrans':'' }}"
-  >
-    <mpProgress
-      class="progress"
-      config="{{contentTimingConfig}}"
-      reset="{{contentTimingReset}}"
-      isStop="{{contentTimingStop}}"
-      percentage="{{100}}"
-      bindtimingOut="timingOut"
-      data-type="content"
-    >
-    </mpProgress>
-    <!-- <button class="resetbtn" type="primary" bindtap="resetCanvasFunc">reset</button> -->
-  </view>
-  <view
-    class="timing"
-    wx:if="{{ contentMode == 3 }}"
     bindtap="{{ isBtnActive? 'showTrans':'' }}"
   >
     <view class="model"></view>
@@ -167,65 +136,57 @@
   >
     <view class="text">下一个</view>
   </t-button>
+</view>
 
-  <view class="bottomMenu">
-    <!-- <view class="left">单词详情</view>
-        <view class="left">跳过此轮</view>
-        <view class="left">设为已掌握</view>
-        <view class="left last">加入生词本</view> -->
+<view class="bottomMenu" wx:if="{{!learnDone}}">
+  <t-button
+    size="medium"
+    variant="text"
+    t-class="bottomBtn"
+    bind:tap="toDetail"
+  >
+    <t-icon name="detail" prefix="icon" size="60rpx" />
+  </t-button>
 
-    <t-button
-      size="medium"
-      variant="text"
-      t-class="bottomBtn"
-      bind:tap="toDetail"
-    >
-      <t-icon name="detail" prefix="icon" size="60rpx" />
-    </t-button>
+  <t-button
+    size="medium"
+    variant="text"
+    t-class="bottomBtn"
+    data-type="skip"
+    bind:tap="{{ isBtnActive? 'skip':'' }}"
+  >
+    <t-icon name="skip" prefix="icon" size="50rpx" />
+  </t-button>
 
-    <t-button
-      size="medium"
-      variant="text"
-      t-class="bottomBtn"
-      data-type="skip"
-      bind:tap="{{ isBtnActive? 'skip':'' }}"
-    >
-      <t-icon name="skip" prefix="icon" size="50rpx" />
-    </t-button>
+  <t-button
+    size="medium"
+    variant="text"
+    t-class="bottomBtn"
+    data-type="master"
+    bind:tap="{{ isBtnActive? 'skip':'' }}"
+  >
+    <t-icon name="learned" prefix="icon" size="40rpx" />
+  </t-button>
 
-    <t-button
-      size="medium"
-      variant="text"
-      t-class="bottomBtn"
-      data-type="master"
-      bind:tap="{{ isBtnActive? 'skip':'' }}"
-    >
-      <t-icon name="learned" prefix="icon" size="40rpx" />
-    </t-button>
-
-    <t-button
-      size="medium"
-      variant="text"
-      t-class="bottomBtn"
-      data-type="master"
-      bind:tap="toggleAddToNB"
-    >
-      <t-icon
-        name="{{isInNotebook?'star':'favorite'}}"
-        prefix="icon"
-        size="50rpx"
-      />
-    </t-button>
-  </view>
+  <t-button
+    size="medium"
+    variant="text"
+    t-class="bottomBtn"
+    data-type="master"
+    bind:tap="toggleAddToNB"
+  >
+    <t-icon
+      name="{{isInNotebook?'star':'favorite'}}"
+      prefix="icon"
+      size="50rpx"
+    />
+  </t-button>
 </view>
 
 <view class="doneWrapper" wx:if="{{learnDone}}">
-  <view class="text word-color-{{colorType}}">本组单词学习已完成</view>
+  <view class="text">本组单词学习已完成</view>
   <view class="btn back" hover-class="wasTaped" bindtap="goBack">完成学习</view>
-  <view
-    class="btn continue bg-color-light-{{colorType}}"
-    hover-class="wasTaped"
-    bindtap="reInit"
+  <view class="btn continue" hover-class="wasTaped" bindtap="reInit"
     >继续学习</view
   >
 </view>

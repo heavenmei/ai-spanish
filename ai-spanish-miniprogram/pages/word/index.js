@@ -202,7 +202,7 @@ Page({
       });
 
       if (res.success) {
-        app.globalData.userInfo.l_book_id = bkInfo.wd_bk_id;
+        app.globalData.userInfo.l_book_id = bkInfo.id;
         // app.globalData.updatedForIndex = true;
         this.setData({
           bkDetail: bkInfo,

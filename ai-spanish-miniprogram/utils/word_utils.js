@@ -126,6 +126,8 @@ const getWordVoiceUrl = (word, source = 0, type = 2) => {
 
 // 处理单词信息
 const handleWordDetail = (wordDetail, settings = {}) => {
+  console.log("handleWordDetail", wordDetail);
+
   if (wordDetail.tagList) wordDetail.tag = getTagList(wordDetail);
   if (wordDetail.translation)
     wordDetail.translation = toTransList(wordDetail.translation);
@@ -179,7 +181,7 @@ const handleWordDetail = (wordDetail, settings = {}) => {
 };
 
 // 批量处理单词信息
-const batchHandleWordDetal = (wordDetailList, settings = {}) => {
+const batchHandleWordDetail = (wordDetailList, settings = {}) => {
   for (let i = 0; i < wordDetailList.length; i++) {
     wordDetailList[i] = handleWordDetail(wordDetailList[i], settings);
   }
@@ -219,7 +221,7 @@ module.exports = {
   getTagList: getTagList,
   getWordVoiceUrl: getWordVoiceUrl,
   handleWordDetail: handleWordDetail,
-  batchHandleWordDetal: batchHandleWordDetal,
+  batchHandleWordDetail: batchHandleWordDetail,
   randNumList: randNumList,
   randArr: randArr,
 };

@@ -6,8 +6,8 @@ export function getEnv() {
   return envVersion;
 }
 
-const dev = "http://192.168.1.108:8000";
-// const dev = "http://127.0.0.1:8000";
+// const dev = "http://192.168.1.108:8000";
+const dev = "http://127.0.0.1:8000";
 // const HOST = "http://116.62.78.22:9000/";
 // const pro = "http://118.31.74.178:8000";
 const pro = "https://ai-spanish.cn";

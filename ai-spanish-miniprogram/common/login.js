@@ -15,8 +15,8 @@ export const loginProfile = async (app) => {
     ...res.userInfo,
   });
 
-  wx.setStorageSync("userInfo", { id: data.id, ...res.userInfo });
-  app.globalData.userInfo = { id: data.id, ...res.userInfo };
+  wx.setStorageSync("userInfo", data);
+  app.globalData.userInfo = data;
 
   const userId = data.id;
   startDuration(app, userId);

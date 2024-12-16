@@ -15,7 +15,7 @@
 
   .progress {
     font-size: 32rpx;
-    color: #f6f6f6;
+    color: var(--td-brand-color);
   }
 }
 
@@ -58,6 +58,9 @@
 
     .bg {
       background-color: #ffffff;
+    }
+    .bg-done {
+      background-color: var(--td-brand-color);
     }
   }
 
@@ -237,9 +240,9 @@
 
 .control {
   position: absolute;
-  bottom: 20rpx;
+  bottom: 100rpx;
   width: 100%;
-  height: 230rpx;
+  height: 180rpx;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -285,40 +288,42 @@
     width: 100%;
     display: flex;
   }
+}
 
-  .bottomMenu {
-    height: 80rpx;
-    width: 100%;
-    margin-top: 40rpx;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.bottomMenu {
+  position: absolute;
+  bottom: 40rpx;
+  height: 80rpx;
+  width: 100%;
+  margin-top: 40rpx;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 
-    .bottomBtn {
-      width: 100rpx;
-      height: 70rpx;
-      font-size: 46rpx;
-      font-weight: 600;
-      color: #cdcdcd;
-      // border-radius: 10rpx;
-      // background-color: rgba(150, 150, 150, 0.1);
-      line-height: 70rpx;
-      text-align: center;
-    }
+  .bottomBtn {
+    width: 100rpx;
+    height: 70rpx;
+    font-size: 46rpx;
+    font-weight: 600;
+    color: #cdcdcd;
+    // border-radius: 10rpx;
+    // background-color: rgba(150, 150, 150, 0.1);
+    line-height: 70rpx;
+    text-align: center;
+  }
 
-    .icon-addToNB-yes {
-      color: #fb6a00;
-    }
+  .icon-addToNB-yes {
+    color: #fb6a00;
+  }
 
-    .wasTaped-bottom {
-      color: #a0a0a0;
-    }
+  .wasTaped-bottom {
+    color: #a0a0a0;
+  }
 
-    .wasTaped-bottom1 {
-      filter: grayscale(20%);
-    }
+  .wasTaped-bottom1 {
+    filter: grayscale(20%);
   }
 }
 
@@ -337,6 +342,7 @@
     font-weight: 700;
     margin-top: -100rpx;
     margin-bottom: 100rpx;
+    color: var(--td-brand-color);
   }
 
   .btn {
@@ -359,6 +365,7 @@
 
   .continue {
     color: #ffffff;
+    background-color: var(--td-brand-color);
   }
 
   .wasTaped {
