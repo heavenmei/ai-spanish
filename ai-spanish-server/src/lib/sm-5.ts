@@ -104,8 +104,7 @@ const calculateNewOF = (last_i, q, used_OF, old_OF, fraction = 0.8) => {
   if (q < 4) if (new_OF > old_OF) new_OF = old_OF;
   new_OF = new_OF * fraction + old_OF * (1 - fraction);
   if (new_OF < 1.2) new_OF = 1.2;
-  new_OF = new_OF.toFixed(4);
-  new_OF = parseFloat(new_OF);
+  new_OF = parseFloat(new_OF.toFixed(4));
   return new_OF;
 };
 
@@ -185,8 +184,11 @@ const sm_5 = (OF, wd_learning_record) => {
     if (NOI > 100 && !master) NOI = 100;
     if (NOI < 0 && !master) NOI = 1;
   }
-  last_l = now.getTime();
-  next_l = last_l + NOI * 86400000;
+  // last_l = now.getTime();
+  // next_l = last_l + NOI * 86400000;
+
+  last_l = new Date();
+  next_l = new Date(last_l.getTime() + NOI * 86400000);
 
   return {
     wd_learning_record: {

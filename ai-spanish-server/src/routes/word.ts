@@ -214,20 +214,22 @@ export async function getTodayLearnData(c: Context) {
   }
 }
 
-// todo
 // GET
 export async function getBasicLearningData(c: Context) {
-  const { userId, bookId } = c.req.query();
-  if (!userId || !bookId) {
-    return c.json(failRes({ message: "缺少必要的参数" }));
+  const { bookId } = c.req.query();
+
+  const user = c.get("user");
+  if (!user) {
+    return c.json(failRes({ code: 401, message: "登录以完成单词记录" }));
   }
 
   try {
+    let tasks = [];
     // 从词书与单词的关系表里获取当前学习的书的所有单词
     const learnedNumRes = await db
       .select({ count: count() })
       .from(learningRecord)
-      .where(eq(learningRecord.user_id, userId))
+      .where(eq(learningRecord.user_id, user.id))
       .leftJoin(
         wordInBook,
         and(
@@ -236,16 +238,33 @@ export async function getBasicLearningData(c: Context) {
         )
       );
 
-    // 删去已经学过的单词（之前的lookup未匹配到说明没有学过）
+    const needToReviewRes = db
+      .select({ count: count() })
+      .from(learningRecord)
+      .where(
+        and(
+          eq(learningRecord.user_id, user.id),
+          eq(learningRecord.master, false),
+          lte(learningRecord.next_l, new Date())
+        )
+      );
 
-    const totalWordsRes = await db
+    const totalWordsRes = db
       .select({ count: count() })
       .from(wordInBook)
       .where(eq(wordInBook.wb_id, bookId));
 
+    const resList = await Promise.all([
+      learnedNumRes,
+      needToReviewRes,
+      totalWordsRes,
+    ]);
+
+    console.log("📚 getBasicLearningData", resList);
+
     const data = {
-      needToLearn: 10,
-      needToReview: 2,
+      needToLearn: resList[2][0].count - resList[0][0].count,
+      needToReview: resList[1][0].count,
     };
     return c.json(successRes({ ...data }));
   } catch (e: any) {
@@ -372,8 +391,8 @@ export async function getReviewData(c: Context) {
     // 获取干扰项并合并到结果中
     const result = await Promise.all(
       detailQuery.map(async (row) => ({
-        ...row.filteredWords,
         ...row.word,
+        record: row.filteredWords,
         sample_list: await getDistractionWords(
           row.word?.id,
           bookId,
@@ -390,7 +409,7 @@ export async function getReviewData(c: Context) {
   }
 }
 
-// 获取干扰项单词列表
+// * 获取干扰项单词列表
 async function getDistractionWords(
   mainword_id: any,
   wd_bk_id: any,
@@ -417,9 +436,8 @@ export async function addLearningRecord(c: Context) {
     return c.json(failRes({ code: 401, message: "登录以完成单词记录" }));
   }
 
-  let now = new Date();
-  let last_l = now;
-  let next_l = new Date(now.getTime() + 86400000);
+  let last_l = new Date();
+  let next_l = new Date(last_l.getTime() + 86400000);
 
   const defaultLearningRecord = {
     last_l: last_l,
@@ -487,16 +505,20 @@ export async function updateLearningRecord(c: Context) {
     let of_matrix = JSON.parse(userRes[0].of_matrix);
 
     let tasks = [];
+    const res = [];
     for (let j = 0; j < wordLearningRecord.length; j++) {
-      console.log("📚 of_matrix", wordLearningRecord[j]);
-
       let result = sm_5_js(of_matrix, wordLearningRecord[j]);
 
       let record = result.wd_learning_record;
-      wordLearningRecord[j].newNOI = record.NOI;
-      wordLearningRecord[j].newMaster = record.master;
+      res[j] = {
+        word: wordLearningRecord[j].word,
+        word_id: wordLearningRecord[j].word_id,
+        NOI: record.NOI,
+        master: record.master,
+      };
       of_matrix = result.OF;
 
+      console.log("📚 sm_5_js", result);
       const promise = db
         .update(learningRecord)
         .set({
@@ -508,17 +530,22 @@ export async function updateLearningRecord(c: Context) {
             eq(learningRecord.user_id, user.id),
             eq(learningRecord.word_id, wordLearningRecord[j].word_id)
           )
-        );
+        )
+        .returning({ id: learningRecord.id });
 
       tasks.push(promise);
     }
     let resInner = await Promise.all(tasks);
 
     // 更新of_矩阵
+    await db
+      .update(users)
+      .set({ of_matrix: JSON.stringify(of_matrix) })
+      .where(eq(users.id, user.id));
 
     logger.info(" 📚 addLearningRecord", resInner);
 
-    return c.json(successRes({}));
+    return c.json(listRes({ list: res }));
   } catch (e: any) {
     logger.error(e);
     return c.json(failRes({ message: e.message }));

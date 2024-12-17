@@ -136,6 +136,7 @@ export const learningRecord = pgTable("learning_record", {
     .notNull()
     .primaryKey()
     .default(sql`gen_random_uuid()`),
+  word: text("word"),
   word_id: text("word_id").references(() => word.id),
   user_id: text("user_id").references(() => users.id),
   master: boolean("master").default(false),
@@ -155,6 +156,7 @@ export const learningRecordTmp = pgTable("learning_record_tmp", {
     .primaryKey()
     .default(sql`gen_random_uuid()`),
   user_id: text("user_id").references(() => users.id),
+  word: text("word"),
   word_id: text("word_id").references(() => word.id),
   repeatTimes: integer("repeatTimes"),
   learn_time: date("learn_time", { mode: "date" }),
