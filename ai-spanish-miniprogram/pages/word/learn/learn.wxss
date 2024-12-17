@@ -36,6 +36,7 @@
   width: 150rpx;
   height: 16rpx;
   display: flex;
+  gap: 16rpx;
   justify-content: center;
   align-items: center;
 }
@@ -43,7 +44,6 @@
   width: 20rpx;
   height: 10rpx;
   border-radius: 5rpx;
-  margin-left: 16rpx;
   box-shadow: 2rpx 2rpx 4rpx rgba(0, 0, 0, 0.1);
 }
 .wordWrapper .repeatTime .first {

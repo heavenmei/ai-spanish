@@ -11,20 +11,10 @@
   <view class="word" wx:if="{{ wordMode == 0 }}">{{wordDetail.word}}</view>
   <view class="repeatTime" wx:if="{{ wordMode == 0 }}">
     <view
-      class="times first {{ thisWordRepeatTime>=1? 'bg-done' : 'bg' }}"
-      wx:if="{{ repeatTimes>1 }}"
-    ></view>
-    <view
-      class="times {{ thisWordRepeatTime>=2? 'bg-done' : 'bg' }}"
-      wx:if="{{ repeatTimes>=2 }}"
-    ></view>
-    <view
-      class="times {{ thisWordRepeatTime>=3? 'bg-done' : 'bg' }}"
-      wx:if="{{ repeatTimes>=3 }}"
-    ></view>
-    <view
-      class="times {{ thisWordRepeatTime==4? 'bg-done' : 'bg' }}"
-      wx:if="{{ repeatTimes==4 }}"
+      wx:for="{{repeatTimes}}"
+      wx:key="item"
+      wx:index="index"
+      class="times {{ index<thisWordRepeatTime? 'bg-done' : 'bg' }}"
     ></view>
   </view>
   <view
@@ -53,20 +43,12 @@
       <view class="meaning"> {{wrongTransWordList[item].translation}}</view>
     </view>
   </view>
+
   <view class="translationWrapper" wx:if="{{ contentMode == 1 }}">
     <view class="transRow">
       <view class="pos">{{wordDetail.pos}}</view>
       <view class="meaning">{{wordDetail.translation}} </view>
     </view>
-    <!-- <view class="transRow" wx:for="{{wordDetail.shortTrans}}" wx:key="index">
-      <view class="pos" wx:if="{{ item.pos != '' }}">{{item.pos}}</view>
-      <view
-        class="meaning {{ item.more? 'moreBtn':'' }}"
-        bindtap="{{ item.more? 'toDetail':'' }}"
-        hover-class="{{ item.more? 'tapedText':'' }}"
-        >{{item.meaning}}
-      </view>
-    </view> -->
   </view>
   <view
     class="timing"
@@ -168,7 +150,7 @@
     <t-icon name="learned" prefix="icon" size="40rpx" />
   </t-button>
 
-  <t-button
+  <!-- <t-button
     size="medium"
     variant="text"
     t-class="bottomBtn"
@@ -180,7 +162,7 @@
       prefix="icon"
       size="50rpx"
     />
-  </t-button>
+  </t-button> -->
 </view>
 
 <view class="doneWrapper" wx:if="{{learnDone}}">

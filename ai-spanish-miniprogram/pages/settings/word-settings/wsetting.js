@@ -383,7 +383,7 @@ Page({
     console.log("uploadFile", res1);
 
     let res2 = await userApi.changeUserInfo({
-      user_id: app.globalData.userInfo.user_id,
+      user_id: app.globalData.userInfo.id,
       type: "avatar_pic",
       value: file,
     });
@@ -425,14 +425,14 @@ Page({
       }
       if (!realIsChange) return;
       let res1 = await userApi.changeSettings({
-        user_id: app.globalData.userInfo.user_id,
+        user_id: app.globalData.userInfo.id,
         settings: this.settings,
       });
       console.log("try1", res1);
       if (!res1.data) {
         // 再次尝试
         let res2 = await userApi.changeSettings({
-          user_id: app.globalData.userInfo.user_id,
+          user_id: app.globalData.userInfo.id,
           settings: this.settings,
         });
         if (!res2.data) {

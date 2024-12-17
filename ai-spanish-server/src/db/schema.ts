@@ -15,6 +15,7 @@ export const users = pgTable("users", {
   id: text("id").primaryKey(),
   nickName: text("nickName"),
   avatarUrl: text("avatarUrl"),
+  of_matrix: text("of_matrix"),
   l_book_id: text("l_book_id")
     .references(() => wordBook.id)
     .default("-1"),
@@ -117,15 +118,16 @@ export const word = pgTable("word", {
     .notNull()
     .primaryKey()
     .default(sql`gen_random_uuid()`),
+  pos: text("pos"),
   word: text("word"),
   definition: text("definition"),
   translation: text("translation"),
 });
 
 export const wordInBook = pgTable("word_in_book", {
-  wordBookId: text("wb_id").references(() => wordBook.id),
-  wordId: text("word_id").references(() => word.id),
-  wordIndex: integer("word_index"),
+  wb_id: text("wb_id").references(() => wordBook.id),
+  word_id: text("word_id").references(() => word.id),
+  word_index: integer("word_index"),
 });
 
 // 存放学习单词记录，学习单词后会生成，记录单词的学习时间，学习次数，遗忘相关参数等
@@ -134,10 +136,15 @@ export const learningRecord = pgTable("learning_record", {
     .notNull()
     .primaryKey()
     .default(sql`gen_random_uuid()`),
-  userId: text("user_id").references(() => users.id),
-  wordId: text("word_id").references(() => word.id),
-  wordBookId: text("word_book_id").references(() => wordBook.id),
+  word_id: text("word_id").references(() => word.id),
+  user_id: text("user_id").references(() => users.id),
   master: boolean("master").default(false),
+  last_l: date("last_l", { mode: "date" }),
+  next_l: date("next_l", { mode: "date" }),
+  c_time: date("c_time", { mode: "date" }),
+  NOI: integer("NOI"),
+  EF: text("EF"),
+  next_n: integer("next_n"),
   createdAt: date("created_at", { mode: "date" }).defaultNow().notNull(),
 });
 
@@ -147,11 +154,10 @@ export const learningRecordTmp = pgTable("learning_record_tmp", {
     .notNull()
     .primaryKey()
     .default(sql`gen_random_uuid()`),
-  userId: text("user_id").references(() => users.id),
-  wordId: text("word_id").references(() => word.id),
-  wordBookId: text("word_book_id").references(() => wordBook.id),
-  learned: boolean("learned"),
-  createdAt: timestamp("created_at", { mode: "date" }).defaultNow(),
+  user_id: text("user_id").references(() => users.id),
+  word_id: text("word_id").references(() => word.id),
+  repeatTimes: integer("repeatTimes"),
+  learn_time: date("learn_time", { mode: "date" }),
 });
 
 // 生词本，在学习或者查词过程中可以点击“星星”将单词加入生词本，就会在本数据库生成相关数据
@@ -161,8 +167,8 @@ export const notebook = pgTable("notebook", {
     .primaryKey()
     .default(sql`gen_random_uuid()`),
   userId: text("user_id").references(() => users.id),
-  wordId: text("word_id").references(() => word.id),
-  wordBookId: text("word_book_id").references(() => wordBook.id),
+  word_id: text("word_id").references(() => word.id),
+  wb_id: text("word_book_id").references(() => wordBook.id),
   learned: boolean("learned"),
   createdAt: timestamp("created_at", { mode: "date" }).defaultNow(),
 });

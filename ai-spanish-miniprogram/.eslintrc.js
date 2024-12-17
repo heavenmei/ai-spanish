@@ -38,7 +38,7 @@ module.exports = {
     "no-useless-constructor": "error",
     "prefer-const": "error",
     "prefer-destructuring": [
-      "error",
+      "off",
       {
         AssignmentExpression: {
           array: false,

@@ -1,2 +1,186 @@
 <!--pages/word/review/review.wxml-->
-<text>pages/word/review/review.wxml</text>
+<view class="bgWrapper"></view>
+
+<view class="topline" wx:if="{{!learnDone}}">
+  <view class="progress">{{learnedNum}} / {{learnNum}}</view>
+</view>
+
+<!-- 单词 -->
+<view class="wordWrapper" bindtap="playVoice" wx:if="{{!learnDone}}">
+  <view class="word" wx:if="{{ wordMode == 0 }}">{{wordDetail.word}}</view>
+  <view class="repeatTime" wx:if="{{ wordMode == 0 }}">
+    <view
+      wx:for="{{repeatTimes}}"
+      wx:key="item"
+      wx:index="index"
+      class="times {{ index<thisWordRepeatTime? 'bg-done' : 'bg' }}"
+    ></view>
+  </view>
+  <view
+    class="pron"
+    wx:if="{{ wordMode == 0 && wordDetail.phonetic.length > 0 }}"
+    >/ {{wordDetail.phonetic}} / <text class="voice iconfont icon-sound"></text
+  ></view>
+  <view class="timing" wx:if="{{ wordMode == 1 }}">
+    <view class="model"></view>
+    <view class="model phonetic"></view>
+  </view>
+</view>
+
+<!-- 内容 -->
+<view class="content" wx:if="{{!learnDone}}">
+  <view class="chooseCorrect" wx:if="{{ contentMode == 0 }}">
+    <view
+      class="choice {{choiceBgList[index]}}"
+      wx:for="{{choiceOrder}}"
+      wx:key="index"
+      hover-class="wasTaped"
+      data-index="{{index}}"
+      bindtap="{{ isBtnActive? 'checkChoice':'' }}"
+    >
+      <view class="pos">{{wrongTransWordList[item].pos}}</view>
+      <view class="meaning"> {{wrongTransWordList[item].translation}}</view>
+    </view>
+  </view>
+
+  <view class="translationWrapper" wx:if="{{ contentMode == 1 }}">
+    <view class="transRow">
+      <view class="pos">{{wordDetail.pos}}</view>
+      <view class="meaning">{{wordDetail.translation}} </view>
+    </view>
+  </view>
+  <view
+    class="timing"
+    wx:if="{{ contentMode == 2 }}"
+    bindtap="{{ isBtnActive? 'showTrans':'' }}"
+  >
+    <view class="model"></view>
+    <view class="model"></view>
+    <view class="model"></view>
+  </view>
+</view>
+
+<view class="control" wx:if="{{!learnDone}}">
+  <t-button
+    wx:if="{{ controlMode == 0 }}"
+    size="large"
+    variant="text"
+    t-class="btn unknown"
+    bind:tap="{{ isBtnActive? 'showAnswer':'' }}"
+  >
+    <view class="text">答案</view>
+  </t-button>
+
+  <view class="knowWrapper" wx:if="{{ controlMode == 1 }}">
+    <t-button
+      size="large"
+      variant="text"
+      t-class="btn"
+      data-type="known"
+      bind:tap="{{ isBtnActive? 'setAsType':'' }}"
+    >
+      <view class="text">认识</view>
+    </t-button>
+    <t-button
+      size="large"
+      variant="text"
+      t-class="btn unknown"
+      data-type="uncertain"
+      bind:tap="{{ isBtnActive? 'setAsType':'' }}"
+    >
+      <view class="text">模糊</view>
+    </t-button>
+    <t-button
+      size="large"
+      variant="text"
+      t-class="btn unknown"
+      data-type="unknown"
+      bind:tap="{{ isBtnActive? 'setAsType':'' }}"
+    >
+      <view class="text">不认识</view>
+    </t-button>
+  </view>
+
+  <view class="knowWrapper" wx:if="{{ controlMode == 2 }}">
+    <t-button
+      size="large"
+      variant="text"
+      t-class="btn"
+      bind:tap="{{ isBtnActive? 'toNextWord':'' }}"
+    >
+      <view class="text">下一个</view>
+    </t-button>
+
+    <t-button
+      size="large"
+      variant="text"
+      t-class="btn unknown"
+      data-type="changeToUnknown"
+      bind:tap="{{ isBtnActive? 'setAsType':'' }}"
+    >
+      <view class="text">记错了</view>
+    </t-button>
+  </view>
+  <t-button
+    wx:if="{{ controlMode == 3 }}"
+    size="large"
+    variant="text"
+    t-class="btn"
+    bind:tap="{{ isBtnActive? 'toNextWord':'' }}"
+  >
+    <view class="text">下一个</view>
+  </t-button>
+</view>
+
+<view class="bottomMenu" wx:if="{{!learnDone}}">
+  <t-button
+    size="medium"
+    variant="text"
+    t-class="bottomBtn"
+    bind:tap="toDetail"
+  >
+    <t-icon name="detail" prefix="icon" size="60rpx" />
+  </t-button>
+
+  <t-button
+    size="medium"
+    variant="text"
+    t-class="bottomBtn"
+    data-type="skip"
+    bind:tap="{{ isBtnActive? 'skip':'' }}"
+  >
+    <t-icon name="skip" prefix="icon" size="50rpx" />
+  </t-button>
+
+  <t-button
+    size="medium"
+    variant="text"
+    t-class="bottomBtn"
+    data-type="master"
+    bind:tap="{{ isBtnActive? 'skip':'' }}"
+  >
+    <t-icon name="learned" prefix="icon" size="40rpx" />
+  </t-button>
+
+  <!-- <t-button
+    size="medium"
+    variant="text"
+    t-class="bottomBtn"
+    data-type="master"
+    bind:tap="toggleAddToNB"
+  >
+    <t-icon
+      name="{{isInNotebook?'star':'favorite'}}"
+      prefix="icon"
+      size="50rpx"
+    />
+  </t-button> -->
+</view>
+
+<view class="doneWrapper" wx:if="{{learnDone}}">
+  <view class="text">本组单词学习已完成</view>
+  <view class="btn back" hover-class="wasTaped" bindtap="goBack">完成学习</view>
+  <view class="btn continue" hover-class="wasTaped" bindtap="reInit"
+    >继续学习</view
+  >
+</view>

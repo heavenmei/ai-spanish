@@ -19,9 +19,9 @@ App({
       timing_duration: 1000,
       autoplay: false,
       type: 1,
+
       review_repeat_t: 2,
-      review_first_m: "recallTrans",
-      review_second_m: "chooseTrans",
+      review_first_m: "chooseTrans",
       review_second_m: "recallWord",
       review_third_m: "recallTrans",
     },

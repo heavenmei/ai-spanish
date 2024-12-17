@@ -1,4 +1,8 @@
-import WordApi, { getLearningData } from "../../../apis/word";
+import {
+  toggleAddToNB,
+  getLearningData,
+  addLearningRecord,
+} from "../../../apis/word";
 import word_utils from "../../../utils/word_utils.js";
 
 const app = getApp();
@@ -6,12 +10,23 @@ const app = getApp();
 // const innerAudioContext = wx.createInnerAudioContext({ useWebAudioImplement: true })
 
 const mode = {
-  chooseTrans: { wordMode: 0, contentMode: 0, controlMode: 0 }, // 看词选义
-  recallTrans: { wordMode: 0, contentMode: 2, controlMode: 1 }, // 看词识义
-  recallWord: { wordMode: 1, contentMode: 1, controlMode: 1 }, // 看义识词
-  all: { wordMode: 0, contentMode: 1, controlMode: 3 }, // 不做遮挡
-  // 如果不倒计时，会在init里进行调整，故没有用const声明
+  // 看词选义
+  chooseTrans: { wordMode: 0, contentMode: 0, controlMode: 0 },
+  // 看词识义
+  recallTrans: { wordMode: 0, contentMode: 2, controlMode: 1 },
+  // 看义识词
+  recallWord: { wordMode: 1, contentMode: 1, controlMode: 1 },
+  // 不做遮挡
+  all: { wordMode: 0, contentMode: 1, controlMode: 3 },
 };
+
+const queNameList = [
+  "unLearnedList",
+  "repeatOnce",
+  "repeatTwice",
+  "repeatThree",
+  "learnedList",
+];
 const insertIndex = 4;
 const listMinLength = 4;
 
@@ -32,9 +47,6 @@ const initControl = {
   rightIndex: -1,
   // 单词音频播放器
   innerAudioContext: undefined,
-  // 倒计时模块是否初始化
-  isWordTimingInit: false,
-  isContentTimingInit: false,
   // 选择题显示答案后停留计时器
   isShowAllTimerSet: false,
   showAllTimer: -1,
@@ -44,9 +56,11 @@ const initControl = {
   repeatTwice: undefined,
   repeatThree: undefined,
   learnedList: undefined,
-  queNameList: [],
+  queNameList: queNameList,
+
   modeList: undefined,
 };
+
 Page({
   /**
    * 页面的初始数据
@@ -55,9 +69,10 @@ Page({
     learnedNum: 0,
     learnNum: 0,
     wordDetail: {},
+
     repeatTimes: 0,
     thisWordRepeatTime: 1,
-
+    // mode
     wordMode: 2,
     contentMode: 3,
     controlMode: 2,
@@ -66,14 +81,13 @@ Page({
     choiceOrder: [],
     choiceBgList: [],
 
-    // innerAudioContextIndex: 0,
     isInNotebook: false,
     isBtnActive: false,
     learnDone: false,
   },
 
   settings: initSettings,
-  wordDetailList: [],
+  wordDetailList: [], // 后端数据
   wordLearningRecord: [],
   control: initControl,
 
@@ -85,12 +99,6 @@ Page({
   init() {
     wx.enableAlertBeforeUnload({
       message: "现在退出将导致学习数据丢失哦",
-      success: () => {
-        console.log("success");
-      },
-      fail: () => {
-        console.log("fail");
-      },
     });
 
     // 初始化设置
@@ -114,25 +122,13 @@ Page({
         : userSettings.learn_fourth_m;
 
     this.settings = settings;
-    console.log("settings", settings);
 
-    const queNameList = [
-      "unLearnedList",
-      "repeatOnce",
-      "repeatTwice",
-      "repeatThree",
-      "learnedList",
-    ];
     for (let i = settings.learn_repeat_t; i < 4; i++)
       queNameList[i] = "learnedList";
     this.control.queNameList = queNameList;
 
     // 初始化显示内容组合
     const modeList = [];
-    if (!settings.timing) {
-      mode.recallTrans.contentMode = 3;
-      mode.recallWord.wordMode = 2;
-    }
     modeList.push(settings.learn_first_m);
     if (settings.learn_repeat_t >= 2) modeList.push(settings.second_mode);
     if (settings.learn_repeat_t >= 3) modeList.push(settings.third_mode);
@@ -155,15 +151,11 @@ Page({
       groupSize: this.settings.group_size,
       sample: this.settings.sample,
     });
-    console.log("learnDataRes", learnDataRes.list);
 
-    // wx.setStorageSync('wordDetailList', learnDataRes.data)
     const wordDetailList = learnDataRes.list;
-    // let wordDetailList = wx.getStorageSync('wordDetailList')
-    // wordDetailList = word_utils.batchHandleWordDetail(wordDetailList, {});
 
-    const wordLearningRecord = [];
     const unLearnedList = [];
+    const wordLearningRecord = [];
     const repeatOnce = this.settings.learn_repeat_t >= 2 ? [] : undefined;
     const repeatTwice = this.settings.learn_repeat_t >= 3 ? [] : undefined;
     const repeatThree = this.settings.learn_repeat_t == 4 ? [] : undefined;
@@ -173,7 +165,7 @@ Page({
       });
       wordDetailList[i].innerAudioContext.src = wordDetailList[i].voiceUrl;
       wordLearningRecord.push({
-        word_id: wordDetailList[i].wordId,
+        word_id: wordDetailList[i].word_id,
         repeatTimes: 0,
         reStartTimes: 0,
         master: false,
@@ -215,6 +207,7 @@ Page({
     this.wordDetailList = wordDetailList;
     this.wordLearningRecord = wordLearningRecord;
     this.control.unLearnedList = unLearnedList;
+
     this.control.repeatOnce = repeatOnce;
     this.control.repeatTwice = repeatTwice;
     this.control.repeatThree = repeatThree;
@@ -226,47 +219,17 @@ Page({
           : this.settings.group_size,
     });
 
+    console.log(
+      " 📚 learnDataRes",
+      this.data,
+      this.wordDetailList,
+      this.wordLearningRecord,
+      this.control
+    );
+
     // 将未学习的队列的第一项“放出来”学习
     const nowIndex = this.control.unLearnedList.shift();
     this.showNextWord(nowIndex);
-  },
-
-  playVoice() {
-    this.control.innerAudioContext.stop();
-    this.control.innerAudioContext.play();
-    // this.wordDetailList[this.data.innerAudioContextIndex].innerAudioContext.stop()
-    // this.wordDetailList[this.data.innerAudioContextIndex].innerAudioContext.play()
-  },
-
-  // * 生成干扰项数组（最后一项为正确答案），生成用于打乱和标记背景颜色的数组以及正确选项索引
-  getWrongTrans(nowIndex) {
-    if (!nowIndex) nowIndex = this.control.nowIndex;
-    const numList = word_utils.randNumList(
-      this.wordDetailList[nowIndex].sample_list.length - 1,
-      3
-    );
-    const wrongTransWordList = [];
-    for (let j = 0; j < numList.length; j++) {
-      wrongTransWordList.push(
-        this.wordDetailList[nowIndex].sample_list[numList[j]]
-      );
-    }
-    // 插入正确的选项
-    wrongTransWordList.push(this.wordDetailList[nowIndex]);
-
-    let choiceOrder = [0, 1, 2, 3];
-    choiceOrder = word_utils.randArr(choiceOrder);
-    const rightIndex = choiceOrder.indexOf(3);
-    const choiceBgList = ["", "", "", ""];
-
-    // console.log("getWrongTrans", numList, wrongTransWordList);
-
-    this.control.rightIndex = rightIndex;
-    this.setData({
-      wrongTransWordList,
-      choiceOrder,
-      choiceBgList,
-    });
   },
 
   // * 下一个
@@ -278,17 +241,18 @@ Page({
     this.control.nowIndex = nextIndex;
     const { repeatTimes } = this.wordLearningRecord[nextIndex];
     const modeDetail = mode[this.control.modeList[repeatTimes]];
+
     if (modeDetail.contentMode == 0) this.getWrongTrans(nextIndex);
 
     this.setData({
       ...modeDetail,
       wordDetail: this.wordDetailList[nextIndex],
-      thisWordRepeatTime: this.wordLearningRecord[nextIndex].repeatTimes,
-      contentTimingStop: false,
-      wordTimingStop: false,
+      thisWordRepeatTime: repeatTimes,
       isInNotebook: !!this.wordDetailList[nextIndex].in_notebook,
       isBtnActive: true,
     });
+
+    // 播放音频
     if (this.control.innerAudioContext) this.control.innerAudioContext.stop();
     this.control.innerAudioContext =
       this.wordDetailList[nextIndex].innerAudioContext;
@@ -296,14 +260,115 @@ Page({
       this.control.innerAudioContext.play();
   },
 
-  // * 单选
+  getNextIndex(thisWordRepeatTime) {
+    // 获取下一个单词的索引，单词顺序是 未学过的->学过一次的->(学过两次的->学过三次的->)未学过的
+
+    // 先检查该轮到的队列的长度是不是超过listMinLength（如果是1的话，就会出现刚学完第一次又从学过一次的队列中取出来学第二次的情况），小于listMinLength则要暂时跳过该队列，循环repeat_times次
+    // 最后一次不满足相当于所有队列都不满足，且没有break的话出来的i会再加一次1，相加一取余，相当于又回到第一次检测的队列（即没人救得了(length>listMinLength)就还是自己硬扛）
+    let i = 0;
+    for (i; i < this.settings.learn_repeat_t; i++) {
+      if (
+        this.control[
+          this.control.queNameList[
+            (thisWordRepeatTime + i + 1) % this.settings.learn_repeat_t
+          ]
+        ].length > listMinLength
+      ) {
+        break;
+      }
+    }
+    thisWordRepeatTime =
+      (thisWordRepeatTime + i) % this.settings.learn_repeat_t;
+
+    let nextIndex = -1;
+    if (thisWordRepeatTime == 0) {
+      if (
+        this.settings.learn_repeat_t >= 2 &&
+        this.control.repeatOnce.length > 0
+      ) {
+        nextIndex = this.control.repeatOnce.shift();
+      } else if (
+        this.settings.learn_repeat_t >= 3 &&
+        this.control.repeatTwice.length > 0
+      ) {
+        nextIndex = this.control.repeatTwice.shift();
+      } else if (
+        this.settings.learn_repeat_t == 4 &&
+        this.control.repeatThree.length > 0
+      ) {
+        nextIndex = this.control.repeatThree.shift();
+      } else if (this.control.unLearnedList.length > 0) {
+        nextIndex = this.control.unLearnedList.shift();
+      }
+    } else if (thisWordRepeatTime == 1) {
+      if (
+        this.settings.learn_repeat_t >= 3 &&
+        this.control.repeatTwice.length > 0
+      ) {
+        nextIndex = this.control.repeatTwice.shift();
+      } else if (
+        this.settings.learn_repeat_t == 4 &&
+        this.control.repeatThree.length > 0
+      ) {
+        nextIndex = this.control.repeatThree.shift();
+      } else if (this.control.unLearnedList.length > 0) {
+        nextIndex = this.control.unLearnedList.shift();
+      } else if (
+        this.settings.learn_repeat_t >= 2 &&
+        this.control.repeatOnce.length > 0
+      ) {
+        nextIndex = this.control.repeatOnce.shift();
+      }
+    } else if (thisWordRepeatTime == 2) {
+      if (
+        this.settings.learn_repeat_t == 4 &&
+        this.control.repeatThree.length > 0
+      ) {
+        nextIndex = this.control.repeatThree.shift();
+      } else if (this.control.unLearnedList.length > 0) {
+        nextIndex = this.control.unLearnedList.shift();
+      } else if (
+        this.settings.learn_repeat_t >= 2 &&
+        this.control.repeatOnce.length > 0
+      ) {
+        nextIndex = this.control.repeatOnce.shift();
+      } else if (
+        this.settings.learn_repeat_t >= 3 &&
+        this.control.repeatTwice.length > 0
+      ) {
+        nextIndex = this.control.repeatTwice.shift();
+      }
+    } else if (thisWordRepeatTime == 3) {
+      if (this.control.unLearnedList.length > 0) {
+        nextIndex = this.control.unLearnedList.shift();
+      } else if (
+        this.settings.learn_repeat_t == 2 &&
+        this.control.repeatOnce.length > 0
+      ) {
+        nextIndex = this.control.repeatOnce.shift();
+      } else if (
+        this.settings.learn_repeat_t == 3 &&
+        this.control.repeatTwice.length > 0
+      ) {
+        nextIndex = this.control.repeatTwice.shift();
+      } else if (
+        this.settings.learn_repeat_t == 4 &&
+        this.control.repeatThree.length > 0
+      ) {
+        nextIndex = this.control.repeatThree.shift();
+      }
+    }
+    if (nextIndex == -1) console.log("GetNextIndex Err!");
+    return nextIndex;
+  },
+
   checkChoice(e) {
     this.setData({ isBtnActive: false });
-    // console.log(e)
     const thisChoice = e.currentTarget.dataset.index;
-    const { rightIndex } = this.control;
+    const { rightIndex, nowIndex } = this.control;
     const choiceBgList = ["", "", "", ""];
     choiceBgList[rightIndex] = "rightChoice";
+    const nowRepeatTimes = this.wordLearningRecord[nowIndex].repeatTimes;
 
     // 如果显示答案的倒计时已经设置了，则“加速”，同时进行错误选项的检测
     if (this.control.isShowAllTimerSet) {
@@ -320,21 +385,12 @@ Page({
       return;
     }
 
-    const { nowIndex } = this.control;
-    const nowRepeatTimes = this.wordLearningRecord[nowIndex].repeatTimes;
-    // let queNameList = ['unLearnedList', 'repeatOnce', 'repeatTwice', 'repeatThree', 'learnedList']
-    // for (let i = this.settings.learn_repeat_t; i < 4; i++) queNameList[i] = 'learnedList'
     if (thisChoice == rightIndex) {
       this.wordLearningRecord[nowIndex].repeatTimes += 1;
-      // this.control.repeatOnce.push(nowIndex)
-      this.control[
-        this.control.queNameList[this.wordLearningRecord[nowIndex].repeatTimes]
-      ].push(nowIndex);
-      if (
-        this.wordLearningRecord[nowIndex].repeatTimes >=
-        this.settings.learn_repeat_t
-      )
-        this.updateLearned();
+      const newRepeatTimes = this.wordLearningRecord[nowIndex].repeatTimes;
+      // todo
+      this.control[this.control.queNameList[newRepeatTimes]].push(nowIndex);
+      if (newRepeatTimes >= this.settings.learn_repeat_t) this.updateLearned();
     } else {
       choiceBgList[thisChoice] = "falseChoice";
       if (this.wordLearningRecord[nowIndex].reStartTimes >= 3) {
@@ -353,14 +409,13 @@ Page({
       choiceBgList,
       thisWordRepeatTime: this.wordLearningRecord[nowIndex].repeatTimes,
     });
+
     this.control.nextIndex = this.getNextIndex(nowRepeatTimes);
 
     // 设置1s之后显示详情
     const _this = this;
     this.control.isShowAllTimerSet = true;
     this.control.showAllTimer = setTimeout(function () {
-      console.log("wordDetail", _this.data.wordDetail);
-
       _this.setData({
         contentMode: 1,
         controlMode: 3,
@@ -386,13 +441,11 @@ Page({
       return;
     }
 
-    const { nowIndex } = this.control;
+    const { nowIndex, rightIndex } = this.control;
     const nowRepeatTimes = this.wordLearningRecord[nowIndex].repeatTimes;
-    const { rightIndex } = this.control;
     const choiceBgList = ["", "", "", ""];
     choiceBgList[rightIndex] = "rightChoice";
-    // let queNameList = ['unLearnedList', 'repeatOnce', 'repeatTwice', 'repeatThree', 'learnedList']
-    // for (let i = this.settings.learn_repeat_t; i < 4; i++) queNameList[i] = 'learnedList'
+
     if (this.wordLearningRecord[nowIndex].reStartTimes >= 3) {
       this.control[
         this.control.queNameList[this.wordLearningRecord[nowIndex].repeatTimes]
@@ -406,7 +459,7 @@ Page({
       choiceBgList,
       thisWordRepeatTime: this.wordLearningRecord[nowIndex].repeatTimes,
     });
-    // this.control.unLearnedList.splice(2, 0, nowIndex) // 如果数组长度超出2则会自动加在末尾
+
     this.control.nextIndex = this.getNextIndex(nowRepeatTimes);
 
     // 设置1s之后显示详情
@@ -553,108 +606,6 @@ Page({
     this.showNextWord();
   },
 
-  getNextIndex(thisWordRepeatTime) {
-    // 获取下一个单词的索引，单词顺序是 未学过的->学过一次的->(学过两次的->学过三次的->)未学过的
-
-    // 先检查该轮到的队列的长度是不是超过listMinLength（如果是1的话，就会出现刚学完第一次又从学过一次的队列中取出来学第二次的情况），小于listMinLength则要暂时跳过该队列，循环repeat_times次
-    // 最后一次不满足相当于所有队列都不满足，且没有break的话出来的i会再加一次1，相加一取余，相当于又回到第一次检测的队列（即没人救得了(length>listMinLength)就还是自己硬扛）
-    let i = 0;
-    for (i; i < this.settings.learn_repeat_t; i++) {
-      if (
-        this.control[
-          this.control.queNameList[
-            (thisWordRepeatTime + i + 1) % this.settings.learn_repeat_t
-          ]
-        ].length > listMinLength
-      ) {
-        break;
-      }
-    }
-    thisWordRepeatTime =
-      (thisWordRepeatTime + i) % this.settings.learn_repeat_t;
-
-    let nextIndex = -1;
-    if (thisWordRepeatTime == 0) {
-      if (
-        this.settings.learn_repeat_t >= 2 &&
-        this.control.repeatOnce.length > 0
-      ) {
-        nextIndex = this.control.repeatOnce.shift();
-      } else if (
-        this.settings.learn_repeat_t >= 3 &&
-        this.control.repeatTwice.length > 0
-      ) {
-        nextIndex = this.control.repeatTwice.shift();
-      } else if (
-        this.settings.learn_repeat_t == 4 &&
-        this.control.repeatThree.length > 0
-      ) {
-        nextIndex = this.control.repeatThree.shift();
-      } else if (this.control.unLearnedList.length > 0) {
-        nextIndex = this.control.unLearnedList.shift();
-      }
-    } else if (thisWordRepeatTime == 1) {
-      if (
-        this.settings.learn_repeat_t >= 3 &&
-        this.control.repeatTwice.length > 0
-      ) {
-        nextIndex = this.control.repeatTwice.shift();
-      } else if (
-        this.settings.learn_repeat_t == 4 &&
-        this.control.repeatThree.length > 0
-      ) {
-        nextIndex = this.control.repeatThree.shift();
-      } else if (this.control.unLearnedList.length > 0) {
-        nextIndex = this.control.unLearnedList.shift();
-      } else if (
-        this.settings.learn_repeat_t >= 2 &&
-        this.control.repeatOnce.length > 0
-      ) {
-        nextIndex = this.control.repeatOnce.shift();
-      }
-    } else if (thisWordRepeatTime == 2) {
-      if (
-        this.settings.learn_repeat_t == 4 &&
-        this.control.repeatThree.length > 0
-      ) {
-        nextIndex = this.control.repeatThree.shift();
-      } else if (this.control.unLearnedList.length > 0) {
-        nextIndex = this.control.unLearnedList.shift();
-      } else if (
-        this.settings.learn_repeat_t >= 2 &&
-        this.control.repeatOnce.length > 0
-      ) {
-        nextIndex = this.control.repeatOnce.shift();
-      } else if (
-        this.settings.learn_repeat_t >= 3 &&
-        this.control.repeatTwice.length > 0
-      ) {
-        nextIndex = this.control.repeatTwice.shift();
-      }
-    } else if (thisWordRepeatTime == 3) {
-      if (this.control.unLearnedList.length > 0) {
-        nextIndex = this.control.unLearnedList.shift();
-      } else if (
-        this.settings.learn_repeat_t == 2 &&
-        this.control.repeatOnce.length > 0
-      ) {
-        nextIndex = this.control.repeatOnce.shift();
-      } else if (
-        this.settings.learn_repeat_t == 3 &&
-        this.control.repeatTwice.length > 0
-      ) {
-        nextIndex = this.control.repeatTwice.shift();
-      } else if (
-        this.settings.learn_repeat_t == 4 &&
-        this.control.repeatThree.length > 0
-      ) {
-        nextIndex = this.control.repeatThree.shift();
-      }
-    }
-    if (nextIndex == -1) console.log("GetNextIndex Err!");
-    return nextIndex;
-  },
-
   showTrans() {
     this.setData({
       contentTimingStop: true,
@@ -674,13 +625,114 @@ Page({
     });
   },
 
-  toDetail: function () {
-    wx.navigateTo({
-      url: `../word_detail/word_detail?word_id=${this.data.wordDetail.word_id}`,
+  // * 更新顶部学习数量
+  updateLearned() {
+    const learnedNum = this.control.learnedList.length;
+    this.setData({ learnedNum });
+  },
+
+  checkDone() {
+    const learnedNum = this.control.learnedList.length;
+    if (learnedNum != this.data.learnedNum) this.setData({ learnedNum });
+    if (learnedNum >= this.data.learnNum) {
+      console.log("本组单词学习完毕啦~");
+      this.setData({
+        isBtnActive: false,
+        learnDone: true,
+      });
+      this.sendLearningData();
+      return true;
+    }
+    return false;
+  },
+
+  // * 上传学习数据
+  async sendLearningData() {
+    wx.showLoading({
+      title: "学习数据上传中...",
+      mask: true,
+    });
+
+    // 生成已完成的单词学习记录
+    const learnedList = [];
+    for (let i = 0; i < this.control.learnedList.length; i++) {
+      learnedList.push({
+        word_id: this.wordLearningRecord[this.control.learnedList[i]].word_id,
+        master: this.wordLearningRecord[this.control.learnedList[i]].master,
+      });
+    }
+
+    // 生成正在学习的单词队列学习记录
+    const learningList = [];
+    for (let j = 1; j < this.settings.learn_repeat_t; j++) {
+      const queName = this.control.queNameList[j];
+      for (let k = 0; k < this.control[queName].length; k++) {
+        learningList.push({
+          word_id: this.wordLearningRecord[this.control[queName][k]].word_id,
+          learn_time: new Date(),
+          repeatTimes: k,
+        });
+      }
+    }
+
+    const res = await addLearningRecord({
+      learnedList,
+      learningList,
+    });
+    console.log("addLearningRecord res", res);
+
+    // todo delete
+    app.globalData.updatedForIndex = true;
+    app.globalData.updatedForOverview = true;
+
+    wx.hideLoading();
+    wx.disableAlertBeforeUnload();
+  },
+
+  playVoice() {
+    this.control.innerAudioContext.stop();
+    this.control.innerAudioContext.play();
+  },
+
+  // * 生成干扰项数组（最后一项为正确答案），生成用于打乱和标记背景颜色的数组以及正确选项索引
+  getWrongTrans(nowIndex) {
+    if (!nowIndex) nowIndex = this.control.nowIndex;
+    const numList = word_utils.randNumList(
+      this.wordDetailList[nowIndex].sample_list.length - 1,
+      3
+    );
+    const wrongTransWordList = [];
+    for (let j = 0; j < numList.length; j++) {
+      wrongTransWordList.push(
+        this.wordDetailList[nowIndex].sample_list[numList[j]]
+      );
+    }
+    // 插入正确的选项
+    wrongTransWordList.push(this.wordDetailList[nowIndex]);
+
+    let choiceOrder = [0, 1, 2, 3];
+    choiceOrder = word_utils.randArr(choiceOrder);
+    const rightIndex = choiceOrder.indexOf(3);
+    const choiceBgList = ["", "", "", ""];
+
+    // console.log("getWrongTrans", numList, wrongTransWordList);
+
+    this.control.rightIndex = rightIndex;
+    this.setData({
+      wrongTransWordList,
+      choiceOrder,
+      choiceBgList,
     });
   },
 
-  // 跳过当前环节/设置为已掌握
+  // ! bottom Buttons
+  toDetail() {
+    wx.navigateTo({
+      url: `/pages/word/detail/detail?word_id=${this.data.wordDetail.word_id}`,
+    });
+  },
+
+  // * 跳过当前环节/设置为已掌握
   skip(e) {
     this.setData({ isBtnActive: false });
     const { type } = e.currentTarget.dataset;
@@ -720,12 +772,12 @@ Page({
     this.setData({ isBtnActive: true });
   },
 
-  // 调整是否添加到生词本
-  toggleAddToNB: async function () {
+  // todo 调整是否添加到生词本
+  async toggleAddToNB() {
     this.setData({ isBtnActive: false });
     const add = this.data.isInNotebook;
-    const res = await WordApi.toggleAddToNB({
-      user_id: app.globalData.userInfo.user_id,
+    const res = await toggleAddToNB({
+      user_id: app.globalData.userInfo.id,
       word_id: this.wordDetailList[this.control.nowIndex].word_id,
       add: !add,
     });
@@ -743,91 +795,6 @@ Page({
         duration: 1000,
       });
       this.setData({ isBtnActive: true });
-    }
-  },
-
-  updateLearned() {
-    const learnedNum = this.control.learnedList.length;
-    this.setData({ learnedNum });
-  },
-
-  checkDone() {
-    const learnedNum = this.control.learnedList.length;
-    if (learnedNum != this.data.learnedNum) this.setData({ learnedNum });
-    if (learnedNum >= this.data.learnNum) {
-      console.log("本组单词学习完毕啦~");
-      this.setData({
-        isBtnActive: false,
-        learnDone: true,
-      });
-      this.sendLearningData();
-      return true;
-    }
-    return false;
-  },
-
-  async sendLearningData() {
-    wx.showLoading({
-      title: "学习数据上传中...",
-      mask: true,
-    });
-    console.log("sendLearningData");
-
-    // 生成已完成的单词学习记录
-    const now = new Date();
-    now.setMilliseconds(0);
-    now.setSeconds(0);
-    now.setMinutes(0);
-    now.setHours(0);
-    const last_l = now.getTime();
-    // let next_l = last_l + 86400000
-    const learnedRecord = [];
-    const { user_id } = app.globalData.userInfo;
-
-    for (let i = 0; i < this.control.learnedList.length; i++) {
-      learnedRecord.push({
-        word_id: this.wordLearningRecord[this.control.learnedList[i]].word_id,
-        user_id,
-        // last_l,
-        // next_l,
-        // NOI: 1,
-        // EF: "2.5",
-        // next_n: 0,
-        master: this.wordLearningRecord[this.control.learnedList[i]].master,
-      });
-    }
-
-    // 生成正在学习的单词队列学习记录
-    const learningRecord = [];
-    for (let j = 1; j < this.settings.learn_repeat_t; j++) {
-      const queName = this.control.queNameList[j];
-      for (let k = 0; k < this.control[queName].length; k++) {
-        learningRecord.push({
-          word_id: this.wordLearningRecord[this.control[queName][k]].word_id,
-          user_id,
-          learn_time: last_l,
-          repeatTimes: k,
-        });
-      }
-    }
-    console.log("learningRecord", learningRecord);
-
-    const res = await WordApi.addLearningRecord({
-      learnedRecord,
-      learningRecord,
-      user_id: app.globalData.userInfo.user_id,
-    });
-    console.log("addLearningRecord res", res);
-    app.globalData.updatedForIndex = true;
-    app.globalData.updatedForOverview = true;
-    wx.hideLoading();
-    wx.disableAlertBeforeUnload();
-    if (res.errorcode != rescontent.SUCCESS.errorcode) {
-      wx.showToast({
-        title: "很抱歉，数据上传出错",
-        icon: "none",
-        duration: 1000,
-      });
     }
   },
 
