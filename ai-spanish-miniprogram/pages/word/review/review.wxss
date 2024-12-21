@@ -281,28 +281,76 @@
   font-weight: 700;
   margin-top: -100rpx;
   margin-bottom: 100rpx;
+}
+.doneWrapper .decorate {
+  width: 690rpx;
+  height: 4rpx;
+  border-radius: 2rpx;
+  background-color: var(--td-brand-color);
+}
+.doneWrapper .title {
+  font-size: 28rpx;
+  height: 40rpx;
+  margin-top: 20rpx;
+  width: 670rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
   color: var(--td-brand-color);
 }
-.doneWrapper .btn {
+.doneWrapper .reviewResWrapper {
+  width: 750rpx;
+  min-height: 460rpx;
+  max-height: 620rpx;
+  padding-bottom: 10rpx;
+}
+.doneWrapper .reviewResWrapper .item {
+  width: 750rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+.doneWrapper .reviewResWrapper .words {
+  font-size: 32rpx;
+  height: 80rpx;
+}
+.doneWrapper .reviewResWrapper .words .word {
+  color: #757575;
+  margin-left: 40rpx;
+}
+.doneWrapper .reviewResWrapper .words .interval {
+  color: #8a8a8a;
+  margin-right: 40rpx;
+}
+.doneWrapper .reviewResWrapper .words .mastered {
+  margin-right: 40rpx;
+}
+.doneWrapper .btnWraper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50rpx;
+}
+.doneWrapper .btnWraper .btn {
   width: 300rpx;
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  border-radius: 10rpx;
   border-radius: 40rpx;
   font-weight: 600;
-  margin-bottom: 50rpx;
   font-size: 32rpx;
 }
-.doneWrapper .back {
+.doneWrapper .btnWraper .back {
   background-color: rgba(150, 150, 150, 0.4);
-  color: #a0a0a0;
   color: #ffffff;
+  margin-right: 50rpx;
 }
-.doneWrapper .continue {
+.doneWrapper .btnWraper .continue {
   color: #ffffff;
   background-color: var(--td-brand-color);
 }
-.doneWrapper .wasTaped {
+.doneWrapper .btnWraper .wasTaped {
   opacity: 0.6;
 }

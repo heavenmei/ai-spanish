@@ -1,2 +1,46 @@
 <!--pages/word/detail/detail.wxml-->
-<text>pages/word/detail/detail.wxml</text>
+<view class="bgWrapper"></view>
+
+<view class="voicePlaying" bindtap="playVoice">
+  <view class="word">
+    {{wordDetail.word}}
+    <t-button
+      size="medium"
+      variant="text"
+      t-class="notebookBtn"
+      bind:tap="toggleAddToNB"
+    >
+      <t-icon
+        name="{{isInNotebook?'star':'favorite'}}"
+        prefix="icon"
+        size="50rpx"
+      />
+    </t-button>
+  </view>
+
+  <view class="pron" wx:if="{{wordDetail.phonetic.length>0}}"
+    >/ {{wordDetail.phonetic}} / <text class="voice iconfont icon-sound"></text
+  ></view>
+
+  <view class="tagContainer" wx:if="{{wordDetail.tag.length>0}}">
+    <view class="tag" wx:for="{{wordDetail.tag}}" wx:key="index">{{item}}</view>
+  </view>
+</view>
+
+<view class="contentCard">
+  <view class="title">西语释义</view>
+
+  <view class="contentWrapper def">
+    <text class="pos">{{wordDetail.pos}}</text>
+    <text class="meaning">{{wordDetail.definition}}</text>
+  </view>
+</view>
+
+<view class="contentCard" wx:if="{{wordDetail.translation.length>0}}">
+  <view class="title">中文释义</view>
+
+  <view class="contentWrapper trans">
+    <text class="pos">{{wordDetail.pos}}</text>
+    <text class="meaning">{{wordDetail.translation}}</text>
+  </view>
+</view>

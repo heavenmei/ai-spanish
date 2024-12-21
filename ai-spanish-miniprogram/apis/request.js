@@ -101,9 +101,11 @@ http.interceptors.request.use((config) => {
 // };
 
 function formatGetParams(params) {
-  return Object.keys(params)
+  return Object.entries(params)
+    .filter(([, value]) => value !== undefined)
     .map(
-      (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+      ([key]) =>
+        `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
     )
     .join("&");
 }

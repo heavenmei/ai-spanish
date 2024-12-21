@@ -106,3 +106,10 @@ export const LearningParamsSchema = z.object({
   groupSize: z.coerce.number().default(0),
   sample: z.coerce.boolean().default(false),
 });
+
+export const BookLearningParamsSchema = z.object({
+  wb_id: z.coerce.string().default(""),
+  subType: z.coerce.string().default(""),
+  page: z.coerce.number().int().positive().default(1),
+  pageSize: z.coerce.number().int().positive().max(100).default(10),
+});

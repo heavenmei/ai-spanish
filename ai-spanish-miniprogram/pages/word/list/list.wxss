@@ -1,7 +1,4 @@
-.wordWrapper {
-  width: 100%;
-}
-.wordWrapper .wordItem {
+.wordItem {
   width: 750rpx;
   height: wordItemHeight;
   background-color: #ffffff;
@@ -10,14 +7,14 @@
   justify-content: center;
   font-weight: 600;
 }
-.wordWrapper .wordItem .dot {
+.wordItem .dot {
   width: 16rpx;
   height: 16rpx;
   border-radius: 8rpx;
   background-color: #fd6802;
   margin-right: 24rpx;
 }
-.wordWrapper .wordItem .wordInfo {
+.wordItem .wordInfo {
   width: 630rpx;
   height: 80rpx;
   line-height: 80rpx;
@@ -27,17 +24,17 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
 }
-.wordWrapper .wordItem .wordInfo .word {
+.wordItem .wordInfo .word {
   color: #757575;
 }
-.wordWrapper .wordItem .wordInfo .trans {
+.wordItem .wordInfo .trans {
   color: #8a8a8a;
   font-size: 28rpx;
 }
-.wordWrapper .wasTaped {
+.wasTaped {
   background-color: #e6e6e6;
 }
-.wordWrapper .tips {
+.tips {
   width: 100%;
   height: 100rpx;
   color: #8a8a8a;
@@ -46,7 +43,7 @@
   align-items: center;
   justify-content: center;
 }
-.wordWrapper .changeType {
+.changeType {
   width: 100%;
   height: 100rpx;
   font-size: 32rpx;
@@ -54,7 +51,7 @@
   background-color: #ffffff;
   position: fixed;
 }
-.wordWrapper .changeType .type {
+.changeType .type {
   width: 50%;
   height: 100rpx;
   display: flex;
@@ -62,28 +59,28 @@
   align-items: center;
   justify-content: center;
 }
-.wordWrapper .changeType .type .text {
+.changeType .type .text {
   font-size: 26rpx;
   color: #8a8a8a;
   font-weight: 600;
 }
-.wordWrapper .changeType .type .decorate {
+.changeType .type .decorate {
   margin-top: 10rpx;
   width: 30rpx;
   height: 10rpx;
   border-radius: 5rpx;
   background-color: #fd6802;
 }
-.wordWrapper .changeType .type .active {
+.changeType .type .active {
   font-size: 30rpx;
   color: #515151;
   margin-top: 10rpx;
 }
-.wordWrapper .forToday {
+.forToday {
   width: 100%;
   margin-top: 100rpx;
 }
-.wordWrapper .bottom {
+.bottom {
   width: 100%;
   height: 100rpx;
 }

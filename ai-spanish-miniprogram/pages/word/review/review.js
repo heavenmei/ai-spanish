@@ -482,8 +482,6 @@ Page({
 
   checkDone() {
     const learnedNum = this.control.reviewedList.length;
-    console.log(this.control.reviewedList, learnedNum);
-
     if (learnedNum != this.data.learnedNum) this.setData({ learnedNum });
     if (learnedNum >= this.data.learnNum) {
       console.log("本组单词复习完毕啦~");
@@ -537,11 +535,12 @@ Page({
     wx.hideLoading();
     wx.disableAlertBeforeUnload();
 
-    console.log("res.data", res.data);
-    const reviewData = JSON.parse(JSON.stringify(res.data));
+    const reviewData = JSON.parse(JSON.stringify(res.list));
+
     reviewData.sort(function (a, b) {
       return a.NOI - b.NOI;
     });
+
     let temp = 0;
     for (let i = 0; i < reviewData.length; i++) {
       for (let j = 0; j < this.wordDetailList.length; j++) {

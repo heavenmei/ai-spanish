@@ -81,17 +81,19 @@ Page({
    * 生命周期函数--监听页面加载 options
    */
   onLoad() {
-    this.init();
+    // this.init();
   },
 
-  onShow() {},
+  onShow() {
+    this.init();
+  },
 
   async init() {
     this.getSingleWBData();
     this.initLearnData();
   },
 
-  async checkLogin() {
+  checkLogin() {
     if (!wx.getStorageSync("userInfo").id) {
       wx.showToast({
         title: "登录后才可以查看哦~",

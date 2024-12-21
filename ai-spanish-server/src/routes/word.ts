@@ -1,6 +1,17 @@
 import { Context } from "hono";
 import db from "@/db";
-import { and, asc, count, desc, eq, lte, ne, notExists } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  desc,
+  eq,
+  exists,
+  lte,
+  ne,
+  notExists,
+  sql,
+} from "drizzle-orm";
 import {
   learningRecord,
   learningRecordTmp,
@@ -11,10 +22,11 @@ import {
 } from "@/db/schema";
 import {
   failRes,
-  LearningParamsSchema,
   listRes,
-  PageQueryParamsSchema,
   successRes,
+  LearningParamsSchema,
+  PageQueryParamsSchema,
+  BookLearningParamsSchema,
 } from "@/utils";
 import log4js from "log4js";
 import sm_5_js from "@/lib/sm-5.js";
@@ -39,6 +51,26 @@ export async function changeWordBook(c: Context) {
       .where(eq(users.id, userId));
 
     return getWBLearnData(c);
+  } catch (e: any) {
+    logger.error(e);
+    return c.json(failRes({ message: e.message }));
+  }
+}
+
+// GET
+export async function getWordDetail(c: Context) {
+  const { word_id } = c.req.query();
+
+  const user = c.get("user");
+  if (!user) {
+    return c.json(failRes({ code: 401, message: "请先登录" }));
+  }
+
+  try {
+    const res = await db.select().from(word).where(eq(word.id, word_id));
+    logger.info("📚 getWordDetail ", word_id);
+
+    return c.json(successRes({ ...res[0] }));
   } catch (e: any) {
     logger.error(e);
     return c.json(failRes({ message: e.message }));
@@ -100,25 +132,30 @@ export async function getWBLearnData(c: Context) {
   } else {
     body = c.req.query();
   }
-  const { userId, bookId } = body;
+  const { bookId } = body;
 
-  if (!userId || !bookId) {
-    return c.json(failRes({ message: "缺少必要的参数" }));
+  const user = c.get("user");
+  if (!user) {
+    return c.json(failRes({ code: 401, message: "请先登录" }));
   }
 
   try {
-    // 某书的学习情况（区分未学习、学习中、已掌握）(原方案耗时较长，使用两个同步查询替换)
-    const learnedRes = db
-      .select({ master: learningRecord.master, count: count() })
-      .from(learningRecord)
-      .where(eq(learningRecord.user_id, userId))
-      .leftJoin(
-        wordInBook,
+    // 筛选单词书中单词
+    const wordInBookQuery = db
+      .select()
+      .from(wordInBook)
+      .where(
         and(
           eq(learningRecord.word_id, wordInBook.word_id),
           eq(wordInBook.wb_id, bookId)
         )
-      )
+      );
+
+    // 某书的学习情况（区分未学习、学习中、已掌握）
+    const learnedRes = db
+      .select({ master: learningRecord.master, count: count() })
+      .from(learningRecord)
+      .where(and(eq(learningRecord.user_id, user.id), exists(wordInBookQuery)))
       .groupBy(learningRecord.master);
 
     // 单词书单词总数
@@ -141,8 +178,8 @@ export async function getWBLearnData(c: Context) {
         bkLearnData.master += resList[0][i].count ? 1 : 0;
     }
     bkLearnData.notLearn = resList[1][0].count - bkLearnData.learn;
-    logger.info("📚 totalRes", resList);
 
+    logger.info("📚 getWBLearnData", resList);
     return c.json(successRes({ ...bkLearnData }));
   } catch (e: any) {
     logger.error(e);
@@ -425,6 +462,133 @@ async function getDistractionWords(
     .limit(sampleSize);
 
   return result.map((row) => row.word);
+}
+
+// GET
+export async function getBookRecordWord(c: Context) {
+  const { wb_id, subType, page, pageSize } = BookLearningParamsSchema.parse(
+    c.req.query()
+  );
+
+  const user = c.get("user");
+  if (!user) {
+    return c.json(failRes({ code: 401, message: "请先登录" }));
+  }
+
+  try {
+    // 学过的单词
+    const learningRecordQuery = db
+      .select()
+      .from(learningRecord)
+      .where(
+        and(
+          eq(learningRecord.user_id, user.id),
+          subType === "getBkMasteredWord"
+            ? eq(learningRecord.master, true)
+            : undefined,
+          eq(learningRecord.word_id, wordInBook.word_id)
+        )
+      );
+
+    let subQuery = undefined;
+    if (subType === "getBkUnlearnedWord") {
+      subQuery = and(
+        eq(wordInBook.wb_id, wb_id),
+        notExists(learningRecordQuery)
+      );
+    } else if (
+      subType === "getBkMasteredWord" ||
+      subType === "getBkLearnedWord"
+    ) {
+      subQuery = and(eq(wordInBook.wb_id, wb_id), exists(learningRecordQuery));
+    }
+
+    // 单词书所有单词
+    const res = await db
+      .select()
+      .from(wordInBook)
+      .where(subQuery)
+      .offset((page - 1) * pageSize)
+      .limit(pageSize)
+      // 获取已取得单词的详细信息
+      .leftJoin(word, eq(word.id, wordInBook.word_id));
+
+    // 总数
+    const total = await db
+      .select({ count: count() })
+      .from(wordInBook)
+      .where(subQuery);
+
+    logger.info("📚 getBookRecordWord ", wb_id, subType, res);
+
+    return c.json(
+      listRes({
+        list: res.map((row) => ({ ...row.word })),
+        total: total[0].count,
+        queryParams: { page, pageSize },
+      })
+    );
+  } catch (e: any) {
+    logger.error(e);
+    return c.json(failRes({ message: e.message }));
+  }
+}
+
+// GET
+export async function getUserRecordWord(c: Context) {
+  const { subType, page, pageSize } = BookLearningParamsSchema.parse(
+    c.req.query()
+  );
+
+  const user = c.get("user");
+  if (!user) {
+    return c.json(failRes({ code: 401, message: "请先登录" }));
+  }
+
+  try {
+    let subQuery = undefined;
+    if (subType === "getMasteredWord") {
+      subQuery = eq(learningRecord.master, true);
+    } else if (subType === "getReviewWord") {
+      subQuery = eq(learningRecord.master, false);
+    } else if (subType === "todayLearn") {
+      subQuery = eq(learningRecord.c_time, new Date());
+    } else if (subType === "todayReview") {
+      subQuery = and(
+        eq(learningRecord.last_l, new Date()),
+        ne(learningRecord.c_time, new Date())
+      );
+    }
+
+    // 学过的单词
+    const res = await db
+      .select()
+      .from(learningRecord)
+      .where(and(eq(learningRecord.user_id, user.id), subQuery))
+      .offset((page - 1) * pageSize)
+      .limit(pageSize)
+      // 获取已取得单词的详细信息
+      .leftJoin(word, eq(word.id, learningRecord.word_id));
+
+    // 总数
+    const total = await db
+      .select({ count: count() })
+      .from(learningRecord)
+      .where(and(eq(learningRecord.user_id, user.id), subQuery));
+
+    logger.info("📚 getUserRecordWord ", res);
+
+    return c.json(
+      listRes({
+        list: res.map((row) => ({ ...row.word })),
+        total: total[0].count,
+        queryParams: { page, pageSize },
+      })
+    );
+  } catch (e: any) {
+    logger.error(e);
+    return c.json(failRes({ message: e.message }));
+  }
 }
 
 // POST

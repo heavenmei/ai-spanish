@@ -75,6 +75,7 @@ app.get("/api/user/logout", user.logout);
 app.post("/api/user/updateStudyDuration", user.updateStudyDuration);
 app.get("/api/user/getStudyDuration", user.getStudyDuration);
 app.post("/api/word/changeWordBook", word.changeWordBook);
+app.get("/api/word/getWordDetail", word.getWordDetail);
 app.get("/api/word/getAllWBData", word.getAllWBData);
 app.get("/api/word/getSingleWBData", word.getSingleWBData);
 app.get("/api/word/getWBLearnData", word.getWBLearnData);
@@ -83,6 +84,8 @@ app.get("/api/word/getTodayLearnData", word.getTodayLearnData);
 app.get("/api/word/getBasicLearningData", word.getBasicLearningData);
 app.get("/api/word/getLearningData", word.getLearningData);
 app.get("/api/word/getReviewData", word.getReviewData);
+app.get("/api/word/getBookRecordWord", word.getBookRecordWord);
+app.get("/api/word/getUserRecordWord", word.getUserRecordWord);
 app.post("/api/word/addLearningRecord", word.addLearningRecord);
 app.post("/api/word/updateLearningRecord", word.updateLearningRecord);
 

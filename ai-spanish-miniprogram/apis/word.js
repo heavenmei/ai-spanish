@@ -9,9 +9,9 @@ export const getAllWBData = (payload) => {
   return get("/api/word/getAllWBData", payload);
 };
 
-export const getDailySentence = (payload) => {
-  return get("/api/word/getDailySentence", payload);
-};
+// export const getDailySentence = (payload) => {
+//   return get("/api/word/getDailySentence", payload);
+// };
 
 export const getSearchResult = (payload) => {
   return get("/api/word/getSearchResult", payload);
@@ -69,46 +69,18 @@ export const getNoteBookWord = (payload) => {
   return get("/api/word/getNoteBookWord", payload);
 };
 
-export const getBkLearnedWord = (payload) => {
-  return get("/api/word/getBkLearnedWord", payload);
+export const getBookRecordWord = (payload) => {
+  return get("/api/word/getBookRecordWord", payload);
 };
 
-export const getBkMasteredWord = (payload) => {
-  return get("/api/word/getBkMasteredWord", payload);
-};
-
-export const getBkUnlearnedWord = (payload) => {
-  return get("/api/word/getBkUnlearnedWord", payload);
-};
-
-export const getBkWord = (payload) => {
-  return get("/api/word/getBkWord", payload);
-};
-
-export const getLearnedWord = (payload) => {
-  return get("/api/word/getLearnedWord", payload);
-};
-
-export const getMasteredWord = (payload) => {
-  return get("/api/word/getMasteredWord", payload);
-};
-
-export const getReviewWord = (payload) => {
-  return get("/api/word/getReviewWord", payload);
-};
-
-export const getTodayLearnWord = (payload) => {
-  return get("/api/word/getTodayLearnWord", payload);
-};
-
-export const getTodayReviewWord = (payload) => {
-  return get("/api/word/getTodayReviewWord", payload);
+export const getUserRecordWord = (payload) => {
+  return get("/api/word/getUserRecordWord", payload);
 };
 
 const WordApi = {
   getAllWBData: getAllWBData,
-  getDailySentence: getDailySentence,
-  getSearchResult: getSearchResult,
+  // getDailySentence: getDailySentence,
+  // getSearchResult: getSearchResult,
   getWordDetail: getWordDetail,
   getBasicLearningData: getBasicLearningData,
   getLearningData: getLearningData,
@@ -119,18 +91,10 @@ const WordApi = {
   getWBLearnData: getWBLearnData,
   getSingleWBData: getSingleWBData,
   getAllLearnData: getAllLearnData,
-  getDailySum: getDailySum,
   getTodayLearnData: getTodayLearnData,
-  getNoteBookWord: getNoteBookWord,
-  getBkLearnedWord: getBkLearnedWord,
-  getBkMasteredWord: getBkMasteredWord,
-  getBkUnlearnedWord: getBkUnlearnedWord,
-  getBkWord: getBkWord,
-  getLearnedWord: getLearnedWord,
-  getMasteredWord: getMasteredWord,
-  getReviewWord: getReviewWord,
-  getTodayLearnWord: getTodayLearnWord,
-  getTodayReviewWord: getTodayReviewWord,
+  // getNoteBookWord: getNoteBookWord,
+  getBookRecordWord: getBookRecordWord,
+  getUserRecordWord: getUserRecordWord,
 };
 
 export default WordApi;

@@ -178,9 +178,33 @@
 </view>
 
 <view class="doneWrapper" wx:if="{{learnDone}}">
-  <view class="text">本组单词学习已完成</view>
-  <view class="btn back" hover-class="wasTaped" bindtap="goBack">完成学习</view>
-  <view class="btn continue" hover-class="wasTaped" bindtap="reInit"
-    >继续学习</view
-  >
+  <view class="text">本组单词复习已完成</view>
+  <view class="decorate"></view>
+
+  <view class="title">
+    <view class="word">单词</view>
+    <view class="interval">下次学习时间</view>
+  </view>
+
+  <scroll-view class="reviewResWrapper" scroll-y="{{true}}">
+    <view class="item words" wx:for="{{reviewRes}}" wx:key="index">
+      <view class="word">{{item.word}}</view>
+      <view class="interval" wx:if="{{!item.master}}">{{item.NOI}}天后</view>
+      <view
+        class="mastered content-title-color-{{colorType}}"
+        wx:if="{{item.master}}"
+        >已掌握</view
+      >
+    </view>
+  </scroll-view>
+
+  <view class="decorate"></view>
+  <view class="btnWraper">
+    <view class="btn back" hover-class="wasTaped" bindtap="goBack"
+      >完成复习</view
+    >
+    <view class="btn continue" hover-class="wasTaped" bindtap="reInit"
+      >继续复习</view
+    >
+  </view>
 </view>

@@ -1,18 +1,31 @@
 // pages/word_list/word_list.js
-import WordApi from "../../../apis/word";
+import { getBookRecordWord, getUserRecordWord } from "../../../apis/word";
 
 const app = getApp();
 
 const typeParameter = {
-  getBkLearnedWord: { navTitle: "本书已学", user_id: true, wd_bk_id: true },
-  getBkMasteredWord: { navTitle: "本书已掌握", user_id: true, wd_bk_id: true },
-  getBkUnlearnedWord: { navTitle: "本书未学", user_id: true, wd_bk_id: true },
-  getBkWord: { navTitle: "本书全部单词", user_id: false, wd_bk_id: true },
-  getLearnedWord: { navTitle: "已学单词", user_id: true, wd_bk_id: false },
-  getMasteredWord: { navTitle: "已掌握单词", user_id: true, wd_bk_id: false },
-  getReviewWord: { navTitle: "复习中单词", user_id: true, wd_bk_id: false },
-  getNoteBookWord: { navTitle: "收藏夹", user_id: true, wd_bk_id: false },
-  today: { navTitle: "今日学习&复习", user_id: true, wd_bk_id: false },
+  getBkLearnedWord: {
+    navTitle: "本书已学",
+    api: getBookRecordWord,
+  },
+  getBkMasteredWord: {
+    navTitle: "本书已掌握",
+    api: getBookRecordWord,
+  },
+  getBkUnlearnedWord: {
+    navTitle: "本书未学",
+    api: getBookRecordWord,
+  },
+  getBkWord: {
+    navTitle: "本书全部单词",
+    api: getBookRecordWord,
+  },
+  getLearnedWord: { navTitle: "已学单词", api: getUserRecordWord },
+  getMasteredWord: { navTitle: "已掌握单词", api: getUserRecordWord },
+  getReviewWord: { navTitle: "复习中单词", api: getUserRecordWord },
+
+  getNoteBookWord: { navTitle: "收藏夹", user_id: true, wb_id: false },
+  today: { navTitle: "今日学习&复习" },
 };
 
 Page({
@@ -20,18 +33,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    wordList: [],
     hasMore: true,
     learnHasMore: true,
     reviewHasMore: true,
-    isToday: false,
-    todayLearn: undefined,
-    todayReview: undefined,
+
+    wordList: [],
+    todayLearn: [],
+    todayReview: [],
     todayType: -1,
   },
-  skip: 0,
-  learnSkip: undefined,
-  reviewSkip: undefined,
+  page: 1,
+  learnPage: 1,
+  reviewPage: 1,
   type: "",
 
   /**
@@ -39,7 +52,7 @@ Page({
    */
   onLoad: function () {
     const { type } = this.options;
-    console.log("type", type);
+    console.log("type", type, typeParameter[type].navTitle);
 
     wx.setNavigationBarTitle({
       title: typeParameter[type].navTitle,
@@ -63,82 +76,49 @@ Page({
     wx.showLoading({
       title: "加载中...",
     });
-    const parameters = {};
-    if (typeParameter[type].user_id)
-      parameters.user_id = wx.getStorageSync("userInfo").id;
-    if (typeParameter[type].wd_bk_id)
-      parameters.wd_bk_id = app.globalData.userInfo.l_book_id;
-    parameters.skip = this.skip;
-    let { wordList } = this.data;
-    console.log("parameters", parameters);
-    const res = await WordApi[type](parameters);
 
-    console.log("res", res);
+    const res = await typeParameter[type].api({
+      wb_id: app.globalData.userInfo.l_book_id,
+      subType: type,
+      page: this.page,
+    });
+    const data = res.list;
+    console.log("res", type, data);
 
-    for (let i = 0; i < res.data.length; i++) {
-      if (res.data[i].translation.indexOf("\n") != -1) {
-        res.data[i].translation = res.data[i].translation.substring(
-          0,
-          res.data[i].translation.indexOf("\n")
-        );
-      }
-      // console.log('rect length of:', directres[i], word_utils.getResObjRectLength(directres[i]))
-    }
-
-    wordList = wordList.concat(res.data);
-    this.skip = wordList.length;
-    let hasMore = true;
-    if (res.data.length < 20) hasMore = false;
-
+    const wordList = this.data.wordList.concat(data);
+    this.page += 1;
     this.setData({
       wordList,
-      hasMore,
+      hasMore: res.pagination.page < res.pagination.totalPages,
     });
     wx.hideLoading();
   },
 
   async getTodayWord(todayType) {
-    if (todayType === undefined) todayType = this.data.todayType;
+    todayType = todayType ?? this.data.todayType;
     const hasMoreType = ["learnHasMore", "reviewHasMore"];
+    const pageType = ["learnPage", "learnPage"];
+    const wordListType = ["todayLearn", "todayReview"];
+
     if (!this.data[hasMoreType[todayType]]) return;
     wx.showLoading({
       title: "加载中...",
     });
-    const apiNameType = ["getTodayLearnWord", "getTodayReviewWord"];
-    const skipType = ["getTodayLearnWord", "getTodayReviewWord"];
-    const wordListType = ["todayLearn", "todayReview"];
-    const type = apiNameType[todayType];
-    const parameters = {};
-    parameters.user_id = wx.getStorageSync("userInfo").id;
-    if (this[skipType[todayType]] === undefined) this[skipType[todayType]] = 0;
-    parameters.skip = this[skipType[todayType]];
-    if (this.data[wordListType[todayType]] === undefined)
-      this.data[wordListType[todayType]] = [];
-    let wordList = this.data[wordListType[todayType]];
 
-    console.log("parameters", parameters);
-    const res = await WordApi[type](parameters);
+    const res = await getUserRecordWord({
+      subType: wordListType[todayType],
+      page: this[pageType[todayType]],
+    });
+    const data = res.list;
+    console.log("res ===", wordListType[todayType], data);
 
-    console.log("res", res);
-
-    for (let i = 0; i < res.data.length; i++) {
-      if (res.data[i].translation.indexOf("\n") != -1) {
-        res.data[i].translation = res.data[i].translation.substring(
-          0,
-          res.data[i].translation.indexOf("\n")
-        );
-      }
-      // console.log('rect length of:', directres[i], word_utils.getResObjRectLength(directres[i]))
-    }
-
-    wordList = wordList.concat(res.data);
-    this[skipType[todayType]] = wordList.length;
-    let hasMore = true;
-    if (res.data.length < 20) hasMore = false;
+    const wordList = this.data[wordListType[todayType]].concat(data);
+    this[pageType[todayType]] = res.pagination.page + 1;
 
     const updateData = {};
     updateData[wordListType[todayType]] = wordList;
-    updateData[hasMoreType[todayType]] = hasMore;
+    updateData[hasMoreType[todayType]] =
+      res.pagination.page < res.pagination.totalPages;
 
     this.setData(updateData);
     wx.hideLoading();
@@ -150,10 +130,11 @@ Page({
       const wordListType = ["todayLearn", "todayReview"];
       wordListName = wordListType[this.data.todayType];
     }
-    const { index } = e.currentTarget.dataset;
-    const { word_id } = this.data[wordListName][index];
+
+    const index = e.currentTarget.dataset.index;
+    const word_id = this.data[wordListName][index].id;
     wx.navigateTo({
-      url: `/pages/word/detail?word_id=${word_id}`,
+      url: `/pages/word/detail/detail?word_id=${word_id}`,
     });
   },
 

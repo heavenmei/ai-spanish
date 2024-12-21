@@ -657,6 +657,7 @@ Page({
     const learnedList = [];
     for (let i = 0; i < this.control.learnedList.length; i++) {
       learnedList.push({
+        word: this.wordLearningRecord[this.control.learnedList[i]].word,
         word_id: this.wordLearningRecord[this.control.learnedList[i]].word_id,
         master: this.wordLearningRecord[this.control.learnedList[i]].master,
       });
@@ -668,6 +669,7 @@ Page({
       const queName = this.control.queNameList[j];
       for (let k = 0; k < this.control[queName].length; k++) {
         learningList.push({
+          word: this.wordLearningRecord[this.control.queName[k]].word,
           word_id: this.wordLearningRecord[this.control[queName][k]].word_id,
           learn_time: new Date(),
           repeatTimes: k,
