@@ -75,6 +75,8 @@ export async function login(c: Context<{ Variables: ContextVariables }>) {
       where: eq(users.id, data.openid),
     });
 
+    logger.debug("curUser", curUser);
+
     // 注册
     if (!curUser) {
       curUser = {
@@ -86,6 +88,8 @@ export async function login(c: Context<{ Variables: ContextVariables }>) {
       await db.insert(users).values(curUser);
     }
   } catch (e: any) {
+    logger.debug("error", e);
+
     return c.json(
       failRes({
         message: e.detail,
@@ -141,7 +145,6 @@ export async function updateStudyDuration(c: Context) {
         .values({
           userId,
           duration: Math.floor(duration / 60),
-          createdAt: new Date(),
         })
         .returning({ id: studyDuration.id });
 

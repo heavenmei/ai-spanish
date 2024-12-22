@@ -17,7 +17,8 @@ dist/
 
 # env
 .env
-.env.production
+.env.dev
+.env.prod
 
 # logs
 logs/

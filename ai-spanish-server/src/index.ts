@@ -13,7 +13,7 @@ import * as user from './routes/user';
 import * as word from './routes/word';
 
 import log4js from "log4js";
-import log4jsConfig from "./config/log4js.json";
+import log4jsConfig from "./config/log4js.json" assert { type: "json" };
 log4js.configure(log4jsConfig);
 
 const app = new Hono<{ Variables: ContextVariables }>();

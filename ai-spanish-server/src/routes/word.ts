@@ -47,8 +47,10 @@ export async function changeWordBook(c: Context) {
     // 切换用户单词书
     const res = await db
       .update(users)
+      // @ts-ignore
       .set({ l_book_id: bookId })
-      .where(eq(users.id, userId));
+      .where(eq(users.id, userId))
+      .returning({ id: users.id });
 
     return getWBLearnData(c);
   } catch (e: any) {
@@ -704,6 +706,7 @@ export async function updateLearningRecord(c: Context) {
     // 更新of_矩阵
     await db
       .update(users)
+      // @ts-ignore
       .set({ of_matrix: JSON.stringify(of_matrix) })
       .where(eq(users.id, user.id));
 

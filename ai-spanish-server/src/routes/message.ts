@@ -1,5 +1,5 @@
-import { and, asc, count, desc, eq } from 'drizzle-orm';
-import { Context } from 'hono';
+import { and, asc, count, desc, eq } from "drizzle-orm";
+import { Context } from "hono";
 
 import {
   failRes,
@@ -7,9 +7,9 @@ import {
   MessageListParamSchema,
   MessageParamSchema,
   successRes,
-} from '@/utils';
-import db from '@/db';
-import { messages } from '@/db/schema';
+} from "@/utils";
+import db from "@/db";
+import { messages } from "@/db/schema";
 
 // GET
 export async function getMessageList(c: Context) {
@@ -79,7 +79,7 @@ export async function insertMessage(c: Context, params: any) {
       .values(newMes)
       .returning({ id: messages.id });
 
-    console.log('💬 ~  Add Message Record  ', messageId?.[0]?.id, newMes);
+    console.log("💬 ~  Add Message Record  ", messageId?.[0]?.id, newMes);
     return messageId?.[0]?.id;
   } catch (e: any) {
     console.log(e);
@@ -98,7 +98,7 @@ export async function updateMessage(c: Context, id: string, params: any) {
 
   try {
     await db.update(messages).set(updateData).where(eq(messages.id, id));
-    console.log('💬 ~ Update Message Record  ', id, updateData);
+    console.log("💬 ~ Update Message Record  ", id, updateData);
     return;
   } catch (e: any) {
     console.log(e);
@@ -109,18 +109,18 @@ export async function updateMessage(c: Context, id: string, params: any) {
 //POST
 export async function updateMessage2(c: Context) {
   const { messageId, content } = MessageParamSchema.parse(c.req.query());
-  const siteConfig = c.get('site_config');
+  const siteConfig = c.get("site_config");
   const _targetText = siteConfig?.content ?? content;
   const _id = siteConfig?.id ?? messageId;
 
   try {
-    const updateData: Partial<typeof messages.$inferInsert> = {};
+    const updateData: any = {};
     if (_targetText !== undefined) updateData.content = _targetText;
 
     if (Object.keys(updateData).length > 0) {
       await db.update(messages).set(updateData).where(eq(messages.id, _id));
     }
-    console.log('🚨 ~  Update History Record ', _id);
+    console.log("🚨 ~  Update History Record ", _id);
 
     return;
   } catch (e: any) {
@@ -137,27 +137,27 @@ export async function updateMessage2(c: Context) {
 //POST
 export async function deleteMessage(c: Context) {
   const { messageId } = MessageParamSchema.parse(c.req.query());
-  const user = c.get('user');
+  const user = c.get("user");
 
   if (!user) {
     return c.json(
       failRes({
-        message: '请先登录',
+        message: "请先登录",
       })
     );
   }
 
   try {
     await db.delete(messages).where(eq(messages.id, messageId));
-    console.log('🚨 ~  Delete History Record ', messageId);
+    console.log("🚨 ~  Delete History Record ", messageId);
 
-    return c.json(successRes({ message: '历史记录已删除' }));
+    return c.json(successRes({ message: "历史记录已删除" }));
   } catch (e: any) {
     console.log(e);
 
     return c.json(
       failRes({
-        message: e.detail || '删除历史记录失败',
+        message: e.detail || "删除历史记录失败",
       })
     );
   }
