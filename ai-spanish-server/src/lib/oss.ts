@@ -9,7 +9,7 @@ export const client = new OSS({
   bucket: serverEnvs.OSS_BUCKET_NAME,
 });
 
-export function upload2Oss(fileName: string, buffer: any, filePath = "mp3/") {
+export function upload2Oss(fileName: string, buffer: any, filePath?: string) {
   const excutor = async (resolve: any, reject: any) => {
     const headers = {
       // 指定Object的存储类型。
@@ -23,9 +23,10 @@ export function upload2Oss(fileName: string, buffer: any, filePath = "mp3/") {
       "content-type": "audio/mp3",
     };
 
+    const file = filePath ?? serverEnvs.OSS_FILE_PATH + fileName;
     try {
       // 上传文件到OSS，'fileName'是OSS中的文件名
-      const uploadResult = await client.put(filePath + fileName, buffer, {
+      const uploadResult = await client.put(file, buffer, {
         headers,
       });
       const filename = uploadResult.name;

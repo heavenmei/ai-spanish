@@ -25,7 +25,7 @@ node src/test.js
 
 ```bash
 # run pg use docker
-docker run --name ai-spanish-postgres -e POSTGRES_PASSWORD=123456 -p 5432:5432  -d postgres
+docker run --name spanish-postgres -e POSTGRES_PASSWORD=123456 -p 5432:5432  -d postgres
 
 # npx drizzle-kit push
 yarn db:push
@@ -43,9 +43,9 @@ docker rm spanish-docker
 docker rmi spanish-docker
 
 docker build -t spanish-docker .
+
 docker run -p 8000:8000  --env-file .env.prod --name spanish-docker spanish-docker
 
-docker run -p 8000:8000  --env-file .env --name spanish-docker spanish-docker
 ```
 
 **宝塔**

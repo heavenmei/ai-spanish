@@ -10,7 +10,7 @@ declare global {
 
 let db: PostgresJsDatabase<typeof schema>;
 
-console.log("serverEnvs.DATABASE_URL:", serverEnvs.DATABASE_URL);
+console.log("=== [DATABASE_URL] ", serverEnvs.DATABASE_URL);
 
 if (serverEnvs.NODE_ENV === "production") {
   db = drizzle(postgres(serverEnvs.DATABASE_URL, { prepare: true }), {

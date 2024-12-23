@@ -35,7 +35,7 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 hono
 
-COPY --from=builder /app/output ./output
+# COPY --from=builder /app/output ./output
 RUN chmod -R 777 /app
 
 COPY --from=builder --chown=hono:nodejs /app/node_modules /app/node_modules
