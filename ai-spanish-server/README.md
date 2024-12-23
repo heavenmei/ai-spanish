@@ -38,12 +38,14 @@ yarn db:seed
 
 ```bash
 # 删除
-docker stop spainish-docker
-docker rm spainish-docker
-docker rmi spainish-docker
+docker stop spanish-docker
+docker rm spanish-docker
+docker rmi spanish-docker
 
-docker build -t spainish-docker .
-docker run -p 8000:8000  --env-file .env --name spainish-docker spainish-docker
+docker build -t spanish-docker .
+docker run -p 8000:8000  --env-file .env.prod --name spanish-docker spanish-docker
+
+docker run -p 8000:8000  --env-file .env --name spanish-docker spanish-docker
 ```
 
 **宝塔**

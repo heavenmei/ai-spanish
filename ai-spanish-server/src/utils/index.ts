@@ -2,7 +2,12 @@ import dotenv from "dotenv";
 
 export * from "./types";
 
-dotenv.config();
+if (process.env.NODE_ENV === "production") {
+  dotenv.config({ path: ".env.prod" });
+} else {
+  dotenv.config({ path: ".env" });
+}
+
 export const serverEnvs = process.env as any;
 
 export function generateUUID() {
