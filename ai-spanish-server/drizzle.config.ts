@@ -1,8 +1,7 @@
 import { type Config } from "drizzle-kit";
-
 import dotenv from "dotenv";
-let dbURL = process.env.DATABASE_URL;
 
+let dbURL;
 if (process.env.NODE_ENV === "production") {
   dotenv.config({ path: ".env.prod" });
   dbURL = process.env.DATABASE_URL?.replace(

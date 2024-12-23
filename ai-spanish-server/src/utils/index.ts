@@ -4,6 +4,10 @@ export * from "./types";
 
 if (process.env.NODE_ENV === "production") {
   dotenv.config({ path: ".env.prod" });
+  process.env.DATABASE_URL = process.env.DATABASE_URL?.replace(
+    "host.docker.internal",
+    "localhost"
+  );
 } else {
   dotenv.config({ path: ".env.dev" });
 }

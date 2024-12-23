@@ -12,7 +12,6 @@
 # deps
 node_modules/
 
-output/
 dist/
 
 # env
