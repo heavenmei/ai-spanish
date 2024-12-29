@@ -1,5 +1,5 @@
 import { Context } from "hono";
-import db from "@/db";
+import db, { increment } from "@/db";
 import {
   and,
   asc,
@@ -19,6 +19,7 @@ import {
   wordBook,
   wordInBook,
   word,
+  dailySum,
 } from "@/db/schema";
 import {
   failRes,
@@ -27,6 +28,7 @@ import {
   LearningParamsSchema,
   PageQueryParamsSchema,
   BookLearningParamsSchema,
+  formatDate,
 } from "@/utils";
 import log4js from "log4js";
 import sm_5_js from "@/lib/sm-5.js";
@@ -141,6 +143,10 @@ export async function getWBLearnData(c: Context) {
     return c.json(failRes({ code: 401, message: "请先登录" }));
   }
 
+  if (!bookId || bookId === "-1") {
+    return c.json(failRes({ code: 500, message: "请先选择词书" }));
+  }
+
   try {
     // 筛选单词书中单词
     const wordInBookQuery = db
@@ -225,26 +231,21 @@ export async function getTodayLearnData(c: Context) {
   if (!userId) {
     return c.json(failRes({ message: "缺少必要的参数" }));
   }
-
   const now = new Date();
-  try {
-    // 获取时间为当天的学习数据
-    const res = await db
-      .select()
-      .from(learningRecord)
-      .where(
-        and(
-          eq(learningRecord.user_id, userId),
-          eq(learningRecord.createdAt, now)
-        )
-      );
-    let data = {
-      l_time: 0,
-      learn: res.length,
-      review: res.length, //todo
-    };
 
-    logger.info("📚 getTodayLearnData: count", res.length);
+  try {
+    // 获取当天的学习数据
+    const res = await db
+      .select({
+        learn: dailySum.learn,
+        review: dailySum.review,
+      })
+      .from(dailySum)
+      .where(and(eq(dailySum.user_id, userId), eq(dailySum.createdAt, now)));
+
+    let data = res?.[0] ?? { learn: 0, review: 0 };
+
+    logger.info("📚 getTodayLearnData ", res);
 
     return c.json(successRes({ ...data }));
   } catch (e: any) {
@@ -439,7 +440,7 @@ export async function getReviewData(c: Context) {
         ),
       }))
     );
-    logger.info("📚 getReviewData", result);
+    // logger.info("📚 getReviewData", result);
 
     return c.json(listRes({ list: result }));
   } catch (e: any) {
@@ -554,12 +555,9 @@ export async function getUserRecordWord(c: Context) {
     } else if (subType === "getReviewWord") {
       subQuery = eq(learningRecord.master, false);
     } else if (subType === "todayLearn") {
-      subQuery = eq(learningRecord.c_time, new Date());
+      subQuery = eq(learningRecord.last_l, new Date());
     } else if (subType === "todayReview") {
-      subQuery = and(
-        eq(learningRecord.last_l, new Date()),
-        ne(learningRecord.c_time, new Date())
-      );
+      subQuery = and(eq(learningRecord.last_r, new Date()));
     }
 
     // 学过的单词
@@ -593,6 +591,51 @@ export async function getUserRecordWord(c: Context) {
   }
 }
 
+// GET
+export async function getDailySum(c: Context) {
+  const { page, pageSize } = PageQueryParamsSchema.parse(c.req.query());
+
+  const user = c.get("user");
+  if (!user) {
+    return c.json(failRes({ code: 401, message: "请先登录" }));
+  }
+
+  try {
+    const res = await db
+      .select({
+        learn: dailySum.learn,
+        review: dailySum.review,
+        createdAt: dailySum.createdAt,
+      })
+      .from(dailySum)
+      .where(
+        and(eq(dailySum.user_id, user.id), lte(dailySum.createdAt, new Date()))
+      )
+      .orderBy(desc(dailySum.createdAt))
+      .limit(pageSize)
+      .offset((page - 1) * pageSize);
+
+    const data = {};
+    res.forEach((row) => {
+      const fDate = formatDate(row.createdAt);
+      data[fDate] = {
+        learn: row.learn,
+        review: row.review,
+      };
+    });
+
+    return c.json(
+      listRes({
+        list: data,
+        queryParams: { page, pageSize },
+      })
+    );
+  } catch (e: any) {
+    logger.error(e);
+    return c.json(failRes({ message: e.message }));
+  }
+}
+
 // POST
 export async function addLearningRecord(c: Context) {
   const { learnedList, learningList } = await c.req.json();
@@ -612,7 +655,6 @@ export async function addLearningRecord(c: Context) {
     EF: "2.5",
     next_n: 0,
     master: false,
-    c_time: last_l,
   };
   // 检查属性，means允许自定义
   for (let i = 0; i < learnedList.length; i++) {
@@ -646,8 +688,33 @@ export async function addLearningRecord(c: Context) {
         .values(learningList)
         .returning({ id: learningRecordTmp.id });
     }
-
     logger.info(" 📚 addLearningRecord", learnedRes);
+
+    // 下面更新daily_sum对应数据
+    const dailySumRes = await db.query.dailySum.findFirst({
+      where: and(
+        eq(dailySum.user_id, user.id),
+        eq(dailySum.createdAt, new Date())
+      ),
+    });
+
+    if (!dailySumRes) {
+      await db.insert(dailySum).values({
+        user_id: user.id,
+        learn: learnedRes.length,
+        review: 0,
+        l_time: 0,
+      });
+    } else {
+      await db
+        .update(dailySum)
+        .set({
+          learn: increment(dailySum.learn, learnedRes.length),
+        })
+        .where(eq(dailySum.id, dailySumRes.id));
+    }
+
+    logger.info(" 📚 addLearningRecord update daily sum", dailySumRes);
 
     return c.json(successRes({ learnedRes, learningRes }));
   } catch (e: any) {
@@ -671,7 +738,7 @@ export async function updateLearningRecord(c: Context) {
     let of_matrix = JSON.parse(userRes[0].of_matrix);
 
     let tasks = [];
-    const res = [];
+    const res = []; // 返回结果
     for (let j = 0; j < wordLearningRecord.length; j++) {
       let result = sm_5_js(of_matrix, wordLearningRecord[j]);
 
@@ -684,12 +751,13 @@ export async function updateLearningRecord(c: Context) {
       };
       of_matrix = result.OF;
 
-      console.log("📚 sm_5_js", result);
+      // console.log("📚 sm_5_js", result);
       const promise = db
         .update(learningRecord)
         .set({
           ...record,
           user_id: user.id,
+          last_r: new Date(),
         })
         .where(
           and(
@@ -711,6 +779,30 @@ export async function updateLearningRecord(c: Context) {
       .where(eq(users.id, user.id));
 
     logger.info(" 📚 addLearningRecord", resInner);
+
+    // 下面更新daily_sum对应数据
+    const dailySumRes = await db.query.dailySum.findFirst({
+      where: and(
+        eq(dailySum.user_id, user.id),
+        eq(dailySum.createdAt, new Date())
+      ),
+    });
+
+    if (!dailySumRes) {
+      await db.insert(dailySum).values({
+        user_id: user.id,
+        learn: 0,
+        review: wordLearningRecord.length,
+        l_time: 0,
+      });
+    } else {
+      await db
+        .update(dailySum)
+        .set({
+          review: increment(dailySum.review, wordLearningRecord.length),
+        })
+        .where(eq(dailySum.id, dailySumRes.id));
+    }
 
     return c.json(listRes({ list: res }));
   } catch (e: any) {

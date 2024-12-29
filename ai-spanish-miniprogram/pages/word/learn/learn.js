@@ -3,6 +3,8 @@ import {
   getLearningData,
   addLearningRecord,
 } from "../../../apis/word";
+import { WORD_VOICE_URL } from "../../../config/index.js";
+
 import word_utils from "../../../utils/word_utils.js";
 
 const app = getApp();
@@ -29,15 +31,6 @@ const queNameList = [
 ];
 const insertIndex = 4;
 const listMinLength = 4;
-
-const initSettings = {
-  learn_repeat_t: 1,
-  group_size: 1,
-  learn_first_m: "chooseTrans",
-  timing: true,
-  timing_duration: 1500,
-  autoplay: true,
-};
 
 const initControl = {
   // 当前&下一个词汇在原数组中下标
@@ -86,7 +79,7 @@ Page({
     learnDone: false,
   },
 
-  settings: initSettings,
+  settings: {},
   wordDetailList: [], // 后端数据
   wordLearningRecord: [],
   control: initControl,
@@ -102,11 +95,9 @@ Page({
     });
 
     // 初始化设置
-    const userSettings = app.globalData.wordSettings;
-    const settings = {
-      ...this.settings,
-      ...userSettings,
-    };
+    const userSettings = app.globalData.userInfo.wordSetting;
+    const settings = { ...userSettings };
+    console.log(" 📚 userSetting", settings);
 
     settings.second_mode =
       settings.learn_repeat_t >= 2 && !userSettings.learn_second_m
@@ -148,7 +139,7 @@ Page({
     const learnDataRes = await getLearningData({
       userId: app.globalData.userInfo.id,
       bookId: app.globalData.userInfo.l_book_id,
-      groupSize: this.settings.group_size,
+      groupSize: this.settings.groupSize,
       sample: this.settings.sample,
     });
 
@@ -163,8 +154,11 @@ Page({
       wordDetailList[i].innerAudioContext = wx.createInnerAudioContext({
         useWebAudioImplement: true,
       });
-      wordDetailList[i].innerAudioContext.src = wordDetailList[i].voiceUrl;
+
+      wordDetailList[i].innerAudioContext.src =
+        WORD_VOICE_URL + wordDetailList[i].voiceUrl;
       wordLearningRecord.push({
+        word: wordDetailList[i].word,
         word_id: wordDetailList[i].word_id,
         repeatTimes: 0,
         reStartTimes: 0,
@@ -214,18 +208,18 @@ Page({
     this.control.learnedList = [];
     this.setData({
       learnNum:
-        wordDetailList.length < this.settings.group_size
+        wordDetailList.length < this.settings.groupSize
           ? wordDetailList.length
-          : this.settings.group_size,
+          : this.settings.groupSize,
     });
 
-    console.log(
-      " 📚 learnDataRes",
-      this.data,
-      this.wordDetailList,
-      this.wordLearningRecord,
-      this.control
-    );
+    // console.log(
+    //   " 📚 learnDataRes",
+    //   this.data,
+    //   this.wordDetailList,
+    //   this.wordLearningRecord,
+    //   this.control
+    // );
 
     // 将未学习的队列的第一项“放出来”学习
     const nowIndex = this.control.unLearnedList.shift();
@@ -809,7 +803,8 @@ Page({
 
   reInit() {
     // 数据恢复初始状态
-    this.settings = initSettings;
+    const userSettings = app.globalData.userInfo.wordSetting;
+    this.settings = { ...userSettings };
     this.wordDetailList = [];
     this.wordLearningRecord = [];
     this.control = initControl;

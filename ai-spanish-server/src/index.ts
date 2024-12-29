@@ -1,5 +1,6 @@
 
 import { serve } from "@hono/node-server";
+import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
 import { getCookie, setCookie } from "hono/cookie";
 import { ContextVariables } from "./utils";
@@ -17,6 +18,8 @@ import log4jsConfig from "./config/log4js.json" assert { type: "json" };
 log4js.configure(log4jsConfig);
 
 const app = new Hono<{ Variables: ContextVariables }>();
+
+app.use("/public/*", serveStatic({ root: "./" }));
 
 app.use("*", async (c, next) => {
   const sessionId = getCookie(c, lucia.sessionCookieName);
@@ -51,6 +54,7 @@ app.use("*", async (c, next) => {
 });
 
 app.get("/", (c) => c.text("Hello Node.js!"));
+
 app.post("/api/audio/text2audio", audio.text2audio);
 app.post("/api/audio/audio2text", audio.audio2text);
 app.get("/api/audio/getOssUrl", audio.getOssUrl);
@@ -72,6 +76,7 @@ app.get("/api/scenario/getScenarios", scenario.getScenarios);
 app.get("/api/user/info", user.info);
 app.post("/api/user/login", user.login);
 app.get("/api/user/logout", user.logout);
+app.post("/api/user/updateUser", user.updateUser);
 app.post("/api/user/updateStudyDuration", user.updateStudyDuration);
 app.get("/api/user/getStudyDuration", user.getStudyDuration);
 app.post("/api/word/changeWordBook", word.changeWordBook);
@@ -86,6 +91,7 @@ app.get("/api/word/getLearningData", word.getLearningData);
 app.get("/api/word/getReviewData", word.getReviewData);
 app.get("/api/word/getBookRecordWord", word.getBookRecordWord);
 app.get("/api/word/getUserRecordWord", word.getUserRecordWord);
+app.get("/api/word/getDailySum", word.getDailySum);
 app.post("/api/word/addLearningRecord", word.addLearningRecord);
 app.post("/api/word/updateLearningRecord", word.updateLearningRecord);
 

@@ -12,13 +12,16 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
-  id: text("id").primaryKey(),
+  id: text("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   nickName: text("nickName"),
   avatarUrl: text("avatarUrl"),
   of_matrix: text("of_matrix"),
   l_book_id: text("l_book_id")
     .references(() => wordBook.id)
     .default("-1"),
+  wordSetting: text("word_setting"),
   createdAt: timestamp("created_at", { mode: "date" }).defaultNow(),
   updatedAt: timestamp("updated_at", { mode: "date" }).$onUpdate(
     () => new Date()
@@ -122,6 +125,8 @@ export const word = pgTable("word", {
   word: text("word"),
   definition: text("definition"),
   translation: text("translation"),
+  phonetic: text("phonetic"),
+  voiceUrl: text("voice_url"),
 });
 
 export const wordInBook = pgTable("word_in_book", {
@@ -140,9 +145,10 @@ export const learningRecord = pgTable("learning_record", {
   word_id: text("word_id").references(() => word.id),
   user_id: text("user_id").references(() => users.id),
   master: boolean("master").default(false),
-  last_l: date("last_l", { mode: "date" }),
-  next_l: date("next_l", { mode: "date" }),
-  c_time: date("c_time", { mode: "date" }),
+  last_l: date("last_l", { mode: "date" }), // 上一次 学习时间
+  next_l: date("next_l", { mode: "date" }), // 下一次 学习时间
+  // c_time: date("c_time", { mode: "date" }), // 学习时间
+  last_r: date("last_r", { mode: "date" }), // 上一次 复习时间
   NOI: integer("NOI"),
   EF: text("EF"),
   next_n: integer("next_n"),
@@ -150,7 +156,7 @@ export const learningRecord = pgTable("learning_record", {
 });
 
 // 存放临时学习数据，设置的学习机制是，比如一组10个，会获取15个，学习的时候可能这15个都会碰到，但只要满10个就认为学完一组，则这多出来的5个的重复次数会记录到本数据库中，下次获取的时候一并获取从而保留之前的重复次数
-export const learningRecordTmp = pgTable("learning_record_tmp", {
+export const learningRecordTmp = pgTable("learning_record_temp", {
   id: text("id")
     .notNull()
     .primaryKey()
@@ -160,6 +166,18 @@ export const learningRecordTmp = pgTable("learning_record_tmp", {
   word_id: text("word_id").references(() => word.id),
   repeatTimes: integer("repeatTimes"),
   learn_time: date("learn_time", { mode: "date" }),
+});
+
+// 用户每日学习数据
+export const dailySum = pgTable("daily_sum", {
+  id: text("id")
+    .notNull()
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
+  user_id: text("user_id").references(() => users.id),
+  learn: integer("learn"), // 学习单词数
+  review: integer("review"), // 复习单词数
+  createdAt: date("created_at", { mode: "date" }).defaultNow().notNull(),
 });
 
 // 生词本，在学习或者查词过程中可以点击“星星”将单词加入生词本，就会在本数据库生成相关数据

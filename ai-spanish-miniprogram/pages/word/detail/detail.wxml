@@ -18,9 +18,15 @@
     </t-button>
   </view>
 
-  <view class="pron" wx:if="{{wordDetail.phonetic.length>0}}"
-    >/ {{wordDetail.phonetic}} / <text class="voice iconfont icon-sound"></text
-  ></view>
+  <view class="pron">
+    <text wx:if="{{wordDetail.phonetic}}">/ {{wordDetail.phonetic}} /</text>
+    <t-icon
+      wx:if="{{wordDetail.voiceUrl}}"
+      name="voice"
+      prefix="icon"
+      size="48rpx"
+    />
+  </view>
 
   <view class="tagContainer" wx:if="{{wordDetail.tag.length>0}}">
     <view class="tag" wx:for="{{wordDetail.tag}}" wx:key="index">{{item}}</view>

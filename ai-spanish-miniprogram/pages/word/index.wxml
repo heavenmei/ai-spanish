@@ -40,12 +40,12 @@
       <view class="bookWrapper">
         <view class="book" bindtap="showBookList">
           <image
-            wx-if="{{bkDetail.cover}}"
+            wx:if="{{bkDetail.cover}}"
             t-class="logo__img"
             src="{{bkDetail.cover}}"
             style="height: 100%; width: 100%"
           />
-          <view wx-else class="name">{{bkDetail.name}}</view>
+          <view wx:else class="name">{{bkDetail.name}}</view>
         </view>
       </view>
       <view class="dataWrapper">
@@ -243,37 +243,7 @@
       format="{{format}}"
       class="calendar-content"
     />
-    <!-- bind:select="handleConfirm" -->
   </view>
-
-  <!-- <view class="history contentWrap">
-    <view class="title">历史</view>
-    <view class="eccanvasContainer">
-      <ec-canvas
-        id="word-history-chart"
-        canvas-id="mychart-bar"
-        ec="{{ ec }}"
-      ></ec-canvas>
-    </view>
-    <view class="dataWrapper forDailySum">
-      <view class="dataItem">
-        <view class="dataName">日期</view>
-        <view class="dataValue date">{{selectedDay.time}}</view>
-      </view>
-      <view class="dataItem">
-        <view class="dataName">学习</view>
-        <view class="dataValue"
-          >{{selectedDay.learn}}<text class="unit">词</text></view
-        >
-      </view>
-      <view class="dataItem">
-        <view class="dataName">复习</view>
-        <view class="dataValue"
-          >{{selectedDay.review}}<text class="unit">词</text></view
-        >
-      </view>
-    </view>
-  </view> -->
 </view>
 
 <t-popup

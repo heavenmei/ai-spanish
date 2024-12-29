@@ -43,6 +43,8 @@
   .title {
     font-size: 36rpx;
     font-weight: 600;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -151,7 +153,7 @@
   .tips {
     position: relative;
     top: -20rpx;
-    left: 20rpx;
+    left: 10rpx;
     width: 100%;
     height: 20rpx;
     font-size: 20rpx;
@@ -394,7 +396,8 @@
   display: none !important;
 }
 
-.is-active:not(.t-calendar__dates-item--selected) {
+.is-active:not(.t-calendar__dates-item--selected),
+.is-active .t-calendar__dates-item-suffix {
   color: #e34d59 !important;
 }
 
@@ -469,6 +472,11 @@
         margin-top: 10rpx;
         font-size: 22rpx;
         color: #8a8a8a;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .total {

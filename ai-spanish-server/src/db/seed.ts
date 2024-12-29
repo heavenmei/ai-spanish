@@ -4,20 +4,14 @@ import * as schema from "./schema";
 await db.insert(schema.wordBook).values([
   {
     id: "-1",
+    name: "请选择",
+    description: "请选择",
+    total: 0,
   },
   {
     id: "1",
     name: "普通高中西班牙语课程标准",
     description: "普通高中西班牙语课程标准",
-    total: 100,
-    tag: "高中",
-    cover:
-      "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/ModernSpanish.jpg",
-  },
-  {
-    id: "2",
-    name: "普通高中西班牙语课程标准222",
-    description: "普通高中西班牙语课程标准222",
     total: 100,
     tag: "高中",
     cover:
@@ -30,7 +24,7 @@ await db.insert(schema.wordBook).values([
     total: 406,
     tag: "A1",
     cover:
-      "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/DELE-A1.jpg",//临时取的名字
+      "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/DELE_A1.jpg",
   },
 ]);
 
@@ -2802,8 +2796,6 @@ await db.insert(schema.word).values([
   },
 ]);
 
-
-
 //DELE A1
 await db.insert(schema.wordInBook).values([
   {
@@ -4780,7 +4772,7 @@ await db.insert(schema.wordInBook).values([
     wb_id: "3",
     word_id: "395",
     word_index: 395,
-  }
+  },
 ]);
 
 console.log("Seeding complete.");

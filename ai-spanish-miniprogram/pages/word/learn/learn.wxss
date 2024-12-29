@@ -58,7 +58,10 @@
 .wordWrapper .pron {
   font-size: 34rpx;
   font-family: Arial, Helvetica, sans-serif;
-  color: #ffffff;
+  color: var(--td-brand-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .wordWrapper .timing {
   width: 100%;

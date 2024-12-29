@@ -17,11 +17,15 @@
       class="times {{ index<thisWordRepeatTime? 'bg-done' : 'bg' }}"
     ></view>
   </view>
-  <view
-    class="pron"
-    wx:if="{{ wordMode == 0 && wordDetail.phonetic.length > 0 }}"
-    >/ {{wordDetail.phonetic}} / <text class="voice iconfont icon-sound"></text
-  ></view>
+  <view class="pron" wx:if="{{ wordMode == 0 }}">
+    <text wx:if="{{wordDetail.phonetic}}">/ {{wordDetail.phonetic}} /</text>
+    <t-icon
+      wx:if="{{wordDetail.voiceUrl}}"
+      name="voice"
+      prefix="icon"
+      size="48rpx"
+    />
+  </view>
   <view class="timing" wx:if="{{ wordMode == 1 }}">
     <view class="model"></view>
     <view class="model phonetic"></view>

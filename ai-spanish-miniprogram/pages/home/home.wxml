@@ -1,36 +1,81 @@
 <t-navbar />
 
 <view class="container">
-  <view class="main">
-    <view class="logo">
-      <image
-        t-class="logo__img"
-        src="/images/logo.png"
-        style="height: 100px; width: 100px"
-      />
-      <view class="titleBar">
-        <view class="title">AI 西语</view>
-        <text class="subTitle"
-          >You can ask me anything. Start chatting with AI now.</text
-        >
-        <view class="subTitle">
-          <text> </text>
-        </view>
+  <view class="logo">
+    <image
+      t-class="logo__img"
+      src="/images/logo.png"
+      style="height: 100px; width: 100px"
+    />
+    <view class="titleBar">
+      <view class="title">AI 西语</view>
+      <text class="subTitle"
+        >You can ask me anything. Start chatting with AI now.</text
+      >
+      <view class="subTitle">
+        <text> </text>
       </view>
     </view>
+  </view>
 
-    <view class="chatPanel">
-      <text class="label">情景对话</text>
-      <t-button theme="primary" size="large" block bind:tap="goChatStart"
-        >Get started</t-button
+  <view class="panel">
+    <view class="panel_content">
+      <text class="label">AI 情景对话</text>
+      <text class="sub">全对话模拟学习</text>
+      <text class="sub">快速提高口语能力</text>
+
+      <t-button
+        t-class="btn"
+        theme="primary"
+        shape="round"
+        size="extra-small"
+        icon="chevron-right-s"
+        bind:tap="goChatStart"
       >
+        快速开始
+      </t-button>
     </view>
 
-    <view class="wordPanel">
+    <image
+      t-class="logo__img"
+      src="/images/chat.png"
+      style="height: 130px; width: 150px"
+    />
+  </view>
+
+  <view class="panel">
+    <image
+      t-class="logo__img"
+      src="/images/word.png"
+      style="height: 130px; width: 150px"
+    />
+
+    <view class="panel_content">
       <text class="label">背单词</text>
-      <t-button theme="primary" size="large" block bind:tap="gotoWord"
-        >Get started</t-button
+
+      <text class="sub">今日计划 </text>
+      <text class="sub">累计已学 </text>
+
+      <t-button
+        t-class="btn"
+        theme="primary"
+        shape="round"
+        size="extra-small"
+        icon="chevron-right-s"
+        bind:tap="gotoWord"
       >
+        快速开始
+      </t-button>
     </view>
   </view>
+
+  <!-- <view class="panel-col">
+    <view class="label">学习时长 (分钟)</view>
+    <view class="chart">
+      <view wx:if="{{!hasUserInfo}}" class="chart-nodata"
+        >登录可解锁学习时长</view
+      >
+      <t-chart wx:else option="{{option}}" height="240rpx"></t-chart>
+    </view>
+  </view> -->
 </view>

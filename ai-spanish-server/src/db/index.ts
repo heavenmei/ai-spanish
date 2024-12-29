@@ -3,6 +3,7 @@ import postgres from "postgres";
 
 import { serverEnvs } from "@/utils";
 import * as schema from "@/db/schema";
+import { AnyColumn, sql } from "drizzle-orm";
 
 declare global {
   var globalDb: PostgresJsDatabase<typeof schema> | undefined;
@@ -25,5 +26,9 @@ if (serverEnvs.NODE_ENV === "production") {
 
   db = global.globalDb;
 }
+
+export const increment = (column: AnyColumn, value = 1) => {
+  return sql`${column} + ${value}`;
+};
 
 export default db;

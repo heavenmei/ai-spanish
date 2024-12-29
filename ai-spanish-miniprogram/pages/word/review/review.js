@@ -88,7 +88,7 @@ Page({
     });
 
     // 初始化设置
-    const userSettings = app.globalData.wordSettings;
+    const userSettings = app.globalData.userInfo.wordSetting;
     const settings = {
       ...this.settings,
       ...userSettings,

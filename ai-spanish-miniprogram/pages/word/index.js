@@ -6,6 +6,7 @@ import {
   getAllLearnData,
   getTodayLearnData,
   getBasicLearningData,
+  getDailySum,
 } from "../../apis/word";
 
 const app = getApp();
@@ -16,33 +17,9 @@ Page({
     needToReview: 0,
     // calendar
     value: new Date().getTime(),
-    minDate: new Date().getTime() - 12 * 30 * 24 * 60 * 60 * 1000, // 1年前
+    minDate: new Date().getTime() - 6 * 30 * 24 * 60 * 60 * 1000, // 半年前
     maxDate: new Date().getTime(),
     format(day) {
-      const { date } = day;
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-      const curDate = date.getDate();
-
-      day.suffix = "*";
-
-      if (year === 2022) {
-        if (month === 2) {
-          const map = {
-            1: "初一",
-            2: "初二",
-            3: "初三",
-            14: "情人节",
-            15: "元宵节",
-          };
-          if (curDate in map) {
-            // day.prefix = map[curDate];
-            day.suffix = "--";
-            day.className = "is-active";
-          }
-        }
-      }
-
       return day;
     },
     // book
@@ -91,6 +68,7 @@ Page({
   async init() {
     this.getSingleWBData();
     this.initLearnData();
+    this.initDailySum();
   },
 
   checkLogin() {
@@ -150,9 +128,31 @@ Page({
     if (needUpdateDailySum) this.updateTodayDailySum();
   },
 
+  async initDailySum() {
+    const res = await getDailySum();
+    const dailySumData = res.list;
+    this.setData({
+      format: (day) => {
+        const { date } = day;
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const curDate = date.getDate();
+        const dateStr = `${year}-${month}-${curDate}`;
+        const dayRes = dailySumData[dateStr];
+
+        if (dayRes) {
+          day.suffix = dayRes.learn + dayRes.review;
+          day.className = "is-active";
+        }
+        return day;
+      },
+    });
+  },
+
   // ! 更新今日学习数据
   updateDailyTaskPercentage() {
-    const { dailyLearn, dailyReview, groupSize } = app.globalData.wordSettings;
+    const { dailyLearn, dailyReview, groupSize } =
+      app.globalData.userInfo.wordSetting;
     const dailyTask = {};
     dailyTask.dailyLearn = dailyLearn * groupSize;
     dailyTask.dailyReview = dailyReview * groupSize;
@@ -205,12 +205,12 @@ Page({
 
       if (res.success) {
         app.globalData.userInfo.l_book_id = bkInfo.id;
-        // app.globalData.updatedForIndex = true;
         this.setData({
           bkDetail: bkInfo,
           bkLearnData: res.data,
           bookListVisible: false,
         });
+        this.init();
       } else {
         wx.showToast({
           title: "更换失败，请重试~",

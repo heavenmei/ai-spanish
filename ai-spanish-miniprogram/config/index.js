@@ -6,14 +6,16 @@ export function getEnv() {
   return envVersion;
 }
 
-const dev = "http://192.168.1.111:8000";
-// const dev = "http://127.0.0.1:8000";
-// const HOST = "http://116.62.78.22:9000/";
+// const dev = "http:/172.30.177.71:8000";
+const dev = "http://127.0.0.1:8000";
+
 // const pro = "http://118.31.74.178:8000";
 const pro = "https://ai-spanish.cn";
 
 export const HOST = getEnv() === "develop" ? dev : pro;
 // export const HOST = pro;
+
+export const WORD_VOICE_URL = HOST;
 
 export const config = {
   /** 是否使用mock代替api返回 */

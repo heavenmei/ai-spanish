@@ -1,27 +1,32 @@
 page {
   min-height: 100%;
 }
+
 .container {
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
   margin-bottom: 150rpx;
 }
+
 .logo {
   flex-shrink: 0;
   position: relative;
   display: flex;
   padding-top: 30rpx;
 }
+
 .titleBar {
   flex: 1;
   margin: 0 30px;
 }
+
 .title {
   font-size: 28px;
   font-weight: 700;
   /* text-align: center; */
 }
+
 .subTitle {
   width: 100%;
   color: #9e9e9e;
@@ -32,39 +37,45 @@ page {
   justify-content: center;
   align-items: center;
 }
+
 .label {
   font-size: 32rpx;
   font-weight: 600;
   margin-bottom: 12rpx;
 }
+
 .panel {
   display: flex;
   margin: 20px 0 40px 0;
   border-radius: 12rpx;
   gap: 60rpx;
+
+  &_content {
+    flex: 1;
+    padding: 16rpx 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16rpx;
+
+    .sub {
+      font-size: 24rpx;
+      font-weight: 400;
+      color: #9e9e9e;
+    }
+    .btn {
+      margin-top: auto;
+      width: 80%;
+    }
+  }
 }
-.panel_content {
-  flex: 1;
-  padding: 16rpx 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16rpx;
-}
-.panel_content .sub {
-  font-size: 24rpx;
-  font-weight: 400;
-  color: #9e9e9e;
-}
-.panel_content .btn {
-  margin-top: auto;
-  width: 80%;
-}
+
 .panel-col {
   display: flex;
   flex-direction: column;
   gap: 20rpx;
   min-height: 300rpx;
 }
+
 .chart {
   position: relative;
   flex: 1;
@@ -76,6 +87,7 @@ page {
   display: flex;
   justify-content: center;
   align-items: center;
+
   top: 0;
   bottom: 0;
   left: 0;
@@ -83,6 +95,7 @@ page {
   font-size: 32rpx;
   color: #999;
 }
+
 ec-canvas {
   width: 100%;
   height: 100%;

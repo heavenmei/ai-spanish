@@ -95,6 +95,7 @@ const WordApi = {
   // getNoteBookWord: getNoteBookWord,
   getBookRecordWord: getBookRecordWord,
   getUserRecordWord: getUserRecordWord,
+  getDailySum: getDailySum,
 };
 
 export default WordApi;

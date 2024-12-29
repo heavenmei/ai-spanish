@@ -1,6 +1,6 @@
 import { updateStudyDuration } from "../apis/index";
 const DELAY = 60000;
-const showToast = [1, 2, 3, 10, 20, 60];
+const showToast = [10, 30, 60, 120];
 
 // 开始计时学习时长
 export const startDuration = (app, userId, callback) => {

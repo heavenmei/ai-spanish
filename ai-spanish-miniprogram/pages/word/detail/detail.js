@@ -1,6 +1,7 @@
 // pages/word/detail/detail.js
 import { getWordDetail, toggleAddToNB } from "../../../apis/word";
-import word_utils from "../../../utils/word_utils.js";
+import { WORD_VOICE_URL } from "../../../config/index.js";
+// import word_utils from "../../../utils/word_utils.js";
 
 // const app = getApp();
 const innerAudioContext = wx.createInnerAudioContext({
@@ -38,7 +39,8 @@ Page({
       wordDetail,
       isInNotebook: wordDetail.in_notebook ?? false,
     });
-    const voiceUrl = word_utils.getWordVoiceUrl(wordDetail.word);
+    const voiceUrl = WORD_VOICE_URL + wordDetail.voiceUrl;
+    // const voiceUrl = word_utils.getWordVoiceUrl(wordDetail.word);
     innerAudioContext.src = voiceUrl;
   },
 

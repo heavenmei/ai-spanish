@@ -20,6 +20,7 @@ export const API_URLS = {
   "API_USER_INFO": "/api/user/info",
   "API_USER_LOGIN": "/api/user/login",
   "API_USER_LOGOUT": "/api/user/logout",
+  "API_USER_UPDATEUSER": "/api/user/updateUser",
   "API_USER_UPDATESTUDYDURATION": "/api/user/updateStudyDuration",
   "API_USER_GETSTUDYDURATION": "/api/user/getStudyDuration",
   "API_WORD_CHANGEWORDBOOK": "/api/word/changeWordBook",
@@ -34,6 +35,7 @@ export const API_URLS = {
   "API_WORD_GETREVIEWDATA": "/api/word/getReviewData",
   "API_WORD_GETBOOKRECORDWORD": "/api/word/getBookRecordWord",
   "API_WORD_GETUSERRECORDWORD": "/api/word/getUserRecordWord",
+  "API_WORD_GETDAILYSUM": "/api/word/getDailySum",
   "API_WORD_ADDLEARNINGRECORD": "/api/word/addLearningRecord",
   "API_WORD_UPDATELEARNINGRECORD": "/api/word/updateLearningRecord"
 };

@@ -1,10 +1,16 @@
 {
-	"navigationStyle": "custom",
-	"navigationBarTextStyle": "black",
-	"usingComponents": {
-		"t-navbar": "tdesign-miniprogram/navbar/navbar",
-		"t-icon": "tdesign-miniprogram/icon/icon",
-		"t-button": "tdesign-miniprogram/button/button",
-		"t-toast": "tdesign-miniprogram/toast/toast"
-	}
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+
+  "usingComponents": {
+    "t-navbar": "tdesign-miniprogram/navbar/navbar",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-toast": "tdesign-miniprogram/toast/toast",
+    "t-chart": "/echarts/baseChart/baseChart"
+  },
+  "componentPlaceholder": {
+    "t-chart": "view"
+  }
 }

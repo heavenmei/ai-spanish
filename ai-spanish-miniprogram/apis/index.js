@@ -12,6 +12,9 @@ export const login = (payload) => {
 export const logout = (payload) => {
   return get("/api/user/logout", payload);
 };
+export const updateUser = (payload) => {
+  return post("/api/user/updateUser", payload);
+};
 
 export const getMessageList = (payload) => {
   return get("/api/message/getMessageList", payload);

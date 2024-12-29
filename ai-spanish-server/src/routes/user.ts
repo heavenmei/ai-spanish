@@ -1,7 +1,7 @@
 import { Context } from "hono";
 import db from "@/db";
 import { and, asc, count, desc, eq } from "drizzle-orm";
-import { session, studyDuration, users } from "@/db/schema";
+import { session, studyDuration, users, word } from "@/db/schema";
 import {
   ContextVariables,
   failRes,
@@ -37,6 +37,24 @@ export const InitOFMatrix = {
   "2.8": [5],
 };
 
+const InitWordSetting = {
+  groupSize: 10,
+  dailyLearn: 1,
+  dailyReview: 1,
+  autoplay: false,
+
+  learn_repeat_t: 3,
+  learn_first_m: "chooseTrans",
+  learn_second_m: "recallTrans",
+  learn_third_m: "recallWord",
+  learn_fourth_m: "recallTrans",
+
+  review_repeat_t: 2,
+  review_first_m: "chooseTrans",
+  review_second_m: "recallWord",
+  review_third_m: "recallTrans",
+};
+
 // GET
 export async function info(c: Context<{ Variables: ContextVariables }>) {
   const user = c.get("user");
@@ -48,7 +66,15 @@ export async function info(c: Context<{ Variables: ContextVariables }>) {
     where: eq(users.id, user.id),
   });
 
-  return c.json(successRes({ message: "用户验证成功", ...existingUser }));
+  console.log("info===", existingUser);
+
+  return c.json(
+    successRes({
+      message: "用户验证成功",
+      ...existingUser,
+      wordSetting: JSON.parse(existingUser.wordSetting),
+    })
+  );
 }
 
 // POST
@@ -84,6 +110,7 @@ export async function login(c: Context<{ Variables: ContextVariables }>) {
         nickName,
         avatarUrl,
         of_matrix: JSON.stringify(InitOFMatrix),
+        wordSetting: JSON.stringify(InitWordSetting),
       };
       await db.insert(users).values(curUser);
     }
@@ -105,6 +132,7 @@ export async function login(c: Context<{ Variables: ContextVariables }>) {
   return c.json(
     successRes({
       ...curUser,
+      wordSetting: JSON.parse(curUser.wordSetting),
     })
   );
 }
@@ -118,6 +146,38 @@ export async function logout(c: Context<{ Variables: ContextVariables }>) {
   await lucia.invalidateSession(session.id);
   c.header("Set-Cookie", lucia.createBlankSessionCookie().serialize());
   return c.json(successRes({}));
+}
+
+// POST
+export async function updateUser(c: Context) {
+  const { wordSetting } = await c.req.json();
+
+  const user = c.get("user");
+  if (!user) {
+    return c.json(failRes({ code: 401, message: "登录以继续" }));
+  }
+
+  try {
+    console.log("updateUser===", wordSetting, JSON.stringify(wordSetting));
+
+    const res = await db
+      .update(users)
+      .set({
+        wordSetting: JSON.stringify(wordSetting),
+      })
+      .where(eq(users.id, user.id))
+      .returning({ wordSetting: users.wordSetting });
+    const data = JSON.parse(res[0].wordSetting);
+
+    return c.json(successRes(data));
+  } catch (e: any) {
+    logger.error("updateUser", e);
+    return c.json(
+      failRes({
+        message: e.detail,
+      })
+    );
+  }
 }
 
 // POST

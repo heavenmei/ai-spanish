@@ -24,6 +24,7 @@ function getFiles(dir) {
 // 模板文件内容
 const template = `
 import { serve } from "@hono/node-server";
+import { serveStatic } from "@hono/node-server/serve-static";
 import { Hono } from "hono";
 import { getCookie, setCookie } from "hono/cookie";
 import { ContextVariables } from "./utils";
@@ -35,6 +36,8 @@ import log4jsConfig from "./config/log4js.json" assert { type: "json" };
 log4js.configure(log4jsConfig);
 
 const app = new Hono<{ Variables: ContextVariables }>();
+
+app.use("/public/*", serveStatic({ root: "./" }));
 
 app.use("*", async (c, next) => {
   const sessionId = getCookie(c, lucia.sessionCookieName);
@@ -69,6 +72,7 @@ app.use("*", async (c, next) => {
 });
 
 app.get("/", (c) => c.text("Hello Node.js!"));
+
 ---接口生成---
 
 console.log("Server is running on port 8000");
