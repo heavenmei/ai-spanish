@@ -35,6 +35,7 @@ await db.insert(schema.word).values([
     word: "gordo",
     definition: "definition",
     translation: "胖的",
+    voiceUrl: "audio_files\\1_adj._gordo_es-es.mp3" 
   },
   {
     id: "2",
@@ -42,6 +43,7 @@ await db.insert(schema.word).values([
     word: "delgado",
     definition: "definition",
     translation: "瘦的",
+    voiceUrl: "audio_files\\2_adj._delgado_es-es.mp3" 
   },
   {
     id: "3",
@@ -49,6 +51,7 @@ await db.insert(schema.word).values([
     word: "alto",
     definition: "definition",
     translation: "高的",
+    voiceUrl: "audio_files\\3_adj._alto_es-es.mp3" 
   },
   {
     id: "4",
@@ -56,6 +59,7 @@ await db.insert(schema.word).values([
     word: "pelo",
     definition: "definition",
     translation: "头发, 毛发",
+    voiceUrl: "audio_files\\4_m._pelo_es-es.mp3" 
   },
   {
     id: "5",
@@ -63,6 +67,7 @@ await db.insert(schema.word).values([
     word: "ojo",
     definition: "definition",
     translation: "眼睛",
+    voiceUrl: "audio_files\\5_m._ojo_es-es.mp3" 
   },
   {
     id: "6",
@@ -70,6 +75,7 @@ await db.insert(schema.word).values([
     word: "nariz",
     definition: "definition",
     translation: "鼻子",
+    voiceUrl: "audio_files\\6_f._nariz_es-es.mp3" 
   },
   {
     id: "7",
@@ -77,6 +83,7 @@ await db.insert(schema.word).values([
     word: "bajo",
     definition: "definition",
     translation: "矮的，低的",
+    voiceUrl: "audio_files\\7_adj._bajo_es-es.mp3" 
   },
   {
     id: "8",
@@ -84,6 +91,7 @@ await db.insert(schema.word).values([
     word: "guapo",
     definition: "definition",
     translation: "漂亮的, 帅哥，美女",
+    voiceUrl: "audio_files\\8_adj.,f.,m._guapo_es-es.mp3" 
   },
   {
     id: "9",
@@ -91,6 +99,7 @@ await db.insert(schema.word).values([
     word: "feo",
     definition: "definition",
     translation: "丑的",
+    voiceUrl: "audio_files\\9_adj._feo_es-es.mp3" 
   },
   {
     id: "10",
@@ -98,6 +107,7 @@ await db.insert(schema.word).values([
     word: "pelo rubio",
     definition: "definition",
     translation: "金头发",
+    voiceUrl: "audio_files\\10_n_a_pelo rubio_es-es.mp3" 
   },
   {
     id: "11",
@@ -105,6 +115,7 @@ await db.insert(schema.word).values([
     word: "tener barba",
     definition: "definition",
     translation: "有胡须",
+    voiceUrl: "audio_files\\11_None_tener barba_es-es.mp3" 
   },
   {
     id: "12",
@@ -112,6 +123,7 @@ await db.insert(schema.word).values([
     word: "tener bigote",
     definition: "definition",
     translation: "有髭（上唇至人中部位的胡子）",
+    voiceUrl: "audio_files\\12_None_tener bigote_es-es.mp3" 
   },
   {
     id: "13",
@@ -119,6 +131,7 @@ await db.insert(schema.word).values([
     word: "llevar gafas",
     definition: "definition",
     translation: "戴眼镜",
+    voiceUrl: "audio_files\\13_None_llevar gafas_es-es.mp3" 
   },
   {
     id: "14",
@@ -126,6 +139,7 @@ await db.insert(schema.word).values([
     word: "tener los ojos grandes",
     definition: "definition",
     translation: "有大眼睛",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "15",
@@ -133,6 +147,7 @@ await db.insert(schema.word).values([
     word: "tener los ojos pequeños",
     definition: "definition",
     translation: "有小眼睛",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "16",
@@ -140,6 +155,7 @@ await db.insert(schema.word).values([
     word: "levantarse",
     definition: "definition",
     translation: "起床，起身",
+    voiceUrl: "audio_files\\16_prnl._levantarse_es-es.mp3" 
   },
   {
     id: "17",
@@ -147,6 +163,7 @@ await db.insert(schema.word).values([
     word: "simpático",
     definition: "definition",
     translation: "和蔼可亲的",
+    voiceUrl: "audio_files\\17_adj._simpático_es-es.mp3" 
   },
   {
     id: "18",
@@ -154,6 +171,7 @@ await db.insert(schema.word).values([
     word: "antipático",
     definition: "definition",
     translation: "令人厌恶的",
+    voiceUrl: "audio_files\\18_adj._antipático_es-es.mp3" 
   },
   {
     id: "19",
@@ -161,6 +179,7 @@ await db.insert(schema.word).values([
     word: "inteligente",
     definition: "definition",
     translation: "聪明的",
+    voiceUrl: "audio_files\\19_adj._inteligente_es-es.mp3" 
   },
   {
     id: "20",
@@ -168,6 +187,7 @@ await db.insert(schema.word).values([
     word: "trabajador",
     definition: "definition",
     translation: "勤劳的",
+    voiceUrl: "audio_files\\20_adj._trabajador_es-es.mp3" 
   },
   {
     id: "21",
@@ -175,6 +195,7 @@ await db.insert(schema.word).values([
     word: "alegre",
     definition: "definition",
     translation: "高兴的，愉悦的，开朗的",
+    voiceUrl: "audio_files\\21_adj._alegre_es-es.mp3" 
   },
   {
     id: "22",
@@ -182,6 +203,7 @@ await db.insert(schema.word).values([
     word: "serio",
     definition: "definition",
     translation: "严肃的",
+    voiceUrl: "audio_files\\22_adj._serio_es-es.mp3" 
   },
   {
     id: "23",
@@ -189,6 +211,7 @@ await db.insert(schema.word).values([
     word: "tímido",
     definition: "definition",
     translation: "害羞的，胆怯的",
+    voiceUrl: "audio_files\\23_adj._tímido_es-es.mp3" 
   },
   {
     id: "24",
@@ -196,6 +219,7 @@ await db.insert(schema.word).values([
     word: "sociable",
     definition: "definition",
     translation: "爱社交的",
+    voiceUrl: "audio_files\\24_adj._sociable_es-es.mp3" 
   },
   {
     id: "25",
@@ -203,6 +227,7 @@ await db.insert(schema.word).values([
     word: "nombre",
     definition: "definition",
     translation: "名字",
+    voiceUrl: "audio_files\\25_m._nombre_es-es.mp3" 
   },
   {
     id: "26",
@@ -210,6 +235,7 @@ await db.insert(schema.word).values([
     word: "primer apellido",
     definition: "definition",
     translation: "第一姓氏",
+    voiceUrl: "audio_files\\26_None_primer apellido_es-es.mp3" 
   },
   {
     id: "27",
@@ -217,6 +243,7 @@ await db.insert(schema.word).values([
     word: "segundo apellido",
     definition: "definition",
     translation: "第二姓氏",
+    voiceUrl: "audio_files\\27_None_segundo apellido_es-es.mp3" 
   },
   {
     id: "28",
@@ -224,6 +251,7 @@ await db.insert(schema.word).values([
     word: "señor",
     definition: "definition",
     translation: "先生",
+    voiceUrl: "audio_files\\28_m._señor_es-es.mp3" 
   },
   {
     id: "29",
@@ -231,6 +259,7 @@ await db.insert(schema.word).values([
     word: "señora",
     definition: "definition",
     translation: "女士",
+    voiceUrl: "audio_files\\29_f._señora_es-es.mp3" 
   },
   {
     id: "30",
@@ -238,6 +267,7 @@ await db.insert(schema.word).values([
     word: "firmar",
     definition: "definition",
     translation: "签字",
+    voiceUrl: "audio_files\\30_tr._firmar_es-es.mp3" 
   },
   {
     id: "31",
@@ -245,6 +275,7 @@ await db.insert(schema.word).values([
     word: "llamarse",
     definition: "definition",
     translation: "叫…名字",
+    voiceUrl: "audio_files\\31_prnl._llamarse_es-es.mp3" 
   },
   {
     id: "32",
@@ -252,6 +283,7 @@ await db.insert(schema.word).values([
     word: "dirección",
     definition: "definition",
     translation: "地址",
+    voiceUrl: "audio_files\\32_f._dirección_es-es.mp3" 
   },
   {
     id: "33",
@@ -259,6 +291,7 @@ await db.insert(schema.word).values([
     word: "correo electrónico",
     definition: "definition",
     translation: "电子邮件",
+    voiceUrl: "audio_files\\33_None_correo electrónico_es-es.mp3" 
   },
   {
     id: "34",
@@ -266,6 +299,7 @@ await db.insert(schema.word).values([
     word: "calle",
     definition: "definition",
     translation: "街",
+    voiceUrl: "audio_files\\34_f._calle_es-es.mp3" 
   },
   {
     id: "35",
@@ -273,6 +307,7 @@ await db.insert(schema.word).values([
     word: "avenida",
     definition: "definition",
     translation: "大道",
+    voiceUrl: "audio_files\\35_f._avenida_es-es.mp3" 
   },
   {
     id: "36",
@@ -280,6 +315,7 @@ await db.insert(schema.word).values([
     word: "paseo",
     definition: "definition",
     translation: "步行道，散步",
+    voiceUrl: "audio_files\\36_m._paseo_es-es.mp3" 
   },
   {
     id: "37",
@@ -287,6 +323,7 @@ await db.insert(schema.word).values([
     word: "número",
     definition: "definition",
     translation: "数字，号码",
+    voiceUrl: "audio_files\\37_m._número_es-es.mp3" 
   },
   {
     id: "38",
@@ -294,6 +331,7 @@ await db.insert(schema.word).values([
     word: "código postal",
     definition: "definition",
     translation: "邮政编码",
+    voiceUrl: "audio_files\\38_None_código postal_es-es.mp3" 
   },
   {
     id: "39",
@@ -301,6 +339,7 @@ await db.insert(schema.word).values([
     word: "país",
     definition: "definition",
     translation: "国家",
+    voiceUrl: "audio_files\\39_m._país_es-es.mp3" 
   },
   {
     id: "40",
@@ -308,6 +347,7 @@ await db.insert(schema.word).values([
     word: "ciudad",
     definition: "definition",
     translation: "城市",
+    voiceUrl: "audio_files\\40_f._ciudad_es-es.mp3" 
   },
   {
     id: "41",
@@ -315,6 +355,7 @@ await db.insert(schema.word).values([
     word: "pueblo",
     definition: "definition",
     translation: "村子",
+    voiceUrl: "audio_files\\41_m._pueblo_es-es.mp3" 
   },
   {
     id: "42",
@@ -322,6 +363,7 @@ await db.insert(schema.word).values([
     word: "vivir",
     definition: "definition",
     translation: "生活 生存",
+    voiceUrl: "audio_files\\42_intr._vivir_es-es.mp3" 
   },
   {
     id: "43",
@@ -329,6 +371,7 @@ await db.insert(schema.word).values([
     word: "número de teléfono",
     definition: "definition",
     translation: "电话号码",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "44",
@@ -336,6 +379,7 @@ await db.insert(schema.word).values([
     word: "móvil",
     definition: "definition",
     translation: "手机",
+    voiceUrl: "audio_files\\44_m._móvil_es-es.mp3" 
   },
   {
     id: "45",
@@ -343,6 +387,7 @@ await db.insert(schema.word).values([
     word: "lugar de nacimiento",
     definition: "definition",
     translation: "出生地",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "46",
@@ -350,6 +395,7 @@ await db.insert(schema.word).values([
     word: "fecha de nacimiento",
     definition: "definition",
     translation: "出生日期",
+    voiceUrl: "audio_files\\46_None_fecha de nacimiento_es-es.mp3" 
   },
   {
     id: "47",
@@ -357,6 +403,7 @@ await db.insert(schema.word).values([
     word: "nacionalidad",
     definition: "definition",
     translation: "国籍",
+    voiceUrl: "audio_files\\47_f._nacionalidad_es-es.mp3" 
   },
   {
     id: "48",
@@ -364,6 +411,7 @@ await db.insert(schema.word).values([
     word: "extranjero",
     definition: "definition",
     translation: "外国的, 外国人 外国",
+    voiceUrl: "audio_files\\48_adj.,f.,m._extranjero_es-es.mp3" 
   },
   {
     id: "49",
@@ -371,6 +419,7 @@ await db.insert(schema.word).values([
     word: "español",
     definition: "definition",
     translation: "西班牙的,  西班牙人  西班牙语",
+    voiceUrl: "audio_files\\49_adj.,f.,m._español_es-es.mp3" 
   },
   {
     id: "50",
@@ -378,6 +427,7 @@ await db.insert(schema.word).values([
     word: "alemán",
     definition: "definition",
     translation: "德国的,  德国人  德语",
+    voiceUrl: "audio_files\\50_adj.,f.,m._alemán_es-es.mp3" 
   },
   {
     id: "51",
@@ -385,6 +435,7 @@ await db.insert(schema.word).values([
     word: "mexicano",
     definition: "definition",
     translation: "墨西哥的,  墨西哥人",
+    voiceUrl: "audio_files\\51_adj.,f.,m._mexicano_es-es.mp3" 
   },
   {
     id: "52",
@@ -392,6 +443,7 @@ await db.insert(schema.word).values([
     word: "japonés",
     definition: "definition",
     translation: "日本的,  日本人  日语",
+    voiceUrl: "audio_files\\52_adj.,f.,m._japonés_es-es.mp3" 
   },
   {
     id: "53",
@@ -399,6 +451,7 @@ await db.insert(schema.word).values([
     word: "ser de Laos",
     definition: "definition",
     translation: "是老挝人",
+    voiceUrl: "audio_files\\53_None_ser de Laos_es-es.mp3" 
   },
   {
     id: "54",
@@ -406,6 +459,7 @@ await db.insert(schema.word).values([
     word: "edad",
     definition: "definition",
     translation: "年龄",
+    voiceUrl: "audio_files\\54_f._edad_es-es.mp3" 
   },
   {
     id: "55",
@@ -413,6 +467,7 @@ await db.insert(schema.word).values([
     word: "niño",
     definition: "definition",
     translation: "儿童，孩子",
+    voiceUrl: "audio_files\\55_f.,m._niño_es-es.mp3" 
   },
   {
     id: "56",
@@ -420,6 +475,7 @@ await db.insert(schema.word).values([
     word: "chico",
     definition: "definition",
     translation: "小孩   小的，年幼的",
+    voiceUrl: "audio_files\\56_adj.,f.,m._chico_es-es.mp3" 
   },
   {
     id: "57",
@@ -427,6 +483,7 @@ await db.insert(schema.word).values([
     word: "joven",
     definition: "definition",
     translation: "年轻的, 年轻人",
+    voiceUrl: "audio_files\\57_adj.,f.,m._joven_es-es.mp3" 
   },
   {
     id: "58",
@@ -434,6 +491,7 @@ await db.insert(schema.word).values([
     word: "viejo",
     definition: "definition",
     translation: "老的，旧的, 老人",
+    voiceUrl: "audio_files\\58_adj.,f.,m._viejo_es-es.mp3" 
   },
   {
     id: "59",
@@ -441,6 +499,7 @@ await db.insert(schema.word).values([
     word: "tener 18 años",
     definition: "definition",
     translation: "18岁",
+    voiceUrl: "audio_files\\59_None_tener 18 años_es-es.mp3" 
   },
   {
     id: "60",
@@ -448,6 +507,7 @@ await db.insert(schema.word).values([
     word: "hombre",
     definition: "definition",
     translation: "男人",
+    voiceUrl: "audio_files\\60_m._hombre_es-es.mp3" 
   },
   {
     id: "61",
@@ -455,6 +515,7 @@ await db.insert(schema.word).values([
     word: "mujer",
     definition: "definition",
     translation: "女人",
+    voiceUrl: "audio_files\\61_f._mujer_es-es.mp3" 
   },
   {
     id: "62",
@@ -462,6 +523,7 @@ await db.insert(schema.word).values([
     word: "estado civil",
     definition: "definition",
     translation: "婚姻状况",
+    voiceUrl: "audio_files\\62_None_estado civil_es-es.mp3" 
   },
   {
     id: "63",
@@ -469,6 +531,7 @@ await db.insert(schema.word).values([
     word: "soltero",
     definition: "definition",
     translation: "单身的",
+    voiceUrl: "audio_files\\63_adj._soltero_es-es.mp3" 
   },
   {
     id: "64",
@@ -476,6 +539,7 @@ await db.insert(schema.word).values([
     word: "casado",
     definition: "definition",
     translation: "已婚的",
+    voiceUrl: "audio_files\\64_adj._casado_es-es.mp3" 
   },
   {
     id: "65",
@@ -483,6 +547,7 @@ await db.insert(schema.word).values([
     word: "viudo",
     definition: "definition",
     translation: "丧偶的",
+    voiceUrl: "audio_files\\65_adj._viudo_es-es.mp3" 
   },
   {
     id: "66",
@@ -490,6 +555,7 @@ await db.insert(schema.word).values([
     word: "separado",
     definition: "definition",
     translation: "分开的",
+    voiceUrl: "audio_files\\66_adj._separado_es-es.mp3" 
   },
   {
     id: "67",
@@ -497,6 +563,7 @@ await db.insert(schema.word).values([
     word: "divorciado",
     definition: "definition",
     translation: "离婚的",
+    voiceUrl: "audio_files\\67_adj._divorciado_es-es.mp3" 
   },
   {
     id: "68",
@@ -504,6 +571,7 @@ await db.insert(schema.word).values([
     word: "llave",
     definition: "definition",
     translation: "钥匙",
+    voiceUrl: "audio_files\\68_f._llave_es-es.mp3" 
   },
   {
     id: "69",
@@ -511,6 +579,7 @@ await db.insert(schema.word).values([
     word: "cartera",
     definition: "definition",
     translation: "钱包",
+    voiceUrl: "audio_files\\69_f._cartera_es-es.mp3" 
   },
   {
     id: "70",
@@ -518,6 +587,7 @@ await db.insert(schema.word).values([
     word: "reloj",
     definition: "definition",
     translation: "手表，时钟",
+    voiceUrl: "audio_files\\70_m._reloj_es-es.mp3" 
   },
   {
     id: "71",
@@ -525,6 +595,7 @@ await db.insert(schema.word).values([
     word: "gafas",
     definition: "definition",
     translation: "[pl.] 眼镜",
+    voiceUrl: "audio_files\\71_f._gafas_es-es.mp3" 
   },
   {
     id: "72",
@@ -532,6 +603,7 @@ await db.insert(schema.word).values([
     word: "familia",
     definition: "definition",
     translation: "家庭，家人",
+    voiceUrl: "audio_files\\72_f._familia_es-es.mp3" 
   },
   {
     id: "73",
@@ -539,6 +611,7 @@ await db.insert(schema.word).values([
     word: "padres",
     definition: "definition",
     translation: "[pl.] 父母",
+    voiceUrl: "audio_files\\73_m._padres_es-es.mp3" 
   },
   {
     id: "74",
@@ -546,6 +619,7 @@ await db.insert(schema.word).values([
     word: "padre",
     definition: "definition",
     translation: "父亲",
+    voiceUrl: "audio_files\\74_m._padre_es-es.mp3" 
   },
   {
     id: "75",
@@ -553,6 +627,7 @@ await db.insert(schema.word).values([
     word: "madre",
     definition: "definition",
     translation: "母亲",
+    voiceUrl: "audio_files\\75_f._madre_es-es.mp3" 
   },
   {
     id: "76",
@@ -560,6 +635,7 @@ await db.insert(schema.word).values([
     word: "hijo",
     definition: "definition",
     translation: "子，女",
+    voiceUrl: "audio_files\\76_m._hijo_es-es.mp3" 
   },
   {
     id: "77",
@@ -567,6 +643,7 @@ await db.insert(schema.word).values([
     word: "hermano",
     definition: "definition",
     translation: "兄弟，姐妹",
+    voiceUrl: "audio_files\\77_m._hermano_es-es.mp3" 
   },
   {
     id: "78",
@@ -574,6 +651,7 @@ await db.insert(schema.word).values([
     word: "tío",
     definition: "definition",
     translation: "伯父, 叔父, 姑父, 舅父，姨父伯母， 婶母， 姑母， 舅母， 姨母",
+    voiceUrl: "audio_files\\78_m._tío_es-es.mp3" 
   },
   {
     id: "79",
@@ -581,6 +659,7 @@ await db.insert(schema.word).values([
     word: "sobrino",
     definition: "definition",
     translation: "侄子，外甥，侄女, 外甥女",
+    voiceUrl: "audio_files\\79_m._sobrino_es-es.mp3" 
   },
   {
     id: "80",
@@ -588,6 +667,7 @@ await db.insert(schema.word).values([
     word: "abuelo",
     definition: "definition",
     translation: "爷爷，奶奶，姥爷，姥爷",
+    voiceUrl: "audio_files\\80_f.,m._abuelo_es-es.mp3" 
   },
   {
     id: "81",
@@ -595,6 +675,7 @@ await db.insert(schema.word).values([
     word: "nieto",
     definition: "definition",
     translation: "孙子，孙女，外孙，外孙女",
+    voiceUrl: "audio_files\\81_f.,m._nieto_es-es.mp3" 
   },
   {
     id: "82",
@@ -602,6 +683,7 @@ await db.insert(schema.word).values([
     word: "primo",
     definition: "definition",
     translation: "表兄弟，表姐妹",
+    voiceUrl: "audio_files\\82_f.,m._primo_es-es.mp3" 
   },
   {
     id: "83",
@@ -609,6 +691,7 @@ await db.insert(schema.word).values([
     word: "pareja",
     definition: "definition",
     translation: "伴侣",
+    voiceUrl: "audio_files\\83_f._pareja_es-es.mp3" 
   },
   {
     id: "84",
@@ -616,6 +699,7 @@ await db.insert(schema.word).values([
     word: "novio",
     definition: "definition",
     translation: "男朋友，女朋友",
+    voiceUrl: "audio_files\\84_f.,m._novio_es-es.mp3" 
   },
   {
     id: "85",
@@ -623,6 +707,7 @@ await db.insert(schema.word).values([
     word: "amigo",
     definition: "definition",
     translation: "朋友",
+    voiceUrl: "audio_files\\85_f.,m._amigo_es-es.mp3" 
   },
   {
     id: "86",
@@ -630,6 +715,7 @@ await db.insert(schema.word).values([
     word: "jefe",
     definition: "definition",
     translation: "老板，首领",
+    voiceUrl: "audio_files\\86_f.,m._jefe_es-es.mp3" 
   },
   {
     id: "87",
@@ -637,6 +723,7 @@ await db.insert(schema.word).values([
     word: "fiesta",
     definition: "definition",
     translation: "聚会",
+    voiceUrl: "audio_files\\87_f._fiesta_es-es.mp3" 
   },
   {
     id: "88",
@@ -644,6 +731,7 @@ await db.insert(schema.word).values([
     word: "desayuno",
     definition: "definition",
     translation: "早饭",
+    voiceUrl: "audio_files\\88_m._desayuno_es-es.mp3" 
   },
   {
     id: "89",
@@ -651,6 +739,7 @@ await db.insert(schema.word).values([
     word: "comida",
     definition: "definition",
     translation: "午饭，食物",
+    voiceUrl: "audio_files\\89_f._comida_es-es.mp3" 
   },
   {
     id: "90",
@@ -658,6 +747,7 @@ await db.insert(schema.word).values([
     word: "merienda",
     definition: "definition",
     translation: "午后小吃",
+    voiceUrl: "audio_files\\90_f._merienda_es-es.mp3" 
   },
   {
     id: "91",
@@ -665,6 +755,7 @@ await db.insert(schema.word).values([
     word: "cena",
     definition: "definition",
     translation: "晚饭",
+    voiceUrl: "audio_files\\91_f._cena_es-es.mp3" 
   },
   {
     id: "92",
@@ -672,6 +763,7 @@ await db.insert(schema.word).values([
     word: "desayunar",
     definition: "definition",
     translation: "吃早饭吃…作为早饭",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "93",
@@ -679,6 +771,7 @@ await db.insert(schema.word).values([
     word: "comer",
     definition: "definition",
     translation: "- 吃饭，吃午饭",
+    voiceUrl: "audio_files\\93_intr.,tr._comer_es-es.mp3" 
   },
   {
     id: "94",
@@ -686,6 +779,7 @@ await db.insert(schema.word).values([
     word: "merendar",
     definition: "definition",
     translation: "吃午后点心吃…作为午后点心",
+    voiceUrl: "audio_files\\94_intr. _merendar_es-es.mp3" 
   },
   {
     id: "95",
@@ -693,6 +787,7 @@ await db.insert(schema.word).values([
     word: "cenar",
     definition: "definition",
     translation: "- 吃晚饭",
+    voiceUrl: "audio_files\\95_intr.,tr._cenar_es-es.mp3" 
   },
   {
     id: "96",
@@ -700,6 +795,7 @@ await db.insert(schema.word).values([
     word: "agua",
     definition: "definition",
     translation: "水",
+    voiceUrl: "audio_files\\96_f._agua_es-es.mp3" 
   },
   {
     id: "97",
@@ -707,6 +803,7 @@ await db.insert(schema.word).values([
     word: "agua mineral",
     definition: "definition",
     translation: "矿泉水",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "98",
@@ -714,6 +811,7 @@ await db.insert(schema.word).values([
     word: "leche",
     definition: "definition",
     translation: "牛奶",
+    voiceUrl: "audio_files\\98_f._leche_es-es.mp3" 
   },
   {
     id: "99",
@@ -721,6 +819,7 @@ await db.insert(schema.word).values([
     word: "té",
     definition: "definition",
     translation: "茶",
+    voiceUrl: "audio_files\\99_m._té_es-es.mp3" 
   },
   {
     id: "100",
@@ -728,6 +827,7 @@ await db.insert(schema.word).values([
     word: "café",
     definition: "definition",
     translation: "咖啡",
+    voiceUrl: "audio_files\\100_m._café_es-es.mp3" 
   },
   {
     id: "101",
@@ -735,6 +835,7 @@ await db.insert(schema.word).values([
     word: "café solo",
     definition: "definition",
     translation: "纯咖啡",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "102",
@@ -742,6 +843,7 @@ await db.insert(schema.word).values([
     word: "café con leche",
     definition: "definition",
     translation: "牛奶咖啡",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "103",
@@ -749,6 +851,7 @@ await db.insert(schema.word).values([
     word: "café cortado",
     definition: "definition",
     translation: "牛奶咖啡（多咖少奶）",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "104",
@@ -756,6 +859,7 @@ await db.insert(schema.word).values([
     word: "cerveza",
     definition: "definition",
     translation: "啤酒",
+    voiceUrl: "audio_files\\104_f._cerveza_es-es.mp3" 
   },
   {
     id: "105",
@@ -763,6 +867,7 @@ await db.insert(schema.word).values([
     word: "vino blanco",
     definition: "definition",
     translation: "白葡萄酒",
+    voiceUrl: "audio_files\\105_None_vino blanco_es-es.mp3" 
   },
   {
     id: "106",
@@ -770,6 +875,7 @@ await db.insert(schema.word).values([
     word: "vino tinto",
     definition: "definition",
     translation: "红葡萄酒",
+    voiceUrl: "audio_files\\106_None_vino tinto_es-es.mp3" 
   },
   {
     id: "107",
@@ -777,6 +883,7 @@ await db.insert(schema.word).values([
     word: "beber",
     definition: "definition",
     translation: "- 喝",
+    voiceUrl: "audio_files\\107_intr.,tr._beber_es-es.mp3" 
   },
   {
     id: "108",
@@ -784,6 +891,7 @@ await db.insert(schema.word).values([
     word: "carne",
     definition: "definition",
     translation: "肉",
+    voiceUrl: "audio_files\\108_f._carne_es-es.mp3" 
   },
   {
     id: "109",
@@ -791,6 +899,7 @@ await db.insert(schema.word).values([
     word: "pescado",
     definition: "definition",
     translation: "鱼",
+    voiceUrl: "audio_files\\109_m._pescado_es-es.mp3" 
   },
   {
     id: "110",
@@ -798,6 +907,7 @@ await db.insert(schema.word).values([
     word: "fruta",
     definition: "definition",
     translation: "水果",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "111",
@@ -805,6 +915,7 @@ await db.insert(schema.word).values([
     word: "verdura",
     definition: "definition",
     translation: "蔬菜",
+    voiceUrl: "audio_files\\111_f._verdura_es-es.mp3" 
   },
   {
     id: "112",
@@ -812,6 +923,7 @@ await db.insert(schema.word).values([
     word: "huevo",
     definition: "definition",
     translation: "鸡蛋",
+    voiceUrl: "audio_files\\112_m._huevo_es-es.mp3" 
   },
   {
     id: "113",
@@ -819,6 +931,7 @@ await db.insert(schema.word).values([
     word: "pan",
     definition: "definition",
     translation: "面包",
+    voiceUrl: "audio_files\\113_m._pan_es-es.mp3" 
   },
   {
     id: "114",
@@ -826,6 +939,7 @@ await db.insert(schema.word).values([
     word: "bocadillo",
     definition: "definition",
     translation: "西班牙三明治",
+    voiceUrl: "audio_files\\114_m._bocadillo_es-es.mp3" 
   },
   {
     id: "115",
@@ -833,6 +947,7 @@ await db.insert(schema.word).values([
     word: "sándwich",
     definition: "definition",
     translation: "三明治",
+    voiceUrl: "audio_files\\115_m._sándwich_es-es.mp3" 
   },
   {
     id: "116",
@@ -840,6 +955,7 @@ await db.insert(schema.word).values([
     word: "hamburguesa",
     definition: "definition",
     translation: "汉堡包",
+    voiceUrl: "audio_files\\116_f._hamburguesa_es-es.mp3" 
   },
   {
     id: "117",
@@ -847,6 +963,7 @@ await db.insert(schema.word).values([
     word: "primer plato",
     definition: "definition",
     translation: "第一道菜",
+    voiceUrl: "audio_files\\117_None_primer plato_es-es.mp3" 
   },
   {
     id: "118",
@@ -854,6 +971,7 @@ await db.insert(schema.word).values([
     word: "segundo plato",
     definition: "definition",
     translation: "第二道菜",
+    voiceUrl: "audio_files\\118_None_segundo plato_es-es.mp3" 
   },
   {
     id: "119",
@@ -861,6 +979,7 @@ await db.insert(schema.word).values([
     word: "plato",
     definition: "definition",
     translation: "菜，盘子",
+    voiceUrl: "audio_files\\119_m._plato_es-es.mp3" 
   },
   {
     id: "120",
@@ -868,6 +987,7 @@ await db.insert(schema.word).values([
     word: "postre",
     definition: "definition",
     translation: "甜品",
+    voiceUrl: "audio_files\\120_m._postre_es-es.mp3" 
   },
   {
     id: "121",
@@ -875,6 +995,7 @@ await db.insert(schema.word).values([
     word: "sopa",
     definition: "definition",
     translation: "汤",
+    voiceUrl: "audio_files\\121_f._sopa_es-es.mp3" 
   },
   {
     id: "122",
@@ -882,6 +1003,7 @@ await db.insert(schema.word).values([
     word: "ensalada",
     definition: "definition",
     translation: "沙拉",
+    voiceUrl: "audio_files\\122_f._ensalada_es-es.mp3" 
   },
   {
     id: "123",
@@ -889,6 +1011,7 @@ await db.insert(schema.word).values([
     word: "paella",
     definition: "definition",
     translation: "海鲜饭",
+    voiceUrl: "audio_files\\123_f._paella_es-es.mp3" 
   },
   {
     id: "124",
@@ -896,6 +1019,7 @@ await db.insert(schema.word).values([
     word: "tortilla",
     definition: "definition",
     translation: "鸡蛋饼，玉米饼[拉美]",
+    voiceUrl: "audio_files\\124_f._tortilla_es-es.mp3" 
   },
   {
     id: "125",
@@ -903,6 +1027,7 @@ await db.insert(schema.word).values([
     word: "bar",
     definition: "definition",
     translation: "酒吧",
+    voiceUrl: "audio_files\\125_m._bar_es-es.mp3" 
   },
   {
     id: "126",
@@ -910,6 +1035,7 @@ await db.insert(schema.word).values([
     word: "restaurante",
     definition: "definition",
     translation: "餐厅",
+    voiceUrl: "audio_files\\126_m._restaurante_es-es.mp3" 
   },
   {
     id: "127",
@@ -917,6 +1043,7 @@ await db.insert(schema.word).values([
     word: "camarero",
     definition: "definition",
     translation: "服务员  [拉美] mesero",
+    voiceUrl: "audio_files\\127_f.,m._camarero_es-es.mp3" 
   },
   {
     id: "128",
@@ -924,6 +1051,7 @@ await db.insert(schema.word).values([
     word: "mesa",
     definition: "definition",
     translation: "桌子",
+    voiceUrl: "audio_files\\128_f._mesa_es-es.mp3" 
   },
   {
     id: "129",
@@ -931,6 +1059,7 @@ await db.insert(schema.word).values([
     word: "menú",
     definition: "definition",
     translation: "菜单",
+    voiceUrl: "audio_files\\129_m._menú_es-es.mp3" 
   },
   {
     id: "130",
@@ -938,6 +1067,7 @@ await db.insert(schema.word).values([
     word: "cuenta",
     definition: "definition",
     translation: "账单",
+    voiceUrl: "audio_files\\130_f._cuenta_es-es.mp3" 
   },
   {
     id: "131",
@@ -945,6 +1075,7 @@ await db.insert(schema.word).values([
     word: "instituto",
     definition: "definition",
     translation: "学院，协会",
+    voiceUrl: "audio_files\\131_m._instituto_es-es.mp3" 
   },
   {
     id: "132",
@@ -952,6 +1083,7 @@ await db.insert(schema.word).values([
     word: "universidad",
     definition: "definition",
     translation: "大学",
+    voiceUrl: "audio_files\\132_f._universidad_es-es.mp3" 
   },
   {
     id: "133",
@@ -959,6 +1091,7 @@ await db.insert(schema.word).values([
     word: "clase",
     definition: "definition",
     translation: "课程",
+    voiceUrl: "audio_files\\133_f._clase_es-es.mp3" 
   },
   {
     id: "134",
@@ -966,6 +1099,7 @@ await db.insert(schema.word).values([
     word: "biblioteca",
     definition: "definition",
     translation: "图书馆",
+    voiceUrl: "audio_files\\134_f._biblioteca_es-es.mp3" 
   },
   {
     id: "135",
@@ -973,6 +1107,7 @@ await db.insert(schema.word).values([
     word: "profesor",
     definition: "definition",
     translation: "教师，教授",
+    voiceUrl: "audio_files\\135_f.,m._profesor_es-es.mp3" 
   },
   {
     id: "136",
@@ -980,6 +1115,7 @@ await db.insert(schema.word).values([
     word: "estudiante",
     definition: "definition",
     translation: "学生",
+    voiceUrl: "audio_files\\136_f.,m._estudiante_es-es.mp3" 
   },
   {
     id: "137",
@@ -987,6 +1123,7 @@ await db.insert(schema.word).values([
     word: "director",
     definition: "definition",
     translation: "领导者，负责人",
+    voiceUrl: "audio_files\\137_f.,m._director_es-es.mp3" 
   },
   {
     id: "138",
@@ -994,6 +1131,7 @@ await db.insert(schema.word).values([
     word: "compañero",
     definition: "definition",
     translation: "同伴，同学",
+    voiceUrl: "audio_files\\138_f.,m._compañero_es-es.mp3" 
   },
   {
     id: "139",
@@ -1001,6 +1139,7 @@ await db.insert(schema.word).values([
     word: "clase de español",
     definition: "definition",
     translation: "西班牙语课",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "140",
@@ -1008,6 +1147,7 @@ await db.insert(schema.word).values([
     word: "examen",
     definition: "definition",
     translation: "考试",
+    voiceUrl: "audio_files\\140_m._examen_es-es.mp3" 
   },
   {
     id: "141",
@@ -1015,6 +1155,7 @@ await db.insert(schema.word).values([
     word: "aprender",
     definition: "definition",
     translation: "学习，掌握",
+    voiceUrl: "audio_files\\141_tr._aprender_es-es.mp3" 
   },
   {
     id: "142",
@@ -1022,6 +1163,7 @@ await db.insert(schema.word).values([
     word: "estudiar",
     definition: "definition",
     translation: "学",
+    voiceUrl: "audio_files\\142_tr._estudiar_es-es.mp3" 
   },
   {
     id: "143",
@@ -1029,6 +1171,7 @@ await db.insert(schema.word).values([
     word: "ir a clase",
     definition: "definition",
     translation: "去上课",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "144",
@@ -1036,6 +1179,7 @@ await db.insert(schema.word).values([
     word: "hacer un examen",
     definition: "definition",
     translation: "参加一个考试",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "145",
@@ -1043,6 +1187,7 @@ await db.insert(schema.word).values([
     word: "ejercicio",
     definition: "definition",
     translation: "练习",
+    voiceUrl: "audio_files\\145_m._ejercicio_es-es.mp3" 
   },
   {
     id: "146",
@@ -1050,6 +1195,7 @@ await db.insert(schema.word).values([
     word: "actividad",
     definition: "definition",
     translation: "活动",
+    voiceUrl: "audio_files\\146_f._actividad_es-es.mp3" 
   },
   {
     id: "147",
@@ -1057,6 +1203,7 @@ await db.insert(schema.word).values([
     word: "lección",
     definition: "definition",
     translation: "课",
+    voiceUrl: "audio_files\\147_f._lección_es-es.mp3" 
   },
   {
     id: "148",
@@ -1064,6 +1211,7 @@ await db.insert(schema.word).values([
     word: "unidad",
     definition: "definition",
     translation: "单元",
+    voiceUrl: "audio_files\\148_f._unidad_es-es.mp3" 
   },
   {
     id: "149",
@@ -1071,6 +1219,7 @@ await db.insert(schema.word).values([
     word: "página",
     definition: "definition",
     translation: "页",
+    voiceUrl: "audio_files\\149_f._página_es-es.mp3" 
   },
   {
     id: "150",
@@ -1078,6 +1227,7 @@ await db.insert(schema.word).values([
     word: "pregunta",
     definition: "definition",
     translation: "问题",
+    voiceUrl: "audio_files\\150_f._pregunta_es-es.mp3" 
   },
   {
     id: "151",
@@ -1085,6 +1235,7 @@ await db.insert(schema.word).values([
     word: "en parejas",
     definition: "definition",
     translation: "按两人一组，成对的",
+    voiceUrl: "audio_files\\151_None_en parejas_es-es.mp3" 
   },
   {
     id: "152",
@@ -1092,6 +1243,7 @@ await db.insert(schema.word).values([
     word: "en grupos",
     definition: "definition",
     translation: "按组",
+    voiceUrl: "audio_files\\152_None_en grupos_es-es.mp3" 
   },
   {
     id: "153",
@@ -1099,6 +1251,7 @@ await db.insert(schema.word).values([
     word: "hablar",
     definition: "definition",
     translation: "说话  会讲某种语言",
+    voiceUrl: "audio_files\\153_intr.,tr._hablar_es-es.mp3" 
   },
   {
     id: "154",
@@ -1106,6 +1259,7 @@ await db.insert(schema.word).values([
     word: "leer",
     definition: "definition",
     translation: "阅读",
+    voiceUrl: "audio_files\\154_tr._leer_es-es.mp3" 
   },
   {
     id: "155",
@@ -1113,6 +1267,7 @@ await db.insert(schema.word).values([
     word: "escribir",
     definition: "definition",
     translation: "写",
+    voiceUrl: "audio_files\\155_tr._escribir_es-es.mp3" 
   },
   {
     id: "156",
@@ -1120,6 +1275,7 @@ await db.insert(schema.word).values([
     word: "entender",
     definition: "definition",
     translation: "明白   懂得",
+    voiceUrl: "audio_files\\156_intr.,tr._entender_es-es.mp3" 
   },
   {
     id: "157",
@@ -1127,6 +1283,7 @@ await db.insert(schema.word).values([
     word: "comprender",
     definition: "definition",
     translation: "明白，理解",
+    voiceUrl: "audio_files\\157_tr._comprender_es-es.mp3" 
   },
   {
     id: "158",
@@ -1134,6 +1291,7 @@ await db.insert(schema.word).values([
     word: "saber",
     definition: "definition",
     translation: "知道",
+    voiceUrl: "audio_files\\158_tr._saber_es-es.mp3" 
   },
   {
     id: "159",
@@ -1141,6 +1299,7 @@ await db.insert(schema.word).values([
     word: "repetir",
     definition: "definition",
     translation: "重复",
+    voiceUrl: "audio_files\\159_tr._repetir_es-es.mp3" 
   },
   {
     id: "160",
@@ -1148,6 +1307,7 @@ await db.insert(schema.word).values([
     word: "practicar",
     definition: "definition",
     translation: "练习",
+    voiceUrl: "audio_files\\160_tr._practicar_es-es.mp3" 
   },
   {
     id: "161",
@@ -1155,6 +1315,7 @@ await db.insert(schema.word).values([
     word: "hacer los deberes",
     definition: "definition",
     translation: "写作业",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "162",
@@ -1162,6 +1323,7 @@ await db.insert(schema.word).values([
     word: "hacer un ejercicio",
     definition: "definition",
     translation: "做个练习",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "163",
@@ -1169,6 +1331,7 @@ await db.insert(schema.word).values([
     word: "internet",
     definition: "definition",
     translation: "互联网",
+    voiceUrl: "audio_files\\163_m._internet_es-es.mp3" 
   },
   {
     id: "164",
@@ -1176,6 +1339,7 @@ await db.insert(schema.word).values([
     word: "libro",
     definition: "definition",
     translation: "书",
+    voiceUrl: "audio_files\\164_m._libro_es-es.mp3" 
   },
   {
     id: "165",
@@ -1183,6 +1347,7 @@ await db.insert(schema.word).values([
     word: "diccionario",
     definition: "definition",
     translation: "字典",
+    voiceUrl: "audio_files\\165_m._diccionario_es-es.mp3" 
   },
   {
     id: "166",
@@ -1190,6 +1355,7 @@ await db.insert(schema.word).values([
     word: "papel",
     definition: "definition",
     translation: "纸",
+    voiceUrl: "audio_files\\166_m._papel_es-es.mp3" 
   },
   {
     id: "167",
@@ -1197,6 +1363,7 @@ await db.insert(schema.word).values([
     word: "bolígrafo",
     definition: "definition",
     translation: "圆珠笔  [墨西哥] lapicero",
+    voiceUrl: "audio_files\\167_m._bolígrafo_es-es.mp3" 
   },
   {
     id: "168",
@@ -1204,6 +1371,7 @@ await db.insert(schema.word).values([
     word: "lápiz",
     definition: "definition",
     translation: "铅笔",
+    voiceUrl: "audio_files\\168_m._lápiz_es-es.mp3" 
   },
   {
     id: "169",
@@ -1211,6 +1379,7 @@ await db.insert(schema.word).values([
     word: "goma",
     definition: "definition",
     translation: "橡皮",
+    voiceUrl: "audio_files\\169_f._goma_es-es.mp3" 
   },
   {
     id: "170",
@@ -1218,6 +1387,7 @@ await db.insert(schema.word).values([
     word: "fotocopia",
     definition: "definition",
     translation: "复印件",
+    voiceUrl: "audio_files\\170_f._fotocopia_es-es.mp3" 
   },
   {
     id: "171",
@@ -1225,6 +1395,7 @@ await db.insert(schema.word).values([
     word: "silla",
     definition: "definition",
     translation: "椅子",
+    voiceUrl: "audio_files\\171_f._silla_es-es.mp3" 
   },
   {
     id: "172",
@@ -1232,6 +1403,7 @@ await db.insert(schema.word).values([
     word: "armario",
     definition: "definition",
     translation: "柜子",
+    voiceUrl: "audio_files\\172_m._armario_es-es.mp3" 
   },
   {
     id: "173",
@@ -1239,6 +1411,7 @@ await db.insert(schema.word).values([
     word: "estantería",
     definition: "definition",
     translation: "带隔板的家具",
+    voiceUrl: "audio_files\\173_f._estantería_es-es.mp3" 
   },
   {
     id: "174",
@@ -1246,6 +1419,7 @@ await db.insert(schema.word).values([
     word: "pizarra",
     definition: "definition",
     translation: "黑板",
+    voiceUrl: "audio_files\\174_f._pizarra_es-es.mp3" 
   },
   {
     id: "175",
@@ -1253,6 +1427,7 @@ await db.insert(schema.word).values([
     word: "ordenador",
     definition: "definition",
     translation: "电脑  [拉美] computadora",
+    voiceUrl: "audio_files\\175_m._ordenador_es-es.mp3" 
   },
   {
     id: "176",
@@ -1260,6 +1435,7 @@ await db.insert(schema.word).values([
     word: "mapa",
     definition: "definition",
     translation: "地图",
+    voiceUrl: "audio_files\\176_m._mapa_es-es.mp3" 
   },
   {
     id: "177",
@@ -1267,6 +1443,7 @@ await db.insert(schema.word).values([
     word: "abogado",
     definition: "definition",
     translation: "律师",
+    voiceUrl: "audio_files\\177_f.,m._abogado_es-es.mp3" 
   },
   {
     id: "178",
@@ -1274,6 +1451,7 @@ await db.insert(schema.word).values([
     word: "médico",
     definition: "definition",
     translation: "医生",
+    voiceUrl: "audio_files\\178_f.,m._médico_es-es.mp3" 
   },
   {
     id: "179",
@@ -1281,6 +1459,7 @@ await db.insert(schema.word).values([
     word: "taxista",
     definition: "definition",
     translation: "出租车司机",
+    voiceUrl: "audio_files\\179_f.,m._taxista_es-es.mp3" 
   },
   {
     id: "180",
@@ -1288,6 +1467,7 @@ await db.insert(schema.word).values([
     word: "ama de casa",
     definition: "definition",
     translation: "家庭主妇",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "181",
@@ -1295,6 +1475,7 @@ await db.insert(schema.word).values([
     word: "ingeniero",
     definition: "definition",
     translation: "工程师",
+    voiceUrl: "audio_files\\181_f.,m._ingeniero_es-es.mp3" 
   },
   {
     id: "182",
@@ -1302,6 +1483,7 @@ await db.insert(schema.word).values([
     word: "dedicarse a",
     definition: "definition",
     translation: "从事…工作",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "183",
@@ -1309,6 +1491,7 @@ await db.insert(schema.word).values([
     word: "lugar de trabajo",
     definition: "definition",
     translation: "工作地点",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "184",
@@ -1316,6 +1499,7 @@ await db.insert(schema.word).values([
     word: "empresa",
     definition: "definition",
     translation: "公司",
+    voiceUrl: "audio_files\\184_f._empresa_es-es.mp3" 
   },
   {
     id: "185",
@@ -1323,6 +1507,7 @@ await db.insert(schema.word).values([
     word: "oficina",
     definition: "definition",
     translation: "办公室",
+    voiceUrl: "audio_files\\185_f._oficina_es-es.mp3" 
   },
   {
     id: "186",
@@ -1330,6 +1515,7 @@ await db.insert(schema.word).values([
     word: "tienda",
     definition: "definition",
     translation: "商店",
+    voiceUrl: "audio_files\\186_f._tienda_es-es.mp3" 
   },
   {
     id: "187",
@@ -1337,6 +1523,7 @@ await db.insert(schema.word).values([
     word: "teléfono",
     definition: "definition",
     translation: "电话",
+    voiceUrl: "audio_files\\187_m._teléfono_es-es.mp3" 
   },
   {
     id: "188",
@@ -1344,6 +1531,7 @@ await db.insert(schema.word).values([
     word: "fax",
     definition: "definition",
     translation: "传真",
+    voiceUrl: "audio_files\\188_m._fax_es-es.mp3" 
   },
   {
     id: "189",
@@ -1351,6 +1539,7 @@ await db.insert(schema.word).values([
     word: "trabajo",
     definition: "definition",
     translation: "工作",
+    voiceUrl: "audio_files\\189_m._trabajo_es-es.mp3" 
   },
   {
     id: "190",
@@ -1358,6 +1547,7 @@ await db.insert(schema.word).values([
     word: "profesión",
     definition: "definition",
     translation: "职业",
+    voiceUrl: "audio_files\\190_f._profesión_es-es.mp3" 
   },
   {
     id: "191",
@@ -1365,6 +1555,7 @@ await db.insert(schema.word).values([
     word: "comprar",
     definition: "definition",
     translation: "买",
+    voiceUrl: "audio_files\\191_tr._comprar_es-es.mp3" 
   },
   {
     id: "192",
@@ -1372,6 +1563,7 @@ await db.insert(schema.word).values([
     word: "vender",
     definition: "definition",
     translation: "卖",
+    voiceUrl: "audio_files\\192_tr._vender_es-es.mp3" 
   },
   {
     id: "193",
@@ -1379,6 +1571,7 @@ await db.insert(schema.word).values([
     word: "estar en paro",
     definition: "definition",
     translation: "失业",
+    voiceUrl: "audio_files\\193_None_estar en paro_es-es.mp3" 
   },
   {
     id: "194",
@@ -1386,6 +1579,7 @@ await db.insert(schema.word).values([
     word: "trabajar",
     definition: "definition",
     translation: "工作",
+    voiceUrl: "audio_files\\194_intr._trabajar_es-es.mp3" 
   },
   {
     id: "195",
@@ -1393,6 +1587,7 @@ await db.insert(schema.word).values([
     word: "vacaciones",
     definition: "definition",
     translation: "[pl.]假期",
+    voiceUrl: "audio_files\\195_f._vacaciones_es-es.mp3" 
   },
   {
     id: "196",
@@ -1400,6 +1595,7 @@ await db.insert(schema.word).values([
     word: "turista",
     definition: "definition",
     translation: "游客",
+    voiceUrl: "audio_files\\196_f.,m._turista_es-es.mp3" 
   },
   {
     id: "197",
@@ -1407,6 +1603,7 @@ await db.insert(schema.word).values([
     word: "oficina de información",
     definition: "definition",
     translation: "信息咨询处",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "198",
@@ -1414,6 +1611,7 @@ await db.insert(schema.word).values([
     word: "viajar",
     definition: "definition",
     translation: "旅游",
+    voiceUrl: "audio_files\\198_intr._viajar_es-es.mp3" 
   },
   {
     id: "199",
@@ -1421,6 +1619,7 @@ await db.insert(schema.word).values([
     word: "leer el periódico",
     definition: "definition",
     translation: "读报纸",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "200",
@@ -1428,6 +1627,7 @@ await db.insert(schema.word).values([
     word: "leer un libro",
     definition: "definition",
     translation: "读本书",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "201",
@@ -1435,6 +1635,7 @@ await db.insert(schema.word).values([
     word: "leer una revista",
     definition: "definition",
     translation: "读本杂志",
+    voiceUrl: "audio_files\\201_None_leer una revista_es-es.mp3" 
   },
   {
     id: "202",
@@ -1442,6 +1643,7 @@ await db.insert(schema.word).values([
     word: "ver la televisión",
     definition: "definition",
     translation: "看电视",
+    voiceUrl: "audio_files\\202_None_ver la televisión_es-es.mp3" 
   },
   {
     id: "203",
@@ -1449,6 +1651,7 @@ await db.insert(schema.word).values([
     word: "ver una película",
     definition: "definition",
     translation: "看一部电影",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "204",
@@ -1456,6 +1659,7 @@ await db.insert(schema.word).values([
     word: "escuchar música",
     definition: "definition",
     translation: "听音乐",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "205",
@@ -1463,6 +1667,7 @@ await db.insert(schema.word).values([
     word: "escuchar la radio",
     definition: "definition",
     translation: "听广播",
+    voiceUrl: "audio_files\\205_None_escuchar la radio_es-es.mp3" 
   },
   {
     id: "206",
@@ -1470,6 +1675,7 @@ await db.insert(schema.word).values([
     word: "escuchar una canción",
     definition: "definition",
     translation: "听首歌",
+    voiceUrl: "audio_files\\206_None_escuchar una canción_es-es.mp3" 
   },
   {
     id: "207",
@@ -1477,6 +1683,7 @@ await db.insert(schema.word).values([
     word: "ir a un café",
     definition: "definition",
     translation: "去家咖啡厅",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "208",
@@ -1484,6 +1691,7 @@ await db.insert(schema.word).values([
     word: "ir a un restaurante",
     definition: "definition",
     translation: "去家餐厅",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "209",
@@ -1491,6 +1699,7 @@ await db.insert(schema.word).values([
     word: "ir a un museo",
     definition: "definition",
     translation: "去家博物馆",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "210",
@@ -1498,6 +1707,7 @@ await db.insert(schema.word).values([
     word: "ir al cine",
     definition: "definition",
     translation: "去电影院",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "211",
@@ -1505,6 +1715,7 @@ await db.insert(schema.word).values([
     word: "ir al teatro",
     definition: "definition",
     translation: "去剧院",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "212",
@@ -1512,6 +1723,7 @@ await db.insert(schema.word).values([
     word: "ir al parque",
     definition: "definition",
     translation: "去公园",
+    voiceUrl: "audio_files\\212_None_ir al parque_es-es.mp3" 
   },
   {
     id: "213",
@@ -1519,6 +1731,7 @@ await db.insert(schema.word).values([
     word: "ir al circo",
     definition: "definition",
     translation: "去看马戏",
+    voiceUrl: "audio_files\\213_None_ir al circo_es-es.mp3" 
   },
   {
     id: "214",
@@ -1526,6 +1739,7 @@ await db.insert(schema.word).values([
     word: "cantar",
     definition: "definition",
     translation: "唱歌",
+    voiceUrl: "audio_files\\214_intr._cantar_es-es.mp3" 
   },
   {
     id: "215",
@@ -1533,6 +1747,7 @@ await db.insert(schema.word).values([
     word: "bailar",
     definition: "definition",
     translation: "跳舞",
+    voiceUrl: "audio_files\\215_intr._bailar_es-es.mp3" 
   },
   {
     id: "216",
@@ -1540,6 +1755,7 @@ await db.insert(schema.word).values([
     word: "película",
     definition: "definition",
     translation: "电影",
+    voiceUrl: "audio_files\\216_f._película_es-es.mp3" 
   },
   {
     id: "217",
@@ -1547,6 +1763,7 @@ await db.insert(schema.word).values([
     word: "concierto",
     definition: "definition",
     translation: "音乐会",
+    voiceUrl: "audio_files\\217_m._concierto_es-es.mp3" 
   },
   {
     id: "218",
@@ -1554,6 +1771,7 @@ await db.insert(schema.word).values([
     word: "correr",
     definition: "definition",
     translation: "跑步",
+    voiceUrl: "audio_files\\218_intr._correr_es-es.mp3" 
   },
   {
     id: "219",
@@ -1561,6 +1779,7 @@ await db.insert(schema.word).values([
     word: "nadar",
     definition: "definition",
     translation: "游泳",
+    voiceUrl: "audio_files\\219_intr._nadar_es-es.mp3" 
   },
   {
     id: "220",
@@ -1568,6 +1787,7 @@ await db.insert(schema.word).values([
     word: "esquiar",
     definition: "definition",
     translation: "滑雪",
+    voiceUrl: "audio_files\\220_intr._esquiar_es-es.mp3" 
   },
   {
     id: "221",
@@ -1575,6 +1795,7 @@ await db.insert(schema.word).values([
     word: "hacer deporte",
     definition: "definition",
     translation: "做体育运动",
+    voiceUrl: "audio_files\\221_None_hacer deporte_es-es.mp3" 
   },
   {
     id: "222",
@@ -1582,6 +1803,7 @@ await db.insert(schema.word).values([
     word: "hacer ejercicio",
     definition: "definition",
     translation: "做运动",
+    voiceUrl: "audio_files\\222_None_hacer ejercicio_es-es.mp3" 
   },
   {
     id: "223",
@@ -1589,6 +1811,7 @@ await db.insert(schema.word).values([
     word: "hacer gimnasia",
     definition: "definition",
     translation: "做体操",
+    voiceUrl: "audio_files\\223_None_hacer gimnasia_es-es.mp3" 
   },
   {
     id: "224",
@@ -1596,6 +1819,7 @@ await db.insert(schema.word).values([
     word: "jugar al fútbol",
     definition: "definition",
     translation: "踢足球",
+    voiceUrl: "audio_files\\224_None_jugar al fútbol_es-es.mp3" 
   },
   {
     id: "225",
@@ -1603,6 +1827,7 @@ await db.insert(schema.word).values([
     word: "jugar al baloncesto",
     definition: "definition",
     translation: "打篮球",
+    voiceUrl: "audio_files\\225_None_jugar al baloncesto_es-es.mp3" 
   },
   {
     id: "226",
@@ -1610,6 +1835,7 @@ await db.insert(schema.word).values([
     word: "jugar al tenis",
     definition: "definition",
     translation: "打网球",
+    voiceUrl: "audio_files\\226_None_jugar al tenis_es-es.mp3" 
   },
   {
     id: "227",
@@ -1617,6 +1843,7 @@ await db.insert(schema.word).values([
     word: "juego",
     definition: "definition",
     translation: "游戏",
+    voiceUrl: "audio_files\\227_m._juego_es-es.mp3" 
   },
   {
     id: "228",
@@ -1624,6 +1851,7 @@ await db.insert(schema.word).values([
     word: "sobre",
     definition: "definition",
     translation: "信封",
+    voiceUrl: "audio_files\\228_m._sobre_es-es.mp3" 
   },
   {
     id: "229",
@@ -1631,6 +1859,7 @@ await db.insert(schema.word).values([
     word: "sello",
     definition: "definition",
     translation: "印章",
+    voiceUrl: "audio_files\\229_m._sello_es-es.mp3" 
   },
   {
     id: "230",
@@ -1638,6 +1867,7 @@ await db.insert(schema.word).values([
     word: "escribir una postal",
     definition: "definition",
     translation: "写张明信片",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "231",
@@ -1645,6 +1875,7 @@ await db.insert(schema.word).values([
     word: "escribir una carta",
     definition: "definition",
     translation: "写封信",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "232",
@@ -1652,6 +1883,7 @@ await db.insert(schema.word).values([
     word: "escribir un correo electrónico",
     definition: "definition",
     translation: "写封电子邮件",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "233",
@@ -1659,6 +1891,7 @@ await db.insert(schema.word).values([
     word: "teléfono fijo",
     definition: "definition",
     translation: "固定电话",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "234",
@@ -1666,6 +1899,7 @@ await db.insert(schema.word).values([
     word: "quiosco",
     definition: "definition",
     translation: "报亭",
+    voiceUrl: "audio_files\\234_m._quiosco_es-es.mp3" 
   },
   {
     id: "235",
@@ -1673,6 +1907,7 @@ await db.insert(schema.word).values([
     word: "arroba",
     definition: "definition",
     translation: "@（艾特）",
+    voiceUrl: "audio_files\\235_f._arroba_es-es.mp3" 
   },
   {
     id: "236",
@@ -1680,6 +1915,7 @@ await db.insert(schema.word).values([
     word: "guión",
     definition: "definition",
     translation: "连字符号[-]",
+    voiceUrl: "audio_files\\236_m._guión_es-es.mp3" 
   },
   {
     id: "237",
@@ -1687,6 +1923,7 @@ await db.insert(schema.word).values([
     word: "guión bajo",
     definition: "definition",
     translation: "下划线",
+    voiceUrl: "audio_files\\237_None_guión bajo_es-es.mp3" 
   },
   {
     id: "238",
@@ -1694,6 +1931,7 @@ await db.insert(schema.word).values([
     word: "punto",
     definition: "definition",
     translation: "句号，点",
+    voiceUrl: "audio_files\\238_m._punto_es-es.mp3" 
   },
   {
     id: "239",
@@ -1701,6 +1939,7 @@ await db.insert(schema.word).values([
     word: "página web",
     definition: "definition",
     translation: "网页",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "240",
@@ -1708,6 +1947,7 @@ await db.insert(schema.word).values([
     word: "casa",
     definition: "definition",
     translation: "家",
+    voiceUrl: "audio_files\\240_f._casa_es-es.mp3" 
   },
   {
     id: "241",
@@ -1715,6 +1955,7 @@ await db.insert(schema.word).values([
     word: "piso",
     definition: "definition",
     translation: "公寓，地面，层",
+    voiceUrl: "audio_files\\241_m._piso_es-es.mp3" 
   },
   {
     id: "242",
@@ -1722,6 +1963,7 @@ await db.insert(schema.word).values([
     word: "apartamento",
     definition: "definition",
     translation: "公寓",
+    voiceUrl: "audio_files\\242_m._apartamento_es-es.mp3" 
   },
   {
     id: "243",
@@ -1729,6 +1971,7 @@ await db.insert(schema.word).values([
     word: "estudio",
     definition: "definition",
     translation: "单身公寓，工作室",
+    voiceUrl: "audio_files\\243_m._estudio_es-es.mp3" 
   },
   {
     id: "244",
@@ -1736,6 +1979,7 @@ await db.insert(schema.word).values([
     word: "habitación",
     definition: "definition",
     translation: "房间",
+    voiceUrl: "audio_files\\244_f._habitación_es-es.mp3" 
   },
   {
     id: "245",
@@ -1743,6 +1987,7 @@ await db.insert(schema.word).values([
     word: "ascensor",
     definition: "definition",
     translation: "电梯",
+    voiceUrl: "audio_files\\245_m._ascensor_es-es.mp3" 
   },
   {
     id: "246",
@@ -1750,6 +1995,7 @@ await db.insert(schema.word).values([
     word: "escalera",
     definition: "definition",
     translation: "楼梯",
+    voiceUrl: "audio_files\\246_f._escalera_es-es.mp3" 
   },
   {
     id: "247",
@@ -1757,6 +2003,7 @@ await db.insert(schema.word).values([
     word: "terraza",
     definition: "definition",
     translation: "露台",
+    voiceUrl: "audio_files\\247_f._terraza_es-es.mp3" 
   },
   {
     id: "248",
@@ -1764,6 +2011,7 @@ await db.insert(schema.word).values([
     word: "jardín",
     definition: "definition",
     translation: "花园",
+    voiceUrl: "audio_files\\248_m._jardín_es-es.mp3" 
   },
   {
     id: "249",
@@ -1771,6 +2019,7 @@ await db.insert(schema.word).values([
     word: "ventana",
     definition: "definition",
     translation: "窗户",
+    voiceUrl: "audio_files\\249_f._ventana_es-es.mp3" 
   },
   {
     id: "250",
@@ -1778,6 +2027,7 @@ await db.insert(schema.word).values([
     word: "puerta",
     definition: "definition",
     translation: "门",
+    voiceUrl: "audio_files\\250_f._puerta_es-es.mp3" 
   },
   {
     id: "251",
@@ -1785,6 +2035,7 @@ await db.insert(schema.word).values([
     word: "sala de estar",
     definition: "definition",
     translation: "客厅",
+    voiceUrl: "audio_files\\251_None_sala de estar_es-es.mp3" 
   },
   {
     id: "252",
@@ -1792,6 +2043,7 @@ await db.insert(schema.word).values([
     word: "dormitorio",
     definition: "definition",
     translation: "寝室，宿舍",
+    voiceUrl: "audio_files\\252_m._dormitorio_es-es.mp3" 
   },
   {
     id: "253",
@@ -1799,6 +2051,7 @@ await db.insert(schema.word).values([
     word: "cocina",
     definition: "definition",
     translation: "厨房",
+    voiceUrl: "audio_files\\253_f._cocina_es-es.mp3" 
   },
   {
     id: "254",
@@ -1806,6 +2059,7 @@ await db.insert(schema.word).values([
     word: "baño",
     definition: "definition",
     translation: "卫生间",
+    voiceUrl: "audio_files\\254_m._baño_es-es.mp3" 
   },
   {
     id: "255",
@@ -1813,6 +2067,7 @@ await db.insert(schema.word).values([
     word: "salón",
     definition: "definition",
     translation: "大厅, 沙龙，展厅",
+    voiceUrl: "audio_files\\255_m._salón_es-es.mp3" 
   },
   {
     id: "256",
@@ -1820,6 +2075,7 @@ await db.insert(schema.word).values([
     word: "garaje",
     definition: "definition",
     translation: "车库",
+    voiceUrl: "audio_files\\256_m._garaje_es-es.mp3" 
   },
   {
     id: "257",
@@ -1827,6 +2083,7 @@ await db.insert(schema.word).values([
     word: "bien comunicado",
     definition: "definition",
     translation: "交通便利的",
+    voiceUrl: "audio_files\\257_None_bien comunicado_es-es.mp3" 
   },
   {
     id: "258",
@@ -1834,6 +2091,7 @@ await db.insert(schema.word).values([
     word: "mal comunicado",
     definition: "definition",
     translation: "交通不便的",
+    voiceUrl: "audio_files\\258_None_mal comunicado_es-es.mp3" 
   },
   {
     id: "259",
@@ -1841,6 +2099,7 @@ await db.insert(schema.word).values([
     word: "tener ascensor",
     definition: "definition",
     translation: "配有电梯",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "260",
@@ -1848,6 +2107,7 @@ await db.insert(schema.word).values([
     word: "aire acondicionado",
     definition: "definition",
     translation: "空调",
+    voiceUrl: "audio_files\\260_None_aire acondicionado_es-es.mp3" 
   },
   {
     id: "261",
@@ -1855,6 +2115,7 @@ await db.insert(schema.word).values([
     word: "calefacción",
     definition: "definition",
     translation: "暖气",
+    voiceUrl: "audio_files\\261_f._calefacción_es-es.mp3" 
   },
   {
     id: "262",
@@ -1862,6 +2123,7 @@ await db.insert(schema.word).values([
     word: "cama",
     definition: "definition",
     translation: "床",
+    voiceUrl: "audio_files\\262_f._cama_es-es.mp3" 
   },
   {
     id: "263",
@@ -1869,6 +2131,7 @@ await db.insert(schema.word).values([
     word: "sofá",
     definition: "definition",
     translation: "沙发",
+    voiceUrl: "audio_files\\263_m._sofá_es-es.mp3" 
   },
   {
     id: "264",
@@ -1876,6 +2139,7 @@ await db.insert(schema.word).values([
     word: "sillón",
     definition: "definition",
     translation: "大扶手椅",
+    voiceUrl: "audio_files\\264_m._sillón_es-es.mp3" 
   },
   {
     id: "265",
@@ -1883,6 +2147,7 @@ await db.insert(schema.word).values([
     word: "lavabo",
     definition: "definition",
     translation: "洗手间",
+    voiceUrl: "audio_files\\265_m._lavabo_es-es.mp3" 
   },
   {
     id: "266",
@@ -1890,6 +2155,7 @@ await db.insert(schema.word).values([
     word: "vídeo",
     definition: "definition",
     translation: "视频   [拉美]  video",
+    voiceUrl: "audio_files\\266_m._vídeo_es-es.mp3" 
   },
   {
     id: "267",
@@ -1897,6 +2163,7 @@ await db.insert(schema.word).values([
     word: "carta",
     definition: "definition",
     translation: "信",
+    voiceUrl: "audio_files\\267_f._carta_es-es.mp3" 
   },
   {
     id: "268",
@@ -1904,6 +2171,7 @@ await db.insert(schema.word).values([
     word: "postal",
     definition: "definition",
     translation: "明信片",
+    voiceUrl: "audio_files\\268_f._postal_es-es.mp3" 
   },
   {
     id: "269",
@@ -1911,6 +2179,7 @@ await db.insert(schema.word).values([
     word: "banco",
     definition: "definition",
     translation: "银行",
+    voiceUrl: "audio_files\\269_m._banco_es-es.mp3" 
   },
   {
     id: "270",
@@ -1918,6 +2187,7 @@ await db.insert(schema.word).values([
     word: "dinero",
     definition: "definition",
     translation: "钱",
+    voiceUrl: "audio_files\\270_m._dinero_es-es.mp3" 
   },
   {
     id: "271",
@@ -1925,6 +2195,7 @@ await db.insert(schema.word).values([
     word: "euro",
     definition: "definition",
     translation: "欧元",
+    voiceUrl: "audio_files\\271_m._euro_es-es.mp3" 
   },
   {
     id: "272",
@@ -1932,6 +2203,7 @@ await db.insert(schema.word).values([
     word: "cambiar dinero",
     definition: "definition",
     translation: "换钱",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "273",
@@ -1939,6 +2211,7 @@ await db.insert(schema.word).values([
     word: "hospital",
     definition: "definition",
     translation: "医院",
+    voiceUrl: "audio_files\\273_m._hospital_es-es.mp3" 
   },
   {
     id: "274",
@@ -1946,6 +2219,7 @@ await db.insert(schema.word).values([
     word: "enfermera",
     definition: "definition",
     translation: "护士",
+    voiceUrl: "audio_files\\274_f.,m._enfermera_es-es.mp3" 
   },
   {
     id: "275",
@@ -1953,6 +2227,7 @@ await db.insert(schema.word).values([
     word: "policía",
     definition: "definition",
     translation: "警察",
+    voiceUrl: "audio_files\\275_f.,m._policía_es-es.mp3" 
   },
   {
     id: "276",
@@ -1960,6 +2235,7 @@ await db.insert(schema.word).values([
     word: "bombero",
     definition: "definition",
     translation: "消防员",
+    voiceUrl: "audio_files\\276_f.,m._bombero_es-es.mp3" 
   },
   {
     id: "277",
@@ -1967,6 +2243,7 @@ await db.insert(schema.word).values([
     word: "supermercado",
     definition: "definition",
     translation: "超市",
+    voiceUrl: "audio_files\\277_m._supermercado_es-es.mp3" 
   },
   {
     id: "278",
@@ -1974,6 +2251,7 @@ await db.insert(schema.word).values([
     word: "mercado",
     definition: "definition",
     translation: "市场",
+    voiceUrl: "audio_files\\278_m._mercado_es-es.mp3" 
   },
   {
     id: "279",
@@ -1981,6 +2259,7 @@ await db.insert(schema.word).values([
     word: "entrada",
     definition: "definition",
     translation: "入口",
+    voiceUrl: "audio_files\\279_f._entrada_es-es.mp3" 
   },
   {
     id: "280",
@@ -1988,6 +2267,7 @@ await db.insert(schema.word).values([
     word: "salida",
     definition: "definition",
     translation: "出口",
+    voiceUrl: "audio_files\\280_f._salida_es-es.mp3" 
   },
   {
     id: "281",
@@ -1995,6 +2275,7 @@ await db.insert(schema.word).values([
     word: "información",
     definition: "definition",
     translation: "信息",
+    voiceUrl: "audio_files\\281_f._información_es-es.mp3" 
   },
   {
     id: "282",
@@ -2002,6 +2283,7 @@ await db.insert(schema.word).values([
     word: "comprador",
     definition: "definition",
     translation: "买家",
+    voiceUrl: "audio_files\\282_f.,m._comprador_es-es.mp3" 
   },
   {
     id: "283",
@@ -2009,6 +2291,7 @@ await db.insert(schema.word).values([
     word: "vendedor",
     definition: "definition",
     translation: "卖家",
+    voiceUrl: "audio_files\\283_f.,m._vendedor_es-es.mp3" 
   },
   {
     id: "284",
@@ -2016,6 +2299,7 @@ await db.insert(schema.word).values([
     word: "pantalón",
     definition: "definition",
     translation: "裤子",
+    voiceUrl: "audio_files\\284_m._pantalón_es-es.mp3" 
   },
   {
     id: "285",
@@ -2023,6 +2307,7 @@ await db.insert(schema.word).values([
     word: "vaqueros",
     definition: "definition",
     translation: "[pl.]牛仔裤  [墨西哥] pantalónes de mezclilla",
+    voiceUrl: "audio_files\\285_m._vaqueros_es-es.mp3" 
   },
   {
     id: "286",
@@ -2030,6 +2315,7 @@ await db.insert(schema.word).values([
     word: "falda",
     definition: "definition",
     translation: "半身裙",
+    voiceUrl: "audio_files\\286_f._falda_es-es.mp3" 
   },
   {
     id: "287",
@@ -2037,6 +2323,7 @@ await db.insert(schema.word).values([
     word: "camisa",
     definition: "definition",
     translation: "衬衫",
+    voiceUrl: "audio_files\\287_f._camisa_es-es.mp3" 
   },
   {
     id: "288",
@@ -2044,6 +2331,7 @@ await db.insert(schema.word).values([
     word: "jersey",
     definition: "definition",
     translation: "针织衫，运动衫  [墨西哥] suéter",
+    voiceUrl: "audio_files\\288_m._jersey_es-es.mp3" 
   },
   {
     id: "289",
@@ -2051,6 +2339,7 @@ await db.insert(schema.word).values([
     word: "zapatos",
     definition: "definition",
     translation: "[pl.] 鞋子",
+    voiceUrl: "audio_files\\289_m._zapatos_es-es.mp3" 
   },
   {
     id: "290",
@@ -2058,6 +2347,7 @@ await db.insert(schema.word).values([
     word: "bolso",
     definition: "definition",
     translation: "手提包",
+    voiceUrl: "audio_files\\290_m._bolso_es-es.mp3" 
   },
   {
     id: "291",
@@ -2065,6 +2355,7 @@ await db.insert(schema.word).values([
     word: "precio",
     definition: "definition",
     translation: "价钱",
+    voiceUrl: "audio_files\\291_m._precio_es-es.mp3" 
   },
   {
     id: "292",
@@ -2072,6 +2363,7 @@ await db.insert(schema.word).values([
     word: "billete",
     definition: "definition",
     translation: "票，钱币  在[拉美]billete表示钱币，票则用boleto",
+    voiceUrl: "audio_files\\292_m._billete_es-es.mp3" 
   },
   {
     id: "293",
@@ -2079,6 +2371,7 @@ await db.insert(schema.word).values([
     word: "pagar con tarjeta",
     definition: "definition",
     translation: "刷卡付款",
+    voiceUrl: "audio_files\\293_None_pagar con tarjeta_es-es.mp3" 
   },
   {
     id: "294",
@@ -2086,6 +2379,7 @@ await db.insert(schema.word).values([
     word: "tarjeta de crédito",
     definition: "definition",
     translation: "信用卡",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "295",
@@ -2093,6 +2387,7 @@ await db.insert(schema.word).values([
     word: "estar enfermo",
     definition: "definition",
     translation: "生病",
+    voiceUrl: "audio_files\\295_None_estar enfermo_es-es.mp3" 
   },
   {
     id: "296",
@@ -2100,6 +2395,7 @@ await db.insert(schema.word).values([
     word: "ir al hospital",
     definition: "definition",
     translation: "去医院",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "297",
@@ -2107,6 +2403,7 @@ await db.insert(schema.word).values([
     word: "ir al médico",
     definition: "definition",
     translation: "去看医生",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "298",
@@ -2114,6 +2411,7 @@ await db.insert(schema.word).values([
     word: "farmacia",
     definition: "definition",
     translation: "药店",
+    voiceUrl: "audio_files\\298_f._farmacia_es-es.mp3" 
   },
   {
     id: "299",
@@ -2121,6 +2419,7 @@ await db.insert(schema.word).values([
     word: "jabón",
     definition: "definition",
     translation: "肥皂",
+    voiceUrl: "audio_files\\299_m._jabón_es-es.mp3" 
   },
   {
     id: "300",
@@ -2128,6 +2427,7 @@ await db.insert(schema.word).values([
     word: "lavarse la cara",
     definition: "definition",
     translation: "洗脸",
+    voiceUrl: "audio_files\\300_None_lavarse la cara_es-es.mp3" 
   },
   {
     id: "301",
@@ -2135,6 +2435,7 @@ await db.insert(schema.word).values([
     word: "lavarse las manos",
     definition: "definition",
     translation: "洗手",
+    voiceUrl: "audio_files\\301_None_lavarse las manos_es-es.mp3" 
   },
   {
     id: "302",
@@ -2142,6 +2443,7 @@ await db.insert(schema.word).values([
     word: "lavarse el pelo",
     definition: "definition",
     translation: "洗头",
+    voiceUrl: "audio_files\\302_None_lavarse el pelo_es-es.mp3" 
   },
   {
     id: "303",
@@ -2149,6 +2451,7 @@ await db.insert(schema.word).values([
     word: "lavarse los dientes",
     definition: "definition",
     translation: "刷牙",
+    voiceUrl: "audio_files\\303_None_lavarse los dientes_es-es.mp3" 
   },
   {
     id: "304",
@@ -2156,6 +2459,7 @@ await db.insert(schema.word).values([
     word: "ducharse",
     definition: "definition",
     translation: "淋浴，洗澡",
+    voiceUrl: "audio_files\\304_prnl._ducharse_es-es.mp3" 
   },
   {
     id: "305",
@@ -2163,6 +2467,7 @@ await db.insert(schema.word).values([
     word: "bañarse",
     definition: "definition",
     translation: "沐浴，洗澡",
+    voiceUrl: "audio_files\\305_prnl._bañarse_es-es.mp3" 
   },
   {
     id: "306",
@@ -2170,6 +2475,7 @@ await db.insert(schema.word).values([
     word: "carné de identidad",
     definition: "definition",
     translation: "身份证",
+    voiceUrl: "audio_files\\306_None_carné de identidad_es-es.mp3" 
   },
   {
     id: "307",
@@ -2177,6 +2483,7 @@ await db.insert(schema.word).values([
     word: "pasaporte",
     definition: "definition",
     translation: "护照",
+    voiceUrl: "audio_files\\307_m._pasaporte_es-es.mp3" 
   },
   {
     id: "308",
@@ -2184,6 +2491,7 @@ await db.insert(schema.word).values([
     word: "carné de conducir",
     definition: "definition",
     translation: "驾照  [墨西哥] licencia de manejo",
+    voiceUrl: "audio_files\\308_None_carné de conducir_es-es.mp3" 
   },
   {
     id: "309",
@@ -2191,6 +2499,7 @@ await db.insert(schema.word).values([
     word: "publicidad",
     definition: "definition",
     translation: "广告",
+    voiceUrl: "audio_files\\309_f._publicidad_es-es.mp3" 
   },
   {
     id: "310",
@@ -2198,6 +2507,7 @@ await db.insert(schema.word).values([
     word: "maleta",
     definition: "definition",
     translation: "行李箱",
+    voiceUrl: "audio_files\\310_f._maleta_es-es.mp3" 
   },
   {
     id: "311",
@@ -2205,6 +2515,7 @@ await db.insert(schema.word).values([
     word: "comprar un billete",
     definition: "definition",
     translation: "买一张票   [拉美] comprar un boleto",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "312",
@@ -2212,6 +2523,7 @@ await db.insert(schema.word).values([
     word: "comprar un billete de ida",
     definition: "definition",
     translation: "买一张去程票  [拉美]comprar un boleto de ida",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "313",
@@ -2219,6 +2531,7 @@ await db.insert(schema.word).values([
     word: "comprar un billete de ida y vuelta",
     definition: "definition",
     translation: "买往返票  [拉美]comprar un boleto de ida y vuelta",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "314",
@@ -2226,6 +2539,7 @@ await db.insert(schema.word).values([
     word: "horario",
     definition: "definition",
     translation: "时刻表",
+    voiceUrl: "audio_files\\314_m._horario_es-es.mp3" 
   },
   {
     id: "315",
@@ -2233,6 +2547,7 @@ await db.insert(schema.word).values([
     word: "ir a Madrid",
     definition: "definition",
     translation: "去马德里",
+    voiceUrl: "audio_files\\315_None_ir a Madrid_es-es.mp3" 
   },
   {
     id: "316",
@@ -2240,6 +2555,7 @@ await db.insert(schema.word).values([
     word: "ir a la playa",
     definition: "definition",
     translation: "去海滩",
+    voiceUrl: "audio_files\\316_None_ir a la playa_es-es.mp3" 
   },
   {
     id: "317",
@@ -2247,6 +2563,7 @@ await db.insert(schema.word).values([
     word: "ir a la montaña",
     definition: "definition",
     translation: "去山上",
+    voiceUrl: "audio_files\\317_None_ir a la montaña_es-es.mp3" 
   },
   {
     id: "318",
@@ -2254,6 +2571,7 @@ await db.insert(schema.word).values([
     word: "hotel",
     definition: "definition",
     translation: "酒店",
+    voiceUrl: "audio_files\\318_m._hotel_es-es.mp3" 
   },
   {
     id: "319",
@@ -2261,6 +2579,7 @@ await db.insert(schema.word).values([
     word: "camping",
     definition: "definition",
     translation: "野营",
+    voiceUrl: "audio_files\\319_m._camping_es-es.mp3" 
   },
   {
     id: "320",
@@ -2268,6 +2587,7 @@ await db.insert(schema.word).values([
     word: "habitación doble",
     definition: "definition",
     translation: "双人间",
+    voiceUrl: "audio_files\\320_None_habitación doble_es-es.mp3" 
   },
   {
     id: "321",
@@ -2275,6 +2595,7 @@ await db.insert(schema.word).values([
     word: "habitación individual",
     definition: "definition",
     translation: "单人间",
+    voiceUrl: "audio_files\\321_None_habitación individual_es-es.mp3" 
   },
   {
     id: "322",
@@ -2282,6 +2603,7 @@ await db.insert(schema.word).values([
     word: "carretera",
     definition: "definition",
     translation: "公路，大路",
+    voiceUrl: "audio_files\\322_f._carretera_es-es.mp3" 
   },
   {
     id: "323",
@@ -2289,6 +2611,7 @@ await db.insert(schema.word).values([
     word: "aeropuerto",
     definition: "definition",
     translation: "飞机场",
+    voiceUrl: "audio_files\\323_m._aeropuerto_es-es.mp3" 
   },
   {
     id: "324",
@@ -2296,6 +2619,7 @@ await db.insert(schema.word).values([
     word: "puerto",
     definition: "definition",
     translation: "港口",
+    voiceUrl: "audio_files\\324_m._puerto_es-es.mp3" 
   },
   {
     id: "325",
@@ -2303,6 +2627,7 @@ await db.insert(schema.word).values([
     word: "estación de tren",
     definition: "definition",
     translation: "火车站",
+    voiceUrl: "audio_files\\325_None_estación de tren_es-es.mp3" 
   },
   {
     id: "326",
@@ -2310,6 +2635,7 @@ await db.insert(schema.word).values([
     word: "estación de metro",
     definition: "definition",
     translation: "地铁站",
+    voiceUrl: "audio_files\\326_None_estación de metro_es-es.mp3" 
   },
   {
     id: "327",
@@ -2317,6 +2643,7 @@ await db.insert(schema.word).values([
     word: "parada de autobús",
     definition: "definition",
     translation: "公交车站",
+    voiceUrl: "audio_files\\327_None_parada de autobús_es-es.mp3" 
   },
   {
     id: "328",
@@ -2324,6 +2651,7 @@ await db.insert(schema.word).values([
     word: "parada de taxi",
     definition: "definition",
     translation: "出租车停靠站",
+    voiceUrl: "audio_files\\328_None_parada de taxi_es-es.mp3" 
   },
   {
     id: "329",
@@ -2331,6 +2659,7 @@ await db.insert(schema.word).values([
     word: "ir andando",
     definition: "definition",
     translation: "走路去",
+    voiceUrl: "audio_files\\329_None_ir andando_es-es.mp3" 
   },
   {
     id: "330",
@@ -2338,6 +2667,7 @@ await db.insert(schema.word).values([
     word: "ir en coche",
     definition: "definition",
     translation: "乘/开车去",
+    voiceUrl: "audio_files\\330_None_ir en coche_es-es.mp3" 
   },
   {
     id: "331",
@@ -2345,6 +2675,7 @@ await db.insert(schema.word).values([
     word: "ir en taxi",
     definition: "definition",
     translation: "乘坐出租车去",
+    voiceUrl: "audio_files\\331_None_ir en taxi_es-es.mp3" 
   },
   {
     id: "332",
@@ -2352,6 +2683,7 @@ await db.insert(schema.word).values([
     word: "ir en tren",
     definition: "definition",
     translation: "坐火车去",
+    voiceUrl: "audio_files\\332_None_ir en tren_es-es.mp3" 
   },
   {
     id: "333",
@@ -2359,6 +2691,7 @@ await db.insert(schema.word).values([
     word: "ir en metro",
     definition: "definition",
     translation: "坐地铁去",
+    voiceUrl: "audio_files\\333_None_ir en metro_es-es.mp3" 
   },
   {
     id: "334",
@@ -2366,6 +2699,7 @@ await db.insert(schema.word).values([
     word: "ir en autobús",
     definition: "definition",
     translation: "坐公交车去",
+    voiceUrl: "audio_files\\334_None_ir en autobús_es-es.mp3" 
   },
   {
     id: "335",
@@ -2373,6 +2707,7 @@ await db.insert(schema.word).values([
     word: "ir en avión",
     definition: "definition",
     translation: "坐飞机去",
+    voiceUrl: "audio_files\\335_None_ir en avión_es-es.mp3" 
   },
   {
     id: "336",
@@ -2380,6 +2715,7 @@ await db.insert(schema.word).values([
     word: "ir en barco",
     definition: "definition",
     translation: "乘船去",
+    voiceUrl: "audio_files\\336_None_ir en barco_es-es.mp3" 
   },
   {
     id: "337",
@@ -2387,6 +2723,7 @@ await db.insert(schema.word).values([
     word: "conductor",
     definition: "definition",
     translation: "司机",
+    voiceUrl: "audio_files\\337_f.,m._conductor_es-es.mp3" 
   },
   {
     id: "338",
@@ -2394,6 +2731,7 @@ await db.insert(schema.word).values([
     word: "aparcamiento",
     definition: "definition",
     translation: "停车场",
+    voiceUrl: "audio_files\\338_m._aparcamiento_es-es.mp3" 
   },
   {
     id: "339",
@@ -2401,6 +2739,7 @@ await db.insert(schema.word).values([
     word: "transporte por tierra",
     definition: "definition",
     translation: "陆地交通运输",
+    voiceUrl: "audio_files\\339_None_transporte por tierra_es-es.mp3" 
   },
   {
     id: "340",
@@ -2408,6 +2747,7 @@ await db.insert(schema.word).values([
     word: "transporte marítimo y fluvial",
     definition: "definition",
     translation: "海洋和河流交通运输",
+    voiceUrl: "audio_files\\340_None_transporte marítimo y fluvial_es-es.mp3" 
   },
   {
     id: "341",
@@ -2415,6 +2755,7 @@ await db.insert(schema.word).values([
     word: "transporte aéreo",
     definition: "definition",
     translation: "航空交通运输",
+    voiceUrl: "audio_files\\341_None_transporte aéreo_es-es.mp3" 
   },
   {
     id: "342",
@@ -2422,6 +2763,7 @@ await db.insert(schema.word).values([
     word: "caro",
     definition: "definition",
     translation: "贵的",
+    voiceUrl: "audio_files\\342_adj._caro_es-es.mp3" 
   },
   {
     id: "343",
@@ -2429,6 +2771,7 @@ await db.insert(schema.word).values([
     word: "barato",
     definition: "definition",
     translation: "便宜的",
+    voiceUrl: "audio_files\\343_adj._barato_es-es.mp3" 
   },
   {
     id: "344",
@@ -2436,6 +2779,7 @@ await db.insert(schema.word).values([
     word: "capital",
     definition: "definition",
     translation: "首都",
+    voiceUrl: "audio_files\\344_f._capital_es-es.mp3" 
   },
   {
     id: "345",
@@ -2443,6 +2787,7 @@ await db.insert(schema.word).values([
     word: "presidente",
     definition: "definition",
     translation: "主席，总统",
+    voiceUrl: "audio_files\\345_f.,m._presidente_es-es.mp3" 
   },
   {
     id: "346",
@@ -2450,6 +2795,7 @@ await db.insert(schema.word).values([
     word: "rey",
     definition: "definition",
     translation: "国王",
+    voiceUrl: "audio_files\\346_m._rey_es-es.mp3" 
   },
   {
     id: "347",
@@ -2457,6 +2803,7 @@ await db.insert(schema.word).values([
     word: "reina",
     definition: "definition",
     translation: "女王",
+    voiceUrl: "audio_files\\347_f._reina_es-es.mp3" 
   },
   {
     id: "348",
@@ -2464,6 +2811,7 @@ await db.insert(schema.word).values([
     word: "cine",
     definition: "definition",
     translation: "电影院",
+    voiceUrl: "audio_files\\348_m._cine_es-es.mp3" 
   },
   {
     id: "349",
@@ -2471,6 +2819,7 @@ await db.insert(schema.word).values([
     word: "teatro",
     definition: "definition",
     translation: "剧院",
+    voiceUrl: "audio_files\\349_m._teatro_es-es.mp3" 
   },
   {
     id: "350",
@@ -2478,6 +2827,7 @@ await db.insert(schema.word).values([
     word: "música",
     definition: "definition",
     translation: "音乐",
+    voiceUrl: "audio_files\\350_f._música_es-es.mp3" 
   },
   {
     id: "351",
@@ -2485,6 +2835,7 @@ await db.insert(schema.word).values([
     word: "foto",
     definition: "definition",
     translation: "照片",
+    voiceUrl: "audio_files\\351_f._foto_es-es.mp3" 
   },
   {
     id: "352",
@@ -2492,6 +2843,7 @@ await db.insert(schema.word).values([
     word: "museo",
     definition: "definition",
     translation: "博物馆",
+    voiceUrl: "audio_files\\352_m._museo_es-es.mp3" 
   },
   {
     id: "353",
@@ -2499,6 +2851,7 @@ await db.insert(schema.word).values([
     word: "exposición",
     definition: "definition",
     translation: "展览",
+    voiceUrl: "audio_files\\353_f._exposición_es-es.mp3" 
   },
   {
     id: "354",
@@ -2506,6 +2859,7 @@ await db.insert(schema.word).values([
     word: "ser interesante",
     definition: "definition",
     translation: "有意思",
+    voiceUrl: "audio_files\\354_None_ser interesante_es-es.mp3" 
   },
   {
     id: "355",
@@ -2513,6 +2867,7 @@ await db.insert(schema.word).values([
     word: "cantante",
     definition: "definition",
     translation: "歌手",
+    voiceUrl: "audio_files\\355_f.,m._cantante_es-es.mp3" 
   },
   {
     id: "356",
@@ -2520,6 +2875,7 @@ await db.insert(schema.word).values([
     word: "edificio",
     definition: "definition",
     translation: "建筑物",
+    voiceUrl: "audio_files\\356_m._edificio_es-es.mp3" 
   },
   {
     id: "357",
@@ -2527,6 +2883,7 @@ await db.insert(schema.word).values([
     word: "monumento",
     definition: "definition",
     translation: "纪念碑",
+    voiceUrl: "audio_files\\357_m._monumento_es-es.mp3" 
   },
   {
     id: "358",
@@ -2534,6 +2891,7 @@ await db.insert(schema.word).values([
     word: "catedral",
     definition: "definition",
     translation: "大教堂",
+    voiceUrl: "audio_files\\358_f._catedral_es-es.mp3" 
   },
   {
     id: "359",
@@ -2541,6 +2899,7 @@ await db.insert(schema.word).values([
     word: "iglesia",
     definition: "definition",
     translation: "教堂",
+    voiceUrl: "audio_files\\359_f._iglesia_es-es.mp3" 
   },
   {
     id: "360",
@@ -2548,6 +2907,7 @@ await db.insert(schema.word).values([
     word: "actor",
     definition: "definition",
     translation: "男演员",
+    voiceUrl: "audio_files\\360_m._actor_es-es.mp3" 
   },
   {
     id: "361",
@@ -2555,6 +2915,7 @@ await db.insert(schema.word).values([
     word: "actriz",
     definition: "definition",
     translation: "女演员",
+    voiceUrl: "audio_files\\361_f._actriz_es-es.mp3" 
   },
   {
     id: "362",
@@ -2562,6 +2923,7 @@ await db.insert(schema.word).values([
     word: "religión",
     definition: "definition",
     translation: "宗教",
+    voiceUrl: "audio_files\\362_f._religión_es-es.mp3" 
   },
   {
     id: "363",
@@ -2569,6 +2931,7 @@ await db.insert(schema.word).values([
     word: "cristiano",
     definition: "definition",
     translation: "基督教的,  基督教教徒",
+    voiceUrl: "audio_files\\363_adj.,f.,m._cristiano_es-es.mp3" 
   },
   {
     id: "364",
@@ -2576,6 +2939,7 @@ await db.insert(schema.word).values([
     word: "judío",
     definition: "definition",
     translation: "犹太人的, 犹太人 犹太教徒",
+    voiceUrl: "audio_files\\364_adj.,f.,m._judío_es-es.mp3" 
   },
   {
     id: "365",
@@ -2583,6 +2947,7 @@ await db.insert(schema.word).values([
     word: "musulmán",
     definition: "definition",
     translation: "穆斯林的,  穆斯林",
+    voiceUrl: "audio_files\\365_adj.,f.,m._musulmán_es-es.mp3" 
   },
   {
     id: "366",
@@ -2590,6 +2955,7 @@ await db.insert(schema.word).values([
     word: "budista",
     definition: "definition",
     translation: "佛教的,  佛教徒",
+    voiceUrl: "audio_files\\366_adj.,f.,m._budista_es-es.mp3" 
   },
   {
     id: "367",
@@ -2597,6 +2963,7 @@ await db.insert(schema.word).values([
     word: "ir a la iglesia",
     definition: "definition",
     translation: "去教堂",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "368",
@@ -2604,6 +2971,7 @@ await db.insert(schema.word).values([
     word: "ir a la mezquita",
     definition: "definition",
     translation: "去清真寺",
+    voiceUrl: "audio_files\\368_None_ir a la mezquita_es-es.mp3" 
   },
   {
     id: "369",
@@ -2611,6 +2979,7 @@ await db.insert(schema.word).values([
     word: "ir a la sinagoga",
     definition: "definition",
     translation: "去犹太教堂",
+    voiceUrl: "audio_files\\None" 
   },
   {
     id: "370",
@@ -2618,6 +2987,7 @@ await db.insert(schema.word).values([
     word: "sol",
     definition: "definition",
     translation: "太阳",
+    voiceUrl: "audio_files\\370_m._sol_es-es.mp3" 
   },
   {
     id: "371",
@@ -2625,6 +2995,7 @@ await db.insert(schema.word).values([
     word: "lugar",
     definition: "definition",
     translation: "地方",
+    voiceUrl: "audio_files\\371_m._lugar_es-es.mp3" 
   },
   {
     id: "372",
@@ -2632,6 +3003,7 @@ await db.insert(schema.word).values([
     word: "norte",
     definition: "definition",
     translation: "北部",
+    voiceUrl: "audio_files\\372_m._norte_es-es.mp3" 
   },
   {
     id: "373",
@@ -2639,6 +3011,7 @@ await db.insert(schema.word).values([
     word: "sur",
     definition: "definition",
     translation: "南部",
+    voiceUrl: "audio_files\\373_m._sur_es-es.mp3" 
   },
   {
     id: "374",
@@ -2646,6 +3019,7 @@ await db.insert(schema.word).values([
     word: "este",
     definition: "definition",
     translation: "东部",
+    voiceUrl: "audio_files\\374_m._este_es-es.mp3" 
   },
   {
     id: "375",
@@ -2653,6 +3027,7 @@ await db.insert(schema.word).values([
     word: "oeste",
     definition: "definition",
     translation: "西部",
+    voiceUrl: "audio_files\\375_m._oeste_es-es.mp3" 
   },
   {
     id: "376",
@@ -2660,6 +3035,7 @@ await db.insert(schema.word).values([
     word: "plaza",
     definition: "definition",
     translation: "广场",
+    voiceUrl: "audio_files\\376_f._plaza_es-es.mp3" 
   },
   {
     id: "377",
@@ -2667,6 +3043,7 @@ await db.insert(schema.word).values([
     word: "centro comercial",
     definition: "definition",
     translation: "购物中心",
+    voiceUrl: "audio_files\\377_None_centro comercial_es-es.mp3" 
   },
   {
     id: "378",
@@ -2674,6 +3051,7 @@ await db.insert(schema.word).values([
     word: "colegio",
     definition: "definition",
     translation: "学院，学校",
+    voiceUrl: "audio_files\\378_m._colegio_es-es.mp3" 
   },
   {
     id: "379",
@@ -2681,6 +3059,7 @@ await db.insert(schema.word).values([
     word: "escuela",
     definition: "definition",
     translation: "学校",
+    voiceUrl: "audio_files\\379_f._escuela_es-es.mp3" 
   },
   {
     id: "380",
@@ -2688,6 +3067,7 @@ await db.insert(schema.word).values([
     word: "primavera",
     definition: "definition",
     translation: "春天",
+    voiceUrl: "audio_files\\380_f._primavera_es-es.mp3" 
   },
   {
     id: "381",
@@ -2695,6 +3075,7 @@ await db.insert(schema.word).values([
     word: "verano",
     definition: "definition",
     translation: "夏天",
+    voiceUrl: "audio_files\\381_m._verano_es-es.mp3" 
   },
   {
     id: "382",
@@ -2702,6 +3083,7 @@ await db.insert(schema.word).values([
     word: "otoño",
     definition: "definition",
     translation: "秋天",
+    voiceUrl: "audio_files\\382_m._otoño_es-es.mp3" 
   },
   {
     id: "383",
@@ -2709,6 +3091,7 @@ await db.insert(schema.word).values([
     word: "invierno",
     definition: "definition",
     translation: "冬天",
+    voiceUrl: "audio_files\\383_m._invierno_es-es.mp3" 
   },
   {
     id: "384",
@@ -2716,6 +3099,7 @@ await db.insert(schema.word).values([
     word: "llover",
     definition: "definition",
     translation: "下雨",
+    voiceUrl: "audio_files\\384_impers._llover_es-es.mp3" 
   },
   {
     id: "385",
@@ -2723,6 +3107,7 @@ await db.insert(schema.word).values([
     word: "nevar",
     definition: "definition",
     translation: "下雪",
+    voiceUrl: "audio_files\\385_impers._nevar_es-es.mp3" 
   },
   {
     id: "386",
@@ -2730,6 +3115,7 @@ await db.insert(schema.word).values([
     word: "hace frío",
     definition: "definition",
     translation: "天气寒冷",
+    voiceUrl: "audio_files\\386_None_hace frío_es-es.mp3" 
   },
   {
     id: "387",
@@ -2737,6 +3123,7 @@ await db.insert(schema.word).values([
     word: "hace calor",
     definition: "definition",
     translation: "天气炎热",
+    voiceUrl: "audio_files\\387_None_hace calor_es-es.mp3" 
   },
   {
     id: "388",
@@ -2744,6 +3131,7 @@ await db.insert(schema.word).values([
     word: "hace sol",
     definition: "definition",
     translation: "阳光明媚",
+    voiceUrl: "audio_files\\388_None_hace sol_es-es.mp3" 
   },
   {
     id: "389",
@@ -2751,6 +3139,7 @@ await db.insert(schema.word).values([
     word: "hace viento",
     definition: "definition",
     translation: "刮风",
+    voiceUrl: "audio_files\\389_None_hace viento_es-es.mp3" 
   },
   {
     id: "390",
@@ -2758,6 +3147,7 @@ await db.insert(schema.word).values([
     word: "hace buen tiempo",
     definition: "definition",
     translation: "好天气",
+    voiceUrl: "audio_files\\390_None_hace buen tiempo_es-es.mp3" 
   },
   {
     id: "391",
@@ -2765,6 +3155,7 @@ await db.insert(schema.word).values([
     word: "hace mal tiempo",
     definition: "definition",
     translation: "天气不好",
+    voiceUrl: "audio_files\\391_None_hace mal tiempo_es-es.mp3" 
   },
   {
     id: "392",
@@ -2772,6 +3163,7 @@ await db.insert(schema.word).values([
     word: "animal",
     definition: "definition",
     translation: "动物",
+    voiceUrl: "audio_files\\392_m._animal_es-es.mp3" 
   },
   {
     id: "393",
@@ -2779,6 +3171,7 @@ await db.insert(schema.word).values([
     word: "planta",
     definition: "definition",
     translation: "植物",
+    voiceUrl: "audio_files\\393_f._planta_es-es.mp3" 
   },
   {
     id: "394",
@@ -2786,6 +3179,7 @@ await db.insert(schema.word).values([
     word: "flor",
     definition: "definition",
     translation: "花",
+    voiceUrl: "audio_files\\394_f._flor_es-es.mp3" 
   },
   {
     id: "395",
@@ -2793,8 +3187,11 @@ await db.insert(schema.word).values([
     word: "árbol",
     definition: "definition",
     translation: "树",
+    voiceUrl: "audio_files\\395_m._árbol_es-es.mp3" 
   },
 ]);
+
+
 
 //DELE A1
 await db.insert(schema.wordInBook).values([
