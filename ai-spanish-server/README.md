@@ -46,6 +46,19 @@ docker build -t spanish-docker .
 
 docker run -p 8000:8000  --env-file .env.prod --name spanish-docker spanish-docker
 
+# 持久化
+docker volume create spanish-volume
+
+
+docker run -p 8000:8000  --env-file .env.prod --name spanish-docker -v spanish-volume:/root/workspace/spanish-volume spanish-docker
+
+
+
+# 进入容器
+docker exec -it spanish-docker /bin/sh
+# 将文件从容器复制到宿主机
+docker cp spanish-docker:/app/logs /root/workspace/
+
 ```
 
 **宝塔**

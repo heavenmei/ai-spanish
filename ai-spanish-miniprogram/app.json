@@ -31,10 +31,6 @@
     }
   ],
   "preloadRule": {
-    "pages/settings/index": {
-      "network": "all",
-      "packages": ["echarts"]
-    },
     "pages/home/home": {
       "network": "all",
       "packages": ["echarts"]

@@ -59,11 +59,11 @@ Page({
 
   onShow() {
     this.getTabBar().init();
-    this.setChartData();
     const userinfo = wx.getStorageSync("userInfo");
     this.setData({
       hasUserInfo: userinfo.id ? true : false,
     });
+    this.setChartData();
   },
 
   onLoad() {

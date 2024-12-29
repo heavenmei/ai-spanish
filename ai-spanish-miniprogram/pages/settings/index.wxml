@@ -6,13 +6,13 @@
   />
 </view>
 <view class="container">
-  <view>学习时长 (分钟)</view>
+  <!-- <view>学习时长 (分钟)</view>
   <view class="chart">
     <view wx:if="{{!userInfo.id}}" class="chart-nodata"
       >登录可解锁学习时长</view
     >
     <t-chart wx:else option="{{option}}" height="300rpx"></t-chart>
-  </view>
+  </view> -->
 
   <view class="menuWrap">
     <view wx:for="{{menuData}}" wx:key="item" class="cell-box">

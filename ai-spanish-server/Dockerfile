@@ -36,6 +36,7 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 hono
 
 COPY --from=builder /app/output ./output
+COPY --from=builder /app/public ./public
 RUN chmod -R 777 /app/output
 RUN chmod -R 777 /app
 

@@ -69,13 +69,13 @@
     </view>
   </view>
 
-  <!-- <view class="panel-col">
+  <view class="panel-col">
     <view class="label">学习时长 (分钟)</view>
     <view class="chart">
       <view wx:if="{{!hasUserInfo}}" class="chart-nodata"
         >登录可解锁学习时长</view
       >
-      <t-chart wx:else option="{{option}}" height="240rpx"></t-chart>
+      <t-chart wx:else option="{{option}}" height="300rpx"></t-chart>
     </view>
-  </view> -->
+  </view>
 </view>

@@ -1,7 +1,7 @@
 import Toast from "tdesign-miniprogram/toast";
-import { getStudyDuration } from "../../apis/index";
+// import { getStudyDuration } from "../../apis/index";
 
-import { MenuData, getBarOption } from "./constants";
+import { MenuData } from "./constants";
 import { loginProfile, logoutProfile } from "../../common/login";
 
 const app = getApp();
@@ -16,12 +16,9 @@ Page({
     showKefu: true,
     versionNo: "",
 
-    option: {},
+    // option: {},
   },
 
-  onReady() {
-    this.setChartData();
-  },
   onLoad() {
     this.getVersionInfo();
 
@@ -44,22 +41,22 @@ Page({
         hasUserInfo: true,
       });
 
-      this.setChartData();
+      // this.setChartData();
     }
   },
   onPullDownRefresh() {
-    this.setChartData();
+    // this.setChartData();
   },
 
-  async setChartData() {
-    if (!wx.getStorageSync("userInfo").id) return;
+  // async setChartData() {
+  //   if (!wx.getStorageSync("userInfo").id) return;
 
-    const { data } = await getStudyDuration();
-    const option = getBarOption(data);
-    this.setData({
-      option,
-    });
-  },
+  //   const { data } = await getStudyDuration();
+  //   const option = getBarOption(data);
+  //   this.setData({
+  //     option,
+  //   });
+  // },
 
   onClickCell({ currentTarget }) {
     const { type } = currentTarget.dataset;
