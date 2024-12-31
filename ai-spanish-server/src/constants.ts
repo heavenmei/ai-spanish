@@ -37,5 +37,6 @@ export const API_URLS = {
   "API_WORD_GETUSERRECORDWORD": "/api/word/getUserRecordWord",
   "API_WORD_GETDAILYSUM": "/api/word/getDailySum",
   "API_WORD_ADDLEARNINGRECORD": "/api/word/addLearningRecord",
-  "API_WORD_UPDATELEARNINGRECORD": "/api/word/updateLearningRecord"
+  "API_WORD_UPDATELEARNINGRECORD": "/api/word/updateLearningRecord",
+  "API_WORD_ADDWORDTONOTEBOOK":"/api/word/addWordToNotebook"
 };

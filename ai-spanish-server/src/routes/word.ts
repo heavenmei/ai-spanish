@@ -20,6 +20,7 @@ import {
   wordInBook,
   word,
   dailySum,
+  notebook,
 } from "@/db/schema";
 import {
   failRes,
@@ -32,6 +33,7 @@ import {
 } from "@/utils";
 import log4js from "log4js";
 import sm_5_js from "@/lib/sm-5.js";
+import { log } from "console";
 
 const logger = log4js.getLogger("book");
 logger.level = "all";
@@ -807,6 +809,48 @@ export async function updateLearningRecord(c: Context) {
     return c.json(listRes({ list: res }));
   } catch (e: any) {
     logger.error(e);
+    return c.json(failRes({ message: e.message }));
+  }
+}
+
+// POST
+export async function addWordToNotebook(c: Context) {
+  const { userId ,wordId, wordBookId, learned } = await c.req.json();
+
+  const user = c.get("user");
+  if (!user) {
+    return c.json(failRes({ code: 401, message: "请先登录以添加生词本" }));
+  }
+
+  try {
+    // 检查用户是否存在
+    const userRes = await db.select().from(users).where(eq(users.id, user.id));
+    if (userRes.length === 0) {
+      return c.json(failRes({ code: 404, message: "用户未找到" }));
+    }
+
+    // 检查单词和生词本是否存在
+    const wordRes = await db.select().from(word).where(eq(word.id, wordId));
+    logger.info("📚 addWordToNotebook", wordRes);
+    const wordBookRes = await db.select().from(wordBook).where(eq(wordBook.id, wordBookId));
+    logger.info("📚 addWordToNotebook", wordBookRes);
+    if (wordRes.length === 0 || wordBookRes.length === 0) {
+      return c.json(failRes({ code: 404, message: "单词或生词本未找到" }));
+    }
+
+    logger.info("📚 addWordToNotebook", wordId, wordBookId, learned);
+    // 添加到生词本
+    await db.insert(notebook).values({
+      useId: user.id,
+      word_id: wordId,
+      wb_id: wordBookId,
+      learned: learned ?? false,
+      createdAt: new Date(),
+    });
+
+    return c.json(listRes({ message: "单词已成功添加到生词本" }));
+  } catch (e: any) {
+    console.error(e);
     return c.json(failRes({ message: e.message }));
   }
 }
