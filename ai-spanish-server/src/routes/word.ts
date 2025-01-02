@@ -33,7 +33,6 @@ import {
 } from "@/utils";
 import log4js from "log4js";
 import sm_5_js from "@/lib/sm-5.js";
-import { log } from "console";
 
 const logger = log4js.getLogger("book");
 logger.level = "all";
@@ -815,7 +814,7 @@ export async function updateLearningRecord(c: Context) {
 
 // POST
 export async function addWordToNotebook(c: Context) {
-  const { userId ,wordId, wordBookId, learned } = await c.req.json();
+  const { userId, wordId, wordBookId, learned } = await c.req.json();
 
   const user = c.get("user");
   if (!user) {
@@ -832,7 +831,10 @@ export async function addWordToNotebook(c: Context) {
     // 检查单词和生词本是否存在
     const wordRes = await db.select().from(word).where(eq(word.id, wordId));
     logger.info("📚 addWordToNotebook", wordRes);
-    const wordBookRes = await db.select().from(wordBook).where(eq(wordBook.id, wordBookId));
+    const wordBookRes = await db
+      .select()
+      .from(wordBook)
+      .where(eq(wordBook.id, wordBookId));
     logger.info("📚 addWordToNotebook", wordBookRes);
     if (wordRes.length === 0 || wordBookRes.length === 0) {
       return c.json(failRes({ code: 404, message: "单词或生词本未找到" }));

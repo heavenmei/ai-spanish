@@ -81,6 +81,7 @@ Page({
       wb_id: app.globalData.userInfo.l_book_id,
       subType: type,
       page: this.page,
+      pageSize: 20,
     });
     const data = res.list;
     console.log("res", type, data);

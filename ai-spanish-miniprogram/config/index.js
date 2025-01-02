@@ -15,7 +15,7 @@ const pro = "https://ai-spanish.cn";
 export const HOST = getEnv() === "develop" ? dev : pro;
 // export const HOST = pro;
 
-export const WORD_VOICE_URL = HOST;
+export const WORD_VOICE_URL = `${HOST}/public/`;
 
 export const config = {
   /** 是否使用mock代替api返回 */

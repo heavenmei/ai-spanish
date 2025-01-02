@@ -38,26 +38,26 @@ yarn db:seed
 
 ```bash
 # 删除
-docker stop spanish-docker
-docker rm spanish-docker
-docker rmi spanish-docker
+docker stop spanish-server
+docker rm spanish-server
+docker rmi spanish-server
 
-docker build -t spanish-docker .
+docker build -t spanish-server .
 
-docker run -p 8000:8000  --env-file .env.prod --name spanish-docker spanish-docker
+docker run -p 8000:8000  --env-file .env.prod --name spanish-server spanish-server
 
 # 持久化
 docker volume create spanish-volume
 
 
-docker run -p 8000:8000  --env-file .env.prod --name spanish-docker -v spanish-volume:/root/workspace/spanish-volume spanish-docker
+docker run -p 8000:8000  --env-file .env.prod --name spanish-server -v spanish-volume:/root/workspace/spanish-volume spanish-server
 
 
 
 # 进入容器
-docker exec -it spanish-docker /bin/sh
+docker exec -it spanish-server /bin/sh
 # 将文件从容器复制到宿主机
-docker cp spanish-docker:/app/logs /root/workspace/
+docker cp spanish-server:/app/logs /root/workspace/
 
 ```
 
