@@ -92,7 +92,7 @@ const WordApi = {
   getSingleWBData: getSingleWBData,
   getAllLearnData: getAllLearnData,
   getTodayLearnData: getTodayLearnData,
-  // getNoteBookWord: getNoteBookWord,
+  getNoteBookWord: getNoteBookWord,
   getBookRecordWord: getBookRecordWord,
   getUserRecordWord: getUserRecordWord,
   getDailySum: getDailySum,

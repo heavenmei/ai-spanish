@@ -21,7 +21,7 @@ import * as schema from "./schema";
 //     id: "3",
 //     name: "DELE A1",
 //     description: "DELE A1",
-//     total: 406,
+//     total: 395,
 //     tag: "A1",
 //     cover:
 //       "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/DELE_A1.jpg",

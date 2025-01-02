@@ -640,12 +640,11 @@ Page({
     this.setData({ isBtnActive: true });
   },
 
-  // todo 调整是否添加到生词本
+  // 调整是否添加到生词本
   async toggleAddToNB() {
     this.setData({ isBtnActive: false });
     const add = this.data.isInNotebook;
     const res = await toggleAddToNB({
-      user_id: app.globalData.userInfo.id,
       word_id: this.wordDetailList[this.control.nowIndex].word_id,
       add: !add,
     });

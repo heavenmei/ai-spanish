@@ -212,9 +212,9 @@
         class="word"
         wx:for="{{notebookWord}}"
         wx:key="index"
-        data-word_id="{{item.wordId}}"
+        data-word_id="{{item.id}}"
         hover-class="wasTaped"
-        bindtap="toWordDetail"
+        bindtap="gotoWordDetail"
         >{{item.word}}</view
       >
     </view>

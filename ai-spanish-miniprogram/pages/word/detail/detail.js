@@ -53,7 +53,7 @@ Page({
   toggleAddToNB: async function () {
     const add = this.data.isInNotebook;
     const res = await toggleAddToNB({
-      word_id: this.data.wordDetail.word_id,
+      word_id: this.data.wordDetail.id,
       add: !add,
     });
     console.log(res);

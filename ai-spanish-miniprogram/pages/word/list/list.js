@@ -1,5 +1,9 @@
 // pages/word_list/word_list.js
-import { getBookRecordWord, getUserRecordWord } from "../../../apis/word";
+import {
+  getBookRecordWord,
+  getNoteBookWord,
+  getUserRecordWord,
+} from "../../../apis/word";
 
 const app = getApp();
 
@@ -24,7 +28,7 @@ const typeParameter = {
   getMasteredWord: { navTitle: "已掌握单词", api: getUserRecordWord },
   getReviewWord: { navTitle: "复习中单词", api: getUserRecordWord },
 
-  getNoteBookWord: { navTitle: "收藏夹", user_id: true, wb_id: false },
+  getNoteBookWord: { navTitle: "收藏夹", api: getNoteBookWord },
   today: { navTitle: "今日学习&复习" },
 };
 

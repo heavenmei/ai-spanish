@@ -162,7 +162,7 @@
     <t-icon name="learned" prefix="icon" size="40rpx" />
   </t-button>
 
-  <!-- <t-button
+  <t-button
     size="medium"
     variant="text"
     t-class="bottomBtn"
@@ -174,7 +174,7 @@
       prefix="icon"
       size="50rpx"
     />
-  </t-button> -->
+  </t-button>
 </view>
 
 <view class="doneWrapper" wx:if="{{learnDone}}">

@@ -94,7 +94,8 @@ app.get("/api/word/getUserRecordWord", word.getUserRecordWord);
 app.get("/api/word/getDailySum", word.getDailySum);
 app.post("/api/word/addLearningRecord", word.addLearningRecord);
 app.post("/api/word/updateLearningRecord", word.updateLearningRecord);
-app.post("/api/word/addWordToNotebook", word.addWordToNotebook);
+app.get("/api/word/getNoteBookWord", word.getNoteBookWord);
+app.post("/api/word/toggleAddToNB", word.toggleAddToNB);
 
 console.log("Server is running on port 8000");
 serve({

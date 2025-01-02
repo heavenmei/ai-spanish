@@ -188,7 +188,5 @@ export const notebook = pgTable("notebook", {
     .default(sql`gen_random_uuid()`),
   userId: text("user_id").references(() => users.id),
   word_id: text("word_id").references(() => word.id),
-  wb_id: text("word_book_id").references(() => wordBook.id),
-  learned: boolean("learned"),
   createdAt: timestamp("created_at", { mode: "date" }).defaultNow(),
 });

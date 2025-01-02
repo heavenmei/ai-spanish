@@ -72,7 +72,18 @@ export async function getWordDetail(c: Context) {
   }
 
   try {
-    const res = await db.select().from(word).where(eq(word.id, word_id));
+    const res = await db
+      // @ts-ignore
+      .select({
+        ...word,
+        in_notebook: notebook.id,
+      })
+      .from(word)
+      .where(eq(word.id, word_id))
+      .leftJoin(
+        notebook,
+        and(eq(notebook.word_id, word.id), eq(notebook.userId, user.id))
+      );
     logger.info("📚 getWordDetail ", word_id);
 
     return c.json(successRes({ ...res[0] }));
@@ -812,9 +823,38 @@ export async function updateLearningRecord(c: Context) {
   }
 }
 
+// * favorite
+// GET
+export async function getNoteBookWord(c: Context) {
+  const { page, pageSize } = PageQueryParamsSchema.parse(c.req.query());
+
+  const user = c.get("user");
+  if (!user) {
+    return c.json(failRes({ code: 401, message: "请先登录" }));
+  }
+
+  try {
+    const result = await db
+      // @ts-ignore
+      .select({ ...word })
+      .from(notebook)
+      .where(eq(notebook.userId, user.id))
+      .offset((page - 1) * pageSize)
+      .limit(pageSize)
+      .leftJoin(word, and(eq(word.id, notebook.word_id)));
+
+    logger.info("📚 getNoteBookWord", result);
+
+    return c.json(listRes({ list: result }));
+  } catch (e: any) {
+    logger.error(e);
+    return c.json(failRes({ message: e.message }));
+  }
+}
+
 // POST
-export async function addWordToNotebook(c: Context) {
-  const { userId, wordId, wordBookId, learned } = await c.req.json();
+export async function toggleAddToNB(c: Context) {
+  const { word_id, add } = await c.req.json();
 
   const user = c.get("user");
   if (!user) {
@@ -822,35 +862,22 @@ export async function addWordToNotebook(c: Context) {
   }
 
   try {
-    // 检查用户是否存在
-    const userRes = await db.select().from(users).where(eq(users.id, user.id));
-    if (userRes.length === 0) {
-      return c.json(failRes({ code: 404, message: "用户未找到" }));
+    if (add) {
+      await db.insert(notebook).values({
+        userId: user.id,
+        word_id: word_id,
+      });
+    } else {
+      await db
+        .delete(notebook)
+        .where(
+          and(eq(notebook.userId, user.id), eq(notebook.word_id, word_id))
+        );
     }
 
-    // 检查单词和生词本是否存在
-    const wordRes = await db.select().from(word).where(eq(word.id, wordId));
-    logger.info("📚 addWordToNotebook", wordRes);
-    const wordBookRes = await db
-      .select()
-      .from(wordBook)
-      .where(eq(wordBook.id, wordBookId));
-    logger.info("📚 addWordToNotebook", wordBookRes);
-    if (wordRes.length === 0 || wordBookRes.length === 0) {
-      return c.json(failRes({ code: 404, message: "单词或生词本未找到" }));
-    }
+    logger.info("📚 toggleAddToNB");
 
-    logger.info("📚 addWordToNotebook", wordId, wordBookId, learned);
-    // 添加到生词本
-    await db.insert(notebook).values({
-      useId: user.id,
-      word_id: wordId,
-      wb_id: wordBookId,
-      learned: learned ?? false,
-      createdAt: new Date(),
-    });
-
-    return c.json(listRes({ message: "单词已成功添加到生词本" }));
+    return c.json(successRes({ message: "单词已成功添加到生词本" }));
   } catch (e: any) {
     console.error(e);
     return c.json(failRes({ message: e.message }));

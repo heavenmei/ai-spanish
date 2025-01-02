@@ -7,6 +7,7 @@ import {
   getTodayLearnData,
   getBasicLearningData,
   getDailySum,
+  getNoteBookWord,
 } from "../../apis/word";
 
 const app = getApp();
@@ -110,18 +111,15 @@ Page({
     const promise3 = getTodayLearnData({
       userId: app.globalData.userInfo.id,
     });
-    // const promise4 = getNoteBookWord({
-    //   userId: app.globalData.userInfo.id,
-    //   num: 10,
-    // });
+    const promise4 = getNoteBookWord();
 
-    const resList = await Promise.all([promise1, promise2, promise3]);
+    const resList = await Promise.all([promise1, promise2, promise3, promise4]);
 
     this.setData({
       bkLearnData: resList[0].data,
       allLearnData: resList[1].data,
       todayLearnData: resList[2].data,
-      // notebookWord: resList[3].data,
+      notebookWord: resList[3].list,
     });
     this.updateDailyTaskPercentage();
 
@@ -276,6 +274,13 @@ Page({
     }
     wx.navigateTo({
       url: `/pages/word/${type}/${type}`,
+    });
+  },
+
+  gotoWordDetail(e) {
+    const { word_id } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/pages/word/detail/detail?word_id=${word_id}`,
     });
   },
 });
