@@ -150,21 +150,25 @@ export async function logout(c: Context<{ Variables: ContextVariables }>) {
 
 // POST
 export async function updateUser(c: Context) {
-  const { wordSetting } = await c.req.json();
+  const { wordSetting, nickName, avatarUrl } = await c.req.json();
 
   const user = c.get("user");
   if (!user) {
     return c.json(failRes({ code: 401, message: "登录以继续" }));
   }
 
+  const newUser = {
+    wordSetting: wordSetting ? JSON.stringify(InitWordSetting) : undefined,
+    nickName: nickName ? nickName : undefined,
+    avatarUrl: avatarUrl ? avatarUrl : undefined,
+  };
+
   try {
     console.log("updateUser===", wordSetting, JSON.stringify(wordSetting));
 
     const res = await db
       .update(users)
-      .set({
-        wordSetting: JSON.stringify(wordSetting),
-      })
+      .set(newUser)
       .where(eq(users.id, user.id))
       .returning({ wordSetting: users.wordSetting });
     const data = JSON.parse(res[0].wordSetting);

@@ -4,6 +4,7 @@
     "pages/history/index",
     "pages/scenarios/index",
     "pages/settings/index",
+    "pages/settings/person-info/index",
     "pages/settings/word-settings/wsetting"
   ],
   "subPackages": [

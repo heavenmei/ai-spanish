@@ -10,7 +10,7 @@
     >
       <t-image
         slot="note"
-        src="{{personInfo.avatar}}"
+        src="{{personInfo.avatarUrl}}"
         t-class="avatarUrl"
         mode="aspectFill"
       />
@@ -18,13 +18,13 @@
     <t-cell
       title="昵称"
       arrow
-      note="{{personInfo.name}}"
+      note="{{personInfo.nickName}}"
       data-type="name"
       bind:click="onClickCell"
       t-class="t-cell-class"
       t-class-left="order-group__left"
     />
-    <t-cell
+    <!-- <t-cell
       title="性别"
       arrow
       note="{{genderMap[personInfo.gender]}}"
@@ -42,7 +42,7 @@
       bind:click="onClickCell"
       t-class="t-cell-class"
       t-class-left="order-group__left"
-    />
+    /> -->
   </t-cell-group>
 </view>
 
@@ -55,3 +55,22 @@
   bind:close="onClose"
 />
 <t-toast id="t-toast" />
+
+<t-dialog
+  visible="{{showWithInput}}"
+  title="带输入框对话框"
+  confirm-btn="确定"
+  cancel-btn="取消"
+  bind:confirm="onConfirmDialog"
+  bind:cancel="onClose"
+>
+  <t-input
+    borderless
+    class="dialog-input"
+    clearable
+    slot="content"
+    placeholder="{{personInfo.nickName}}"
+    placeholder-class="placeholder"
+    bind:change="onInput"
+  />
+</t-dialog>

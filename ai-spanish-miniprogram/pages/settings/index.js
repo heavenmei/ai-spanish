@@ -140,7 +140,13 @@ Page({
   },
 
   async login() {
-    if (wx.getStorageSync("userInfo").id) return;
+    console.log("login", wx.getStorageSync("userInfo").id);
+
+    if (wx.getStorageSync("userInfo").id) {
+      wx.navigateTo({
+        url: "/pages/settings/person-info/index",
+      });
+    }
 
     await loginProfile(app);
     // this.setChartData();

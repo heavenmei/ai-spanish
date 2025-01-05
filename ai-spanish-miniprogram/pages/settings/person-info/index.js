@@ -1,13 +1,14 @@
 // import { phoneEncryption } from "../../../utils/util";
 import Toast from "tdesign-miniprogram/toast";
+import { updateUser } from "../../../apis/index";
+
+const app = getApp();
 
 Page({
   data: {
     personInfo: {
-      avatar: "",
-      name: "",
-      gender: 0,
-      phoneNumber: "",
+      avatarUrl: "",
+      nickName: "",
     },
     showUnbindConfirm: false,
     pickerOptions: [
@@ -22,10 +23,12 @@ Page({
     ],
     typeVisible: false,
     genderMap: ["", "男", "女"],
+
+    showWithInput: false,
   },
   onLoad() {
     const userinfo = wx.getStorageSync("userInfo");
-    if (userinfo.name) {
+    if (userinfo.id) {
       this.setData({
         personInfo: {
           ...userinfo,
@@ -36,7 +39,6 @@ Page({
   },
   onClickCell({ currentTarget }) {
     const { dataset } = currentTarget;
-    const { nickName } = this.data.personInfo;
 
     switch (dataset.type) {
       case "gender":
@@ -45,12 +47,12 @@ Page({
         });
         break;
       case "name":
-        wx.navigateTo({
-          url: `/pages/usercenter/name-edit/index?name=${nickName}`,
+        this.setData({
+          showWithInput: true,
         });
         break;
       case "avatarUrl":
-        this.toModifyAvatar();
+        // this.toModifyAvatar();
         break;
       default: {
         break;
@@ -60,6 +62,7 @@ Page({
   onClose() {
     this.setData({
       typeVisible: false,
+      showWithInput: false,
     });
   },
   onConfirm(e) {
@@ -78,6 +81,28 @@ Page({
         });
       }
     );
+  },
+
+  onInput(e) {
+    const nickName = e.detail.value;
+    this.setData({
+      "personInfo.nickName": nickName,
+    });
+  },
+
+  async onConfirmDialog() {
+    this.setData({
+      typeVisible: false,
+      showWithInput: false,
+    });
+
+    const { nickName } = this.data.personInfo;
+    await updateUser({
+      nickName: nickName,
+    });
+    app.globalData.userInfo.nickName = nickName;
+    wx.setStorageSync("userInfo", app.globalData.userInfo);
+    console.log(app.globalData.userInfo);
   },
   async toModifyAvatar() {
     try {
