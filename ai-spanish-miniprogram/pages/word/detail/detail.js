@@ -24,7 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    const word_id = parseInt(options.word_id);
+    const word_id = options.word_id;
     this.getDetail(word_id);
   },
 
