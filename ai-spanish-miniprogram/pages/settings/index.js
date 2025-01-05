@@ -143,7 +143,7 @@ Page({
     if (wx.getStorageSync("userInfo").id) return;
 
     await loginProfile(app);
-    this.setChartData();
+    // this.setChartData();
     this.setData({
       userInfo: wx.getStorageSync("userInfo"),
       hasUserInfo: true,
