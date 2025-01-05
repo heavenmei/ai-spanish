@@ -1,0 +1,24 @@
+[
+  {
+    "id": "-1",
+    "name": "请选择",
+    "description": "请选择",
+    "total": 0
+  },
+  {
+    "id": "modernSpanish1",
+    "name": "现代西班牙语 第一册",
+    "description": "现代西班牙语1",
+    "total": 967,
+    "tag": "A1",
+    "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/ModernSpanish.jpg"
+  },
+  {
+    "id": "3",
+    "name": "DELE A1",
+    "description": "DELE A1",
+    "total": 395,
+    "tag": "A1",
+    "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/DELE_A1.jpg"
+  }
+]

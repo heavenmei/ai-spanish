@@ -506,7 +506,9 @@ export async function getBookRecordWord(c: Context) {
       );
 
     let subQuery = undefined;
-    if (subType === "getBkUnlearnedWord") {
+    if (subType === "getBkWord") {
+      subQuery = eq(wordInBook.wb_id, wb_id);
+    } else if (subType === "getBkUnlearnedWord") {
       subQuery = and(
         eq(wordInBook.wb_id, wb_id),
         notExists(learningRecordQuery)
@@ -861,6 +863,10 @@ export async function toggleAddToNB(c: Context) {
     return c.json(failRes({ code: 401, message: "请先登录以添加生词本" }));
   }
 
+  if (!word_id) {
+    return c.json(failRes({ message: "缺少必要的参数" }));
+  }
+
   try {
     if (add) {
       await db.insert(notebook).values({
@@ -875,7 +881,7 @@ export async function toggleAddToNB(c: Context) {
         );
     }
 
-    logger.info("📚 toggleAddToNB");
+    logger.info("📚 toggleAddToNB", word_id);
 
     return c.json(successRes({ message: "单词已成功添加到生词本" }));
   } catch (e: any) {
