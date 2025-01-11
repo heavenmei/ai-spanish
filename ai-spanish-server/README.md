@@ -59,6 +59,12 @@ docker exec -it spanish-server /bin/sh
 # 将文件从容器复制到宿主机
 docker cp spanish-server:/app/logs /root/workspace/
 
+
+# 备份数据库
+docker exec -it spanish-postgres /bin/sh
+pg_dump -U postgres -h 118.31.74.178 -p 5432 spanish-PROD > spanish-PROD.sql
+docker cp spanish-postgres:spanish-PROD.sql /root/workspace/ai-spanish-database/spanish-PROD.sql
+
 ```
 
 **宝塔**

@@ -158,7 +158,7 @@ export async function updateUser(c: Context) {
   }
 
   const newUser = {
-    wordSetting: wordSetting ? JSON.stringify(InitWordSetting) : undefined,
+    wordSetting: wordSetting ? JSON.stringify(wordSetting) : undefined,
     nickName: nickName ? nickName : undefined,
     avatarUrl: avatarUrl ? avatarUrl : undefined,
   };

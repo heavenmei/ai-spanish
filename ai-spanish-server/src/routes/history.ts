@@ -7,6 +7,7 @@ import {
   HistoryParamsSchema,
   listRes,
   PageQueryParamsSchema,
+  serverEnvs,
   successRes,
 } from "@/utils";
 import db from "@/db";
@@ -61,7 +62,7 @@ export async function insertHistory(c: Context) {
   }
 
   try {
-    const historyId = await db
+       const historyId = await db
       .insert(history)
       .values({
         uid: user.id,

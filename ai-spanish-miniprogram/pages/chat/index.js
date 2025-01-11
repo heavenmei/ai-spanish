@@ -199,7 +199,7 @@ Page({
 
           const content = res.data;
           const lastMes = messageList[messageList.length - 1];
-          const output = this.data.chatOutput + content;
+          const output = content;
           const newMes = {
             ...lastMes,
             content: output,
