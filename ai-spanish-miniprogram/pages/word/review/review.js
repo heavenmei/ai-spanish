@@ -2,8 +2,8 @@ import {
   toggleAddToNB,
   getReviewData,
   updateLearningRecord,
-} from "../../../apis/word";
-import word_utils from "../../../utils/word_utils.js";
+} from "../apis/word";
+import word_utils from "../word_utils";
 
 const app = getApp();
 

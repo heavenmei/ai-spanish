@@ -1,6 +1,6 @@
 // pages/word/search/search.js
-import WordApi from "../../../apis/word";
-import word_utils from "../../../utils/word_utils.js";
+import WordApi from "../apis/word";
+import word_utils from "../word_utils.js";
 
 Page({
   /**

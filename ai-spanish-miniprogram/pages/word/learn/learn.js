@@ -2,10 +2,10 @@ import {
   toggleAddToNB,
   getLearningData,
   addLearningRecord,
-} from "../../../apis/word";
+} from "../apis/word";
 import { WORD_VOICE_URL } from "../../../config/index.js";
 
-import word_utils from "../../../utils/word_utils.js";
+import word_utils from "../word_utils";
 
 const app = getApp();
 

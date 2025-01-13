@@ -1,5 +1,5 @@
 // pages/word/detail/detail.js
-import { getWordDetail, toggleAddToNB } from "../../../apis/word";
+import { getWordDetail, toggleAddToNB } from "../apis/word";
 import { WORD_VOICE_URL } from "../../../config/index.js";
 // import word_utils from "../../../utils/word_utils.js";
 

@@ -8,7 +8,7 @@ import {
   getBasicLearningData,
   getDailySum,
   getNoteBookWord,
-} from "../../apis/word";
+} from "./apis/word";
 
 const app = getApp();
 

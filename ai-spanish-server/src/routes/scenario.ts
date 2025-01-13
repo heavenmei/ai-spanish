@@ -2,7 +2,7 @@ import { and, count, desc, eq } from "drizzle-orm";
 import { Context } from "hono";
 
 import { failRes, listRes, PageQueryParamsSchema, successRes } from "@/utils";
-import ScenariosList from "../../public/scenarios.json";
+import ScenariosList from "../../public/scenarios.json" assert { type: "json" };
 
 // GET
 export async function getScenarioList(c: Context) {

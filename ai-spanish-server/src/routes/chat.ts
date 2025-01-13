@@ -3,11 +3,12 @@ import { Context } from "hono";
 import { streamSSE } from "hono/streaming";
 import { insertMessage } from "./message";
 import chatReplyProcess, { ChatMessage } from "@/lib/chatgpt";
-import ScenariosDict from "../../public/scenarios-dict.json";
-import log4js from "log4js";
 import db from "@/db";
+import log4js from "log4js";
 import { history, messages } from "@/db/schema";
 import { eq, count } from "drizzle-orm";
+
+import ScenariosDict from "../../public/scenarios-dict.json" assert { type: "json" };
 
 const logger = log4js.getLogger("chat");
 logger.level = "all";

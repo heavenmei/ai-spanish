@@ -1,4 +1,5 @@
-import { get, post } from "./request";
+// import { get, post } from "./request";
+import { get, post } from "../../../apis/request";
 
 // 更换词书
 export const changeWordBook = (payload) => {

@@ -240,7 +240,7 @@ const getRectLength = (str) => {
   return rectLength;
 };
 
-const getResObjRectLength = (obj) => {
+export const getResObjRectLength = (obj) => {
   let totalLength = 0;
   totalLength += getRectLength(obj.word);
   if (obj.exchange && obj.exchange.name) {
