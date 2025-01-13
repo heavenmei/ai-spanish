@@ -8,8 +8,8 @@ import {
   MessageParamSchema,
   successRes,
 } from "@/utils";
-import db from "@/db";
-import { messages } from "@/db/schema";
+import db, { increment } from "@/db";
+import { messages, users } from "@/db/schema";
 
 // GET
 export async function getMessageList(c: Context) {
@@ -63,21 +63,25 @@ export async function getMessageList(c: Context) {
 export async function insertMessage(c: Context, params: any) {
   const payload = MessageParamSchema.parse(params);
 
-  // const user = c.get('user');
-  // if (!user) {
-  //   return;
-  // }
   let newMes = {
-    // uid: user.id,
     ...payload,
   };
-  // console.log('💬 ~ insertMessage===', newMes);
 
   try {
     const messageId = await db
       .insert(messages)
       .values(newMes)
       .returning({ id: messages.id });
+
+    // * record token
+    if (payload.token) {
+      await db
+        .update(users)
+        .set({
+          recordToken: increment(users.recordToken, payload.token),
+        })
+        .where(eq(users.id, payload.userId));
+    }
 
     console.log("💬 ~  Add Message Record  ", messageId?.[0]?.id, newMes);
     return messageId?.[0]?.id;

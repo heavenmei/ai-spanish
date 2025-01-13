@@ -42,7 +42,7 @@ export const getOSSUrl = (payload) => {
 };
 
 // 上传录音
-export const uploadRecord = (fileLocalUri, keyname, data) => {
+export const audio2text = (fileLocalUri, keyname, data) => {
   return uploadFile("/api/audio/audio2text", fileLocalUri, keyname, data);
 };
 
@@ -52,7 +52,7 @@ export const getAudio = (payload) => {
 
 // 场景
 export const getScenarioList = (payload) => {
-  return get("/api/scenario/getScenarios", payload);
+  return get("/api/scenario/getScenarioList", payload);
 };
 
 // 更新学习时长

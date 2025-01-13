@@ -13,32 +13,34 @@
 </t-navbar>
 
 <view class="container">
-  <t-tabs defaultValue="{{0}}" theme="tag">
+  <t-tabs defaultValue="all" theme="tag" bind:change="onTabsChange">
     <t-tab-panel
-      wx:for="{{tabList}}"
+      wx:for="{{scenarioList}}"
+      wx:for-item="tab"
       wx:for-index="index"
       wx:key="index"
-      label="{{item.title}}"
-      value="{{item.id}}"
-    />
+      label="{{tab.title}}"
+      value="{{tab.id}}"
+    >
+      <view class="scenarios-list-wrap wr-class">
+        <block wx:for="{{tab.children}}" wx:for-item="item" wx:key="index">
+          <scenario-card
+            id="{{item.id}}"
+            data="{{item}}"
+            class="scenario-card-inside"
+            data-index="{{index}}"
+            bind:thumb="onClickGoodsThumb"
+            bind:click="onClickGoods"
+            bind:add-cart="onAddCart"
+          />
+        </block>
+      </view>
+    </t-tab-panel>
   </t-tabs>
-  <view class="scenarios-list-wrap wr-class" id="{{independentID}}">
-    <block wx:for="{{modelList}}" wx:for-item="item" wx:key="index">
-      <scenario-card
-        id="{{item.id}}"
-        data="{{item}}"
-        class="scenario-card-inside"
-        data-index="{{index}}"
-        bind:thumb="onClickGoodsThumb"
-        bind:click="onClickGoods"
-        bind:add-cart="onAddCart"
-      />
-    </block>
-  </view>
-
+  <!-- 
   <load-more
     list-is-empty="{{!modelList.length}}"
     status="{{modelListLoadStatus}}"
     bind:retry="onReTry"
-  />
+  /> -->
 </view>

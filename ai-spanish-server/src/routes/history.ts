@@ -11,7 +11,7 @@ import {
   successRes,
 } from "@/utils";
 import db from "@/db";
-import { history } from "@/db/schema";
+import { history, messages } from "@/db/schema";
 
 // GET
 export async function getHistory(c: Context<{ Variables: ContextVariables }>) {
@@ -62,7 +62,7 @@ export async function insertHistory(c: Context) {
   }
 
   try {
-       const historyId = await db
+    const historyId = await db
       .insert(history)
       .values({
         uid: user.id,
@@ -98,6 +98,7 @@ export async function deleteHistory(c: Context) {
   }
 
   try {
+    await db.delete(messages).where(eq(messages.historyId, id));
     await db.delete(history).where(eq(history.id, id));
 
     return c.json(successRes({ message: "历史记录已删除" }));

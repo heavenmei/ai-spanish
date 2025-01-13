@@ -1,5 +1,4 @@
 import { addHistory, getStudyDuration } from "../../apis/index";
-import { loginProfile } from "../../common/login";
 
 function getBarOption(data) {
   return {
@@ -49,7 +48,6 @@ function getBarOption(data) {
   };
 }
 
-const app = getApp();
 Page({
   data: {
     // navigationBarHeight: wx.getWindowInfo().statusBarHeight + 44,
@@ -88,8 +86,10 @@ Page({
 
   async checkLogin() {
     if (!this.data.hasUserInfo) {
-      const data = await loginProfile(app);
-      if (!data) return false;
+      wx.navigateTo({
+        url: "/pages/login/login",
+      });
+      return false;
     }
     return true;
   },

@@ -2,7 +2,7 @@ import {
   getAudio,
   getMessageList,
   sendChat,
-  uploadRecord,
+  audio2text,
   getOSSUrl,
 } from "../../apis/index";
 
@@ -46,8 +46,10 @@ Page({
     const historyId = options.id;
     this.setData({
       historyId: historyId,
+      model: options.model,
+      scenarioId: options.scenarioId,
     });
-    console.log("🚀 History ID:", historyId);
+    console.log("🚀 onLoad:", options);
 
     this.initRecord();
     this.initAudio();
@@ -179,8 +181,16 @@ Page({
   // * 发送聊天
   async handleSend(sendType = "text") {
     const that = this;
-    const { messageList, inputText, historyId } = that.data;
-    console.log("🚀 handleSend", inputText, sendType);
+    const { messageList, inputText, historyId, model, scenarioId } = that.data;
+    console.log(
+      "🚀 handleSend",
+      sendType,
+      messageList,
+      inputText,
+      historyId,
+      model,
+      scenarioId
+    );
 
     this.setData({
       isStop: true,
@@ -189,7 +199,13 @@ Page({
     });
 
     await sendChat(
-      { content: inputText, historyId: historyId, type: sendType },
+      {
+        content: inputText,
+        historyId: historyId,
+        type: sendType,
+        model: model,
+        scenarioId: scenarioId,
+      },
       (response) => {
         response.map((res) => {
           if (res.event === "done") {
@@ -257,7 +273,17 @@ Page({
     var { tempFilePath, duration, fileSize } = res;
     that.scrollToBottom();
     console.log("🚀 === new speech file", res);
-    const response = await uploadRecord(tempFilePath, "file", {
+
+    if (duration < 1000) {
+      wx.showToast({
+        icon: "none",
+        title: `语音时长过短`,
+        duration: 1400,
+      });
+      return;
+    }
+
+    const response = await audio2text(tempFilePath, "file", {
       historyId: that.data.historyId,
       seconds: duration,
       fileSize: fileSize,
@@ -265,6 +291,15 @@ Page({
       username: wx.getStorageSync("userInfo").name,
     });
     const resData = JSON.parse(response).data;
+
+    if (!resData.content) {
+      wx.showToast({
+        icon: "none",
+        title: `未检测到语音内容`,
+        duration: 1400,
+      });
+      return;
+    }
 
     // * Add new message
     const id = `id_${Date.parse(new Date()) / 1000}`;

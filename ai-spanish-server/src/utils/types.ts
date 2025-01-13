@@ -71,9 +71,12 @@ export const PageQueryParamsSchema = z.object({
 });
 
 export const UserParamsSchema = z.object({
+  type: z.coerce.string().default("wechat"),
   code: z.coerce.string().default(""),
   avatarUrl: z.coerce.string().default(""),
   nickName: z.coerce.string().default(""),
+  username: z.coerce.string().default(""),
+  pwd: z.coerce.string(),
 });
 
 export const MessageListParamSchema = z.object({
@@ -83,11 +86,15 @@ export const MessageListParamSchema = z.object({
 });
 
 export const MessageParamSchema = z.object({
+  userId: z.coerce.string(),
   type: z.coerce.string().default("text"),
+  model: z.coerce.string().default(""),
+  scenarioId: z.coerce.string().default(""),
   messageId: z.coerce.string().default(""),
   content: z.coerce.string().default(""),
   isAiRes: z.coerce.boolean().default(false),
   historyId: z.coerce.string().default(""),
+  token: z.coerce.number().default(0),
   filename: z.coerce.string().default(""),
   seconds: z.coerce.string().default(""),
 });

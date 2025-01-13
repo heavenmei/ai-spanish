@@ -104,8 +104,7 @@ function formatGetParams(params) {
   return Object.entries(params)
     .filter(([, value]) => value !== undefined)
     .map(
-      ([key]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
+      ([key]) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
     )
     .join("&");
 }
@@ -170,12 +169,14 @@ const convertStringToArr = (str) => {
 
 const streamRequest = (url, params = {}, callback) => {
   const URL = `${HOST}${url}`;
+  const cookie = wx.getStorageSync("cookie");
   const requestTask = wx.request({
     url: URL,
     method: "POST",
     responseType: "arraybuffer",
     enableChunked: true, //关键！开启流式传输模式
     header: {
+      Cookie: http.qs.stringify(cookie, ";", "="),
       "content-type": "application/json",
     },
     data: params,
@@ -185,6 +186,7 @@ const streamRequest = (url, params = {}, callback) => {
     },
     fail: (err) => {
       console.log("request fail", err);
+      requestTask.abort();
     },
   });
 

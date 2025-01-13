@@ -15,6 +15,8 @@ export const users = pgTable("users", {
   id: text("id")
     .primaryKey()
     .default(sql`gen_random_uuid()`),
+  username: text("username"),
+  pwd: text("pwd"),
   nickName: text("nickName"),
   avatarUrl: text("avatarUrl"),
   of_matrix: text("of_matrix"),
@@ -22,6 +24,8 @@ export const users = pgTable("users", {
     .references(() => wordBook.id)
     .default("-1"),
   wordSetting: text("word_setting"),
+  money: integer("money").default(0),
+  recordToken: integer("record_token").default(0),
   createdAt: timestamp("created_at", { mode: "date" }).defaultNow(),
   updatedAt: timestamp("updated_at", { mode: "date" }).$onUpdate(
     () => new Date()
@@ -68,25 +72,9 @@ export const messages = pgTable("messages", {
     () => new Date()
   ),
   qs_limit: integer("qs_limit"),
-  qs_token: integer("qs_token"),
+  token: integer("token"),
   seconds: text("seconds"),
   filename: text("filename"),
-});
-
-export const models = pgTable("models", {
-  id: text("id")
-    .notNull()
-    .primaryKey()
-    .default(sql`gen_random_uuid()`),
-  name: text("name"),
-  desc: text("desc"),
-  apiKey: text("api_key"),
-  baseUrl: text("base_url"),
-  thumb: text("thumb"),
-  createdAt: timestamp("created_at", { mode: "date" }).defaultNow(),
-  updatedAt: timestamp("updated_at", { mode: "date" }).$onUpdate(
-    () => new Date()
-  ),
 });
 
 export const studyDuration = pgTable("study_duration", {
@@ -156,17 +144,17 @@ export const learningRecord = pgTable("learning_record", {
 });
 
 // 存放临时学习数据，设置的学习机制是，比如一组10个，会获取15个，学习的时候可能这15个都会碰到，但只要满10个就认为学完一组，则这多出来的5个的重复次数会记录到本数据库中，下次获取的时候一并获取从而保留之前的重复次数
-export const learningRecordTmp = pgTable("learning_record_temp", {
-  id: text("id")
-    .notNull()
-    .primaryKey()
-    .default(sql`gen_random_uuid()`),
-  user_id: text("user_id").references(() => users.id),
-  word: text("word"),
-  word_id: text("word_id").references(() => word.id),
-  repeatTimes: integer("repeatTimes"),
-  learn_time: date("learn_time", { mode: "date" }),
-});
+// export const learningRecordTmp = pgTable("learning_record_temp", {
+//   id: text("id")
+//     .notNull()
+//     .primaryKey()
+//     .default(sql`gen_random_uuid()`),
+//   user_id: text("user_id").references(() => users.id),
+//   word: text("word"),
+//   word_id: text("word_id").references(() => word.id),
+//   repeatTimes: integer("repeatTimes"),
+//   learn_time: date("learn_time", { mode: "date" }),
+// });
 
 // 用户每日学习数据
 export const dailySum = pgTable("daily_sum", {

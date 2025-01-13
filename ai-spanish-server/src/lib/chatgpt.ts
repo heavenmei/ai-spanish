@@ -1,4 +1,4 @@
-import type { ChatMessage } from "chatgpt";
+import type { ChatMessage, SendMessageOptions } from "chatgpt";
 import { ChatGPTAPI } from "chatgpt";
 import { serverEnvs } from "@/utils";
 
@@ -102,19 +102,22 @@ export async function chatFetch(options: RequestOptions) {
 }
 
 export default async function chatReplyProcess(options: RequestOptions) {
-  const { message, process, signal, payload } = options;
+  const { message, process, signal, payload, systemMessage } = options;
+  const opts: SendMessageOptions = {
+    timeoutMs,
+    stream: true,
+    abortSignal: signal,
+    completionParams: payload,
+    systemMessage: systemMessage,
+    onProgress: (partialResponse) => {
+      process?.(partialResponse);
+    },
+  };
 
   try {
-    const response = await api.sendMessage(message, {
-      timeoutMs,
-      stream: true,
-      abortSignal: signal,
-      completionParams: payload,
-      onProgress: (partialResponse) => {
-        process?.(partialResponse);
-      },
-    });
+    const response = await api.sendMessage(message, opts);
     console.log("🚀 ~ chatReplyProcess ~ response", response);
+    return response;
   } catch (error: any) {
     const code = error.statusCode;
     global.console.log(error);

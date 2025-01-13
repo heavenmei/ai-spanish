@@ -1,8 +1,7 @@
 import Toast from "tdesign-miniprogram/toast";
-// import { getStudyDuration } from "../../apis/index";
+import { logout } from "../../apis/index";
 
 import { MenuData } from "./constants";
-import { loginProfile, logoutProfile } from "../../common/login";
 
 const app = getApp();
 
@@ -128,17 +127,6 @@ Page({
     });
   },
 
-  gotoUserEditPage() {
-    const { hasUserInfo } = this.data;
-    if (hasUserInfo) {
-      // wx.navigateTo({
-      //   url: "/pages/settings/person-info/index",
-      // });
-    } else {
-      this.getUserProfile();
-    }
-  },
-
   async login() {
     console.log("login", wx.getStorageSync("userInfo").id);
 
@@ -148,16 +136,30 @@ Page({
       });
     }
 
-    await loginProfile(app);
-    // this.setChartData();
-    this.setData({
-      userInfo: wx.getStorageSync("userInfo"),
-      hasUserInfo: true,
+    wx.navigateTo({
+      url: "/pages/login/login",
     });
+    return;
   },
 
   async logout() {
-    await logoutProfile(app);
+    const res = await logout();
+    if (res.success) {
+      wx.showToast({
+        title: "退出成功",
+        icon: "success",
+      });
+
+      const userId = wx.getStorageSync("userInfo").id;
+      wx.removeStorageSync("userInfo");
+      app && updateDuration(app, userId);
+    } else {
+      wx.showToast({
+        title: "退出失败",
+        icon: "error",
+      });
+    }
+
     this.setData({
       userInfo: {},
       hasUserInfo: false,

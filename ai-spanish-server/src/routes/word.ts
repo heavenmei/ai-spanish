@@ -14,7 +14,6 @@ import {
 } from "drizzle-orm";
 import {
   learningRecord,
-  learningRecordTmp,
   users,
   wordBook,
   wordInBook,
@@ -365,18 +364,7 @@ export async function getLearningData(c: Context) {
       .offset(0)
       .as("filteredWords");
 
-    // 查找获取取得的单词是否有学习过的“缓存”
-    const recordTmpQuery = await db
-      .select()
-      .from(learningRecordTmp)
-      .leftJoin(
-        filteredWordsQuery,
-        and(
-          eq(learningRecordTmp.user_id, userId),
-          eq(filteredWordsQuery.word_id, learningRecordTmp.word_id)
-        )
-      )
-      .as("recordTmp");
+    // todo 查找获取取得的单词是否有学习过的“缓存”
 
     // 获取取得的单词的详细数据
     const detailQuery = await db
@@ -696,12 +684,6 @@ export async function addLearningRecord(c: Context) {
         .returning({ id: learningRecord.id });
     }
 
-    if (learningList.length > 0) {
-      learningRes = await db
-        .insert(learningRecordTmp)
-        .values(learningList)
-        .returning({ id: learningRecordTmp.id });
-    }
     logger.info(" 📚 addLearningRecord", learnedRes);
 
     // 下面更新daily_sum对应数据

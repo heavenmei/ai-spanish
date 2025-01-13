@@ -80,51 +80,119 @@ export async function info(c: Context<{ Variables: ContextVariables }>) {
 // POST
 export async function login(c: Context<{ Variables: ContextVariables }>) {
   const body = await c.req.json();
-  const { code, nickName, avatarUrl } = UserParamsSchema.parse(body);
-
-  const { data } = await axios.get(
-    "https://api.weixin.qq.com/sns/jscode2session",
-    {
-      params: {
-        appid: serverEnvs.WX_APPID,
-        secret: serverEnvs.WX_SECRET,
-        js_code: code,
-        grant_type: "authorization_code",
-      },
-    }
-  );
-  logger.info("user", data);
+  const { type, code, nickName, avatarUrl, username, pwd } =
+    UserParamsSchema.parse(body);
 
   let curUser = null;
-  try {
-    curUser = await db.query.users.findFirst({
-      where: eq(users.id, data.openid),
-    });
 
-    logger.debug("curUser", curUser);
+  if (type === "wechat") {
+    const { data } = await axios.get(
+      "https://api.weixin.qq.com/sns/jscode2session",
+      {
+        params: {
+          appid: serverEnvs.WX_APPID,
+          secret: serverEnvs.WX_SECRET,
+          js_code: code,
+          grant_type: "authorization_code",
+        },
+      }
+    );
 
-    // 注册
-    if (!curUser) {
+    try {
+      curUser = await db.query.users.findFirst({
+        where: eq(users.id, data.openid),
+      });
+
+      logger.debug("curUser", curUser);
+
+      // 注册
+      if (!curUser) {
+        curUser = {
+          id: data.openid,
+          nickName,
+          avatarUrl,
+          of_matrix: JSON.stringify(InitOFMatrix),
+          wordSetting: JSON.stringify(InitWordSetting),
+        };
+        await db.insert(users).values(curUser);
+      }
+    } catch (e: any) {
+      logger.debug("error", e);
+      return c.json(
+        failRes({
+          message: e.detail,
+        })
+      );
+    }
+  }
+  // 用户名密码登录
+  else if (type == "login") {
+    try {
+      curUser = await db.query.users.findFirst({
+        where: eq(users.username, username),
+      });
+
+      if (!curUser) {
+        return c.json(
+          failRes({
+            message: "账号或密码错误",
+          })
+        );
+      } else if (curUser.pwd !== pwd) {
+        return c.json(
+          failRes({
+            message: "账号或密码错误",
+          })
+        );
+      }
+    } catch (e: any) {
+      logger.debug("error", e);
+      return c.json(
+        failRes({
+          message: e.detail,
+        })
+      );
+    }
+  } else if (type == "register") {
+    try {
+      curUser = await db.query.users.findFirst({
+        where: eq(users.username, username),
+      });
+      if (curUser) {
+        return c.json(
+          failRes({
+            code: 401,
+            message: "该账号已被注册",
+          })
+        );
+      }
+
       curUser = {
-        id: data.openid,
-        nickName,
-        avatarUrl,
+        username,
+        pwd,
+        nickName: username,
+        avatarUrl:
+          "https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132",
         of_matrix: JSON.stringify(InitOFMatrix),
         wordSetting: JSON.stringify(InitWordSetting),
       };
-      await db.insert(users).values(curUser);
-    }
-  } catch (e: any) {
-    logger.debug("error", e);
+      const userId = await db
+        .insert(users)
+        .values(curUser)
+        .returning({ id: users.id });
 
-    return c.json(
-      failRes({
-        message: e.detail,
-      })
-    );
+      curUser.id = userId[0].id;
+    } catch (e: any) {
+      logger.debug("error", e);
+      return c.json(
+        failRes({
+          message: e.detail,
+        })
+      );
+    }
   }
 
-  const session = await lucia.createSession(data.openid, {});
+  const session = await lucia.createSession(curUser.id, {});
   const sessionCookie = lucia.createSessionCookie(session.id);
 
   setCookie(c, lucia.sessionCookieName, sessionCookie.value);

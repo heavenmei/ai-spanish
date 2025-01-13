@@ -56,14 +56,14 @@ export async function audio2text(c: Context) {
     const content = await iat_youdao(buffer);
 
     //* Add Record
-    const messageId = await insertMessage(c, {
-      historyId,
-      filename: uploadResult.name,
-      seconds,
-      content: content,
-      isAiRes: false,
-    });
-    console.log('🚀 ~ add message ~ :', messageId, content);
+    // const messageId = await insertMessage(c, {
+    //   historyId,
+    //   filename: uploadResult.name,
+    //   seconds,
+    //   content: content,
+    //   isAiRes: false,
+    // });
+    // console.log('🚀 ~ add message ~ :', messageId, content);
 
     return c.json(successRes({ ...uploadResult, content: content }));
   } catch (err) {
