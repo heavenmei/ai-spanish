@@ -1,20 +1,11 @@
 <!--pages/word/list/list.wxml-->
 <view class="container">
   <block wx:if="{{todayType == -1}}">
-    <view
-      class="wordItem"
-      wx:for="{{wordList}}"
-      wx:key="index"
-      bindtap="getWordDetail"
-      data-index="{{index}}"
-      hover-class="wasTaped"
-    >
+    <view class="wordItem" wx:for="{{wordList}}" wx:key="index" bindtap="getWordDetail" data-index="{{index}}" hover-class="wasTaped">
       <view class="dot"></view>
       <view class="wordInfo">
         <text class="word">{{item.word}}</text>
-        <text class="trans" space="nbsp" decode="true"
-          >&nbsp;&nbsp;&nbsp;&nbsp;{{item.pos}}&nbsp;{{item.translation}}</text
-        >
+        <text class="trans" space="nbsp" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;{{item.pos?item.pos:''}}&nbsp;{{item.translation}}</text>
       </view>
     </view>
     <view class="tips" wx:if="{{!hasMore }}">没有更多了哦~</view>
@@ -35,30 +26,16 @@
     </view>
 
     <view class="forToday">
-      <view
-        class="wordItem"
-        wx:for="{{todayType == 0? todayLearn : todayReview}}"
-        wx:key="index"
-        bindtap="getWordDetail"
-        data-index="{{index}}"
-        hover-class="wasTaped"
-      >
+      <view class="wordItem" wx:for="{{todayType == 0? todayLearn : todayReview}}" wx:key="index" bindtap="getWordDetail" data-index="{{index}}" hover-class="wasTaped">
         <view class="dot"></view>
         <view class="wordInfo">
           <text class="word">{{item.word}}</text>
-          <text class="trans" space="nbsp" decode="true"
-            >&nbsp;&nbsp;&nbsp;&nbsp;{{item.translation}}</text
-          >
+          <text class="trans" space="nbsp" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;{{item.translation}}</text>
         </view>
       </view>
     </view>
 
-    <view class="tips" wx:if="{{todayType == 0? !learnHasMore:!reviewHasMore}}"
-      >没有更多了哦~</view
-    >
-    <view
-      class="bottom"
-      wx:if="{{todayType == 0? learnHasMore:reviewHasMore}}"
-    ></view>
+    <view class="tips" wx:if="{{todayType == 0? !learnHasMore:!reviewHasMore}}">没有更多了哦~</view>
+    <view class="bottom" wx:if="{{todayType == 0? learnHasMore:reviewHasMore}}"></view>
   </block>
 </view>

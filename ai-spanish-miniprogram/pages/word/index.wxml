@@ -261,12 +261,14 @@
       bindtap="changeWordBook"
     >
       <view class="bookCover">
-        <image
-          t-class="logo__img"
-          src="{{item.cover}}"
-          style="height: 100%; width: 100%"
-        />
-      </view>
+          <image
+            wx:if="{{item.cover}}"
+            t-class="logo__img"
+            src="{{item.cover}}"
+            style="height: 100%; width: 100%"
+          />
+          <view wx:else class="name">{{item.name}}</view>
+        </view>
       <view class="info">
         <view class="bookName">{{item.name}}</view>
         <view class="des">{{item.description}}</view>

@@ -34,10 +34,10 @@
 </view>
 
 <view class="contentCard">
-  <view class="title">西语释义</view>
+  <view class="title">西语描述</view>
 
   <view class="contentWrapper def">
-    <text class="pos">{{wordDetail.pos}}</text>
+    <text class="pos" wx:if="{{wordDetail.pos}}">{{wordDetail.pos}}</text>
     <text class="meaning">{{wordDetail.definition}}</text>
   </view>
 </view>
@@ -46,7 +46,7 @@
   <view class="title">中文释义</view>
 
   <view class="contentWrapper trans">
-    <text class="pos">{{wordDetail.pos}}</text>
+    <text class="pos" wx:if="{{wordDetail.pos}}">{{wordDetail.pos}}</text>
     <text class="meaning">{{wordDetail.translation}}</text>
   </view>
 </view>
