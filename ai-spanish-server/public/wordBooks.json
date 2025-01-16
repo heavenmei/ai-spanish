@@ -20,5 +20,13 @@
     "total": 395,
     "tag": "A1",
     "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/DELE_A1.jpg"
+  },
+  {
+    "id": "NewMiddleSchool",
+    "name": "中学新教材 必修I",
+    "description": "中学新教材 必修I",
+    "total": 970,
+    "tag": "",
+    "cover": ""
   }
 ]
