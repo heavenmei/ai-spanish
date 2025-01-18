@@ -1,6 +1,6 @@
 import Toast from "tdesign-miniprogram/toast";
 import { logout } from "../../apis/index";
-
+import { updateDuration } from "../../common/recordStudyDuration";
 import { MenuData } from "./constants";
 
 const app = getApp();
