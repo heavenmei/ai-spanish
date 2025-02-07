@@ -108,7 +108,7 @@ Page({
   async gotoWord() {
     if (!(await this.checkLogin())) return;
     wx.navigateTo({
-      url: `/pages/word/index`,
+      url: `/pages/word-overview/index`,
     });
   },
 

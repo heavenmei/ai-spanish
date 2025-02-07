@@ -1,6 +1,6 @@
 // pages/word/search/search.js
-import WordApi from "../apis/word";
-import word_utils from "../word_utils.js";
+import WordApi from "../../../apis/word";
+import { toExchangeList } from "../word_utils.js";
 
 Page({
   /**
@@ -140,7 +140,7 @@ Page({
     let directres = searchresult.directSearch;
     for (let i = 0; i < lemmares.length; i++) {
       console.log(lemmares[i].exchange);
-      const exchangeList = word_utils.toExchangeList(lemmares[i].exchange);
+      const exchangeList = toExchangeList(lemmares[i].exchange);
       let find = false;
       let exchange = "";
       for (let m = 0; m < exchangeList.length; m++) {
@@ -170,7 +170,6 @@ Page({
           directres[i].translation.indexOf("\n")
         );
       }
-      // console.log('rect length of:', directres[i], word_utils.getResObjRectLength(directres[i]))
     }
     console.log("directres", directres);
 

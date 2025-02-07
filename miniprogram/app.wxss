@@ -1,4 +1,4 @@
-@import "style/iconfont.wxss";
+/* @import "style/iconfont.wxss"; */
 @import "style/icon.wxss";
 
 @import "style/theme.wxss";

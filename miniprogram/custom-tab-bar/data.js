@@ -5,17 +5,22 @@ export default [
     url: "pages/home/home",
   },
   {
-    icon: "comment",
+    icon: "chat",
     text: "聊天",
     url: "pages/history/index",
   },
   {
-    icon: "sort",
+    icon: "words",
+    text: "单词",
+    url: "pages/word-overview/index",
+  },
+  {
+    icon: "app",
     text: "情景",
     url: "pages/scenarios/index",
   },
   {
-    icon: "person",
+    icon: "user",
     text: "个人中心",
     url: "pages/settings/index",
   },

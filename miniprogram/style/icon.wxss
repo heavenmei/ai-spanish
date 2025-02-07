@@ -1,7 +1,6 @@
 @font-face {
   font-family: "icon"; /* Project id 4645788 */
-  src: url("//at.alicdn.com/t/c/font_4645788_gf8c361ctli.woff2?t=1735457329046")
-    format("woff2");
+  src: url('//at.alicdn.com/t/c/font_4645788_qhbwebnc92.woff2?t=1738914365864') format('woff2');
 }
 
 .icon {
@@ -10,6 +9,26 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-words:before {
+  content: "\e61b";
+}
+
+.icon-app:before {
+  content: "\e643";
+}
+
+.icon-home:before {
+  content: "\e7c6";
+}
+
+.icon-user:before {
+  content: "\e682";
+}
+
+.icon-chat:before {
+  content: "\e69d";
 }
 
 .icon-right:before {

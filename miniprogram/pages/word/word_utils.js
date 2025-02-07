@@ -1,13 +1,3 @@
-const tagDict = {
-  zk: "中考",
-  gk: "高考",
-  ky: "考研",
-  cet4: "四级",
-  cet6: "六级",
-  toefl: "托福",
-  ielts: "雅思",
-  gre: "GRE",
-};
 
 const exchangeTagList = ["s", "p", "d", "i", "3", "r", "t"]; // 统一词形变换排列顺序用
 const exchangeNameDict = {
@@ -214,8 +204,6 @@ const randArr = (arr) => {
 };
 
 module.exports = {
-  tagDict: tagDict,
-  exchangeNameDict: exchangeNameDict,
   toExchangeList: toExchangeList,
   toTransList: toTransList,
   getTagList: getTagList,

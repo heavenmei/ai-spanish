@@ -2,8 +2,8 @@ import {
   toggleAddToNB,
   getReviewData,
   updateLearningRecord,
-} from "../apis/word";
-import word_utils from "../word_utils";
+} from "../../../apis/word";
+import { randNumList, randArr } from "../word_utils";
 
 const app = getApp();
 
@@ -565,7 +565,7 @@ Page({
   // * 生成干扰项数组（最后一项为正确答案），生成用于打乱和标记背景颜色的数组以及正确选项索引
   getWrongTrans(nowIndex) {
     if (!nowIndex) nowIndex = this.control.nowIndex;
-    const numList = word_utils.randNumList(
+    const numList = randNumList(
       this.wordDetailList[nowIndex].sample_list.length - 1,
       3
     );
@@ -579,7 +579,7 @@ Page({
     wrongTransWordList.push(this.wordDetailList[nowIndex]);
 
     let choiceOrder = [0, 1, 2, 3];
-    choiceOrder = word_utils.randArr(choiceOrder);
+    choiceOrder = randArr(choiceOrder);
     const rightIndex = choiceOrder.indexOf(3);
     const choiceBgList = ["", "", "", ""];
 

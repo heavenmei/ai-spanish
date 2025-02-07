@@ -3,6 +3,7 @@
     "pages/home/home",
     "pages/login/login",
     "pages/history/index",
+    "pages/word-overview/index",
     "pages/scenarios/index",
     "pages/settings/index",
     "pages/settings/person-info/index",
@@ -13,7 +14,6 @@
       "name": "word",
       "root": "pages/word",
       "pages": [
-        "index",
         "learn/learn",
         "review/review",
         "list/list",
@@ -49,6 +49,10 @@
       {
         "pagePath": "pages/history/index",
         "text": "聊天"
+      },
+      {
+        "pagePath": "pages/word-overview/index",
+        "text": "单词"
       },
       {
         "pagePath": "pages/scenarios/index",
