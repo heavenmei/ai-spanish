@@ -38,11 +38,11 @@ Page({
     pickerOptions: [
       {
         name: "男",
-        code: "1",
+        code: 1,
       },
       {
         name: "女",
-        code: "2",
+        code: 2,
       },
     ],
     typeVisible: false,
@@ -51,6 +51,20 @@ Page({
     showWithInput: false,
   },
   onLoad() {
+    // const userinfo = wx.getStorageSync("userInfo");
+    // if (userinfo.id) {
+    //   this.setData({
+    //     userInfo: {
+    //       ...userinfo,
+    //       phoneNumber: userinfo.phoneNumber
+    //         ? phoneEncryption(userinfo.phoneNumber)
+    //         : "去绑定手机号",
+    //     },
+    //     hasUserInfo: true,
+    //   });
+    // }
+  },
+  onShow() {
     const userinfo = wx.getStorageSync("userInfo");
     if (userinfo.id) {
       this.setData({
@@ -63,6 +77,13 @@ Page({
         hasUserInfo: true,
       });
     }
+  },
+  async onUnload() {
+    const { nickName } = this.data.userInfo;
+    await updateUser(this.data.userInfo);
+    app.globalData.userInfo.nickName = nickName;
+    wx.setStorageSync("userInfo", app.globalData.userInfo);
+    console.log(app.globalData.userInfo);
   },
 
   onClickCell({ currentTarget }) {
@@ -95,18 +116,20 @@ Page({
   },
   onConfirm(e) {
     const { value } = e.detail;
+    console.log(e.detail);
+
     this.setData(
       {
         typeVisible: false,
         "userInfo.gender": value,
       },
       () => {
-        Toast({
-          context: this,
-          selector: "#t-toast",
-          message: "设置成功",
-          theme: "success",
-        });
+        // Toast({
+        //   context: this,
+        //   selector: "#t-toast",
+        //   message: "设置成功",
+        //   theme: "success",
+        // });
       }
     );
   },

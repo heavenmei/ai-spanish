@@ -9,7 +9,9 @@ import {
   timestamp,
   uuid,
   varchar,
+  pgEnum,
 } from "drizzle-orm/pg-core";
+
 
 export const users = pgTable("users", {
   id: text("id")
@@ -18,6 +20,8 @@ export const users = pgTable("users", {
   username: text("username"),
   pwd: text("pwd"),
   nickName: text("nickName"),
+  gender: integer('gender'),
+  phoneNumber: text("phoneNumber"),
   avatarUrl: text("avatarUrl"),
   of_matrix: text("of_matrix"),
   l_book_id: text("l_book_id")

@@ -5,7 +5,7 @@ import {
 } from "../../../apis/word";
 import { WORD_VOICE_URL } from "../../../config/index.js";
 
-import { randNumList, randArr } from "../word_utils";
+import { randNumList, randArr, batchHandleWordDetail } from "../word_utils";
 
 const app = getApp();
 
@@ -143,7 +143,11 @@ Page({
       sample: this.settings.sample,
     });
 
-    const wordDetailList = learnDataRes.list;
+    let wordDetailList = learnDataRes.list;
+    wordDetailList = batchHandleWordDetail(wordDetailList, {
+      getShortTrans: false,
+    });
+    console.log(wordDetailList);
 
     const unLearnedList = [];
     const wordLearningRecord = [];
@@ -694,7 +698,7 @@ Page({
   getWrongTrans(nowIndex) {
     if (!nowIndex) nowIndex = this.control.nowIndex;
     const numList = randNumList(
-      this.wordDetailList[nowIndex].sample_list.length - 1,
+      this.wordDetailList[nowIndex].sample_list.length - 2,
       3
     );
     const wrongTransWordList = [];
@@ -703,8 +707,8 @@ Page({
         this.wordDetailList[nowIndex].sample_list[numList[j]]
       );
     }
-    // 插入正确的选项
-    wrongTransWordList.push(this.wordDetailList[nowIndex]);
+    // 插入正确的选项 最后一个
+    wrongTransWordList.push(this.wordDetailList[nowIndex].sample_list[9]);
 
     let choiceOrder = [0, 1, 2, 3];
     choiceOrder = randArr(choiceOrder);

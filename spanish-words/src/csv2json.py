@@ -41,9 +41,11 @@ APP_KEY = os.getenv("YOUDAO_APP_KEY")
 # 您的应用密钥
 APP_SECRET = os.getenv("YOUDAO_APP_SECRET")
 # 合成音频保存路径
-PATH = "../data/"
+PATH = "./data/"
 # 书名
-WORD_BOOK = "NewMiddleSchool"
+WORD_BOOK = "modernSpanish2"
+csv_file_path = "./data/老现西第二册.csv"
+
 os.makedirs(os.path.dirname(f"{PATH}{WORD_BOOK}/"), exist_ok=True)
 
 
@@ -86,8 +88,14 @@ def main(start, all_word_df, audio=False):
         if not isExist.empty:
             id = isExist["id"].values[0]
             sameWords.append({"word_id": id, "word": row["word"]})
+        # 合并翻译
+        elif pd.isna(row["word"]):
+            entry["definition"] = f"{entry['definition']}\n{row['definition']}"
+            entry["translation"] = f"{entry['translation']}\n{row['translation']}"
+
         else:
-            clean_word = re.sub(r"[^\w\s]", "", row["translation"])
+            clean_word = re.sub(r"[^\w\s]", "", row["translation"]).split("\n")[0]
+
             # todo 命名规则需要符合url规范
             id = f"{index}_{clean_word}"
             voiceUrl = f"{WORD_BOOK}/{id}.mp3"
@@ -101,8 +109,16 @@ def main(start, all_word_df, audio=False):
                 "id": id,
                 "pos": row["pos"] if "pos" in row and pd.notna(row["pos"]) else None,
                 "word": row["word"],
-                "definition": row["definition"],
-                "translation": row["translation"],
+                "definition": (
+                    row["definition"]
+                    if "definition" in row and pd.notna(row["definition"])
+                    else ""
+                ),
+                "translation": (
+                    f"{row['pos']} {row['translation']}"
+                    if "pos" in row and pd.notna(row["pos"])
+                    else row["translation"]
+                ),
                 "voiceUrl": voiceUrl,
             }
             data.append(entry)
@@ -119,11 +135,11 @@ def main(start, all_word_df, audio=False):
 
 if __name__ == "__main__":
     # ! 更新单词数据表
-    all_word_path = "../data/word.csv"
+    all_word_path = "./data/word.csv"
     all_word_df = pd.read_csv(all_word_path, encoding="utf-8")
 
-    csv_file_path = "../data/中学新教材 必修I.csv"
     df = pd.read_csv(csv_file_path, encoding="utf-8")
 
     # main(0)
     main(0, all_word_df, audio=False)
+    # main(0, all_word_df, audio=True)

@@ -1,4 +1,3 @@
-
 const exchangeTagList = ["s", "p", "d", "i", "3", "r", "t"]; // 统一词形变换排列顺序用
 const exchangeNameDict = {
   p: "过去式",
@@ -116,7 +115,7 @@ const getWordVoiceUrl = (word, source = 0, type = 2) => {
 
 // 处理单词信息
 const handleWordDetail = (wordDetail, settings = {}) => {
-  console.log("handleWordDetail", wordDetail);
+  // console.log("handleWordDetail", wordDetail);
 
   if (wordDetail.tagList) wordDetail.tag = getTagList(wordDetail);
   if (wordDetail.translation)

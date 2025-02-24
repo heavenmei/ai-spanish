@@ -127,6 +127,8 @@ export async function login(c: Context<{ Variables: ContextVariables }>) {
       if (!curUser) {
         curUser = {
           id: phoneNumber,
+          username: phoneNumber,
+          phoneNumber: phoneNumber,
           nickName: nickName || `西语#${generateRandomNickname(12)}`,
           avatarUrl,
           of_matrix: JSON.stringify(InitOFMatrix),
@@ -235,7 +237,7 @@ export async function logout(c: Context<{ Variables: ContextVariables }>) {
 
 // POST
 export async function updateUser(c: Context) {
-  const { wordSetting, nickName, avatarUrl } = await c.req.json();
+  const { wordSetting, nickName, avatarUrl, gender } = await c.req.json();
 
   const user = c.get("user");
   if (!user) {
@@ -246,10 +248,11 @@ export async function updateUser(c: Context) {
     wordSetting: wordSetting ? JSON.stringify(wordSetting) : undefined,
     nickName: nickName ? nickName : undefined,
     avatarUrl: avatarUrl ? avatarUrl : undefined,
+    gender: gender ? gender : undefined,
   };
 
   try {
-    console.log("updateUser===", wordSetting, JSON.stringify(wordSetting));
+    // console.log("updateUser===", wordSetting, JSON.stringify(wordSetting));
 
     const res = await db
       .update(users)

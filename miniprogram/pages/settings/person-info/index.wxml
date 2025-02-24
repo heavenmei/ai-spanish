@@ -13,7 +13,7 @@
       wx:key="item"
       data-type="{{item.type}}"
       title="{{item.title}}"
-      note="{{userInfo[item.value]}}"
+      note="{{item.type =='gender'? genderMap[userInfo.gender]:userInfo[item.value]}}"
       url="{{item.url}}"
       leftIcon="{{item.icon}}"
       bordered="{{false}}"
@@ -40,7 +40,7 @@
   show="{{typeVisible}}"
   picker-options="{{pickerOptions}}"
   title="选择性别"
-  value="{{userInfo.gender}}"
+  value="{{genderText}}"
   bind:confirm="onConfirm"
   bind:close="onClose"
 />

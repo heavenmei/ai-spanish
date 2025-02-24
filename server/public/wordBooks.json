@@ -17,7 +17,7 @@
     "id": "modernSpanish2",
     "name": "现代西班牙语 第二册",
     "description": "现代西班牙语2",
-    "total": 967,
+    "total": 818,
     "tag": "A1",
     "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/ModernSpanish1.png"
   },
@@ -27,7 +27,7 @@
     "description": "西班牙语中学课程标准",
     "total": 3330,
     "tag": "A1",
-    "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/NewMiddleSchool.png"
+    "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/middleSchoolStandard.jpg"
   },
   {
     "id": "NewMiddleSchool",

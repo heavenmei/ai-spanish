@@ -33,11 +33,10 @@
   </view>
 </view>
 
-<view class="contentCard">
+<view class="contentCard" wx:if="{{wordDetail.definition}}">
   <view class="title">西语描述</view>
 
   <view class="contentWrapper def">
-    <text class="pos" wx:if="{{wordDetail.pos}}">{{wordDetail.pos}}</text>
     <text class="meaning">{{wordDetail.definition}}</text>
   </view>
 </view>
@@ -46,7 +45,16 @@
   <view class="title">中文释义</view>
 
   <view class="contentWrapper trans">
-    <text class="pos" wx:if="{{wordDetail.pos}}">{{wordDetail.pos}}</text>
-    <text class="meaning">{{wordDetail.translation}}</text>
+    <view
+      class="content transRow"
+      wx:for="{{wordDetail.translation}}"
+      wx:key="index"
+    >
+      <text class="pos" wx:if="{{ item.pos && item.pos != '' }}"
+        >{{item.pos}}</text
+      >
+      <text class="pos" wx:elif="{{wordDetail.pos}}">{{wordDetail.pos}}</text>
+      <text class="meaning">{{item.meaning}}</text>
+    </view>
   </view>
 </view>

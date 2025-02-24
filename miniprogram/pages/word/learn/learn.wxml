@@ -43,15 +43,17 @@
       data-index="{{index}}"
       bindtap="{{ isBtnActive? 'checkChoice':'' }}"
     >
-      <view class="pos">{{wrongTransWordList[item].pos}}</view>
-      <view class="meaning"> {{wrongTransWordList[item].translation}}</view>
+      <view class="pos">{{wrongTransWordList[item].translation.pos}}</view>
+      <view class="meaning">
+        {{wrongTransWordList[item].translation.meaning}}</view
+      >
     </view>
   </view>
 
   <view class="translationWrapper" wx:if="{{ contentMode == 1 }}">
-    <view class="transRow">
-      <view class="pos">{{wordDetail.pos}}</view>
-      <view class="meaning">{{wordDetail.translation}} </view>
+    <view class="transRow" wx:for="{{wordDetail.translation}}" wx:key="index">
+      <text class="pos" wx:if="{{ item.pos != '' }}">{{item.pos}}</text>
+      <text class="meaning">{{item.meaning}}</text>
     </view>
   </view>
   <view

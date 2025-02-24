@@ -1,6 +1,7 @@
 // pages/word/detail/detail.js
 import { getWordDetail, toggleAddToNB } from "../../../apis/word";
 import { WORD_VOICE_URL } from "../../../config/index.js";
+import { toTransList } from "../word_utils";
 
 // const app = getApp();
 const innerAudioContext = wx.createInnerAudioContext({
@@ -32,6 +33,7 @@ Page({
       word_id,
     });
     const wordDetail = JSON.parse(JSON.stringify(res.data));
+    wordDetail.translation = toTransList(wordDetail.translation);
     console.log(wordDetail);
 
     this.setData({

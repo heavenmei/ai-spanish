@@ -524,7 +524,7 @@ export async function getBookRecordWord(c: Context) {
       .from(wordInBook)
       .where(subQuery);
 
-    logger.info("📚 getBookRecordWord ", wb_id, subType, res);
+    // logger.info("📚 getBookRecordWord ", wb_id, subType, res);
 
     return c.json(
       listRes({
