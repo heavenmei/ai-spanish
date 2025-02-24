@@ -11,7 +11,31 @@
     "description": "现代西班牙语1",
     "total": 967,
     "tag": "A1",
-    "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/ModernSpanish.jpg"
+    "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/ModernSpanish1.png"
+  },
+  {
+    "id": "modernSpanish2",
+    "name": "现代西班牙语 第二册",
+    "description": "现代西班牙语2",
+    "total": 967,
+    "tag": "A1",
+    "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/ModernSpanish1.png"
+  },
+  {
+    "id": "middleSchoolStandard",
+    "name": "西班牙语中学课程标准",
+    "description": "西班牙语中学课程标准",
+    "total": 3330,
+    "tag": "A1",
+    "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/NewMiddleSchool.png"
+  },
+  {
+    "id": "NewMiddleSchool",
+    "name": "中学新教材 必修I",
+    "description": "中学新教材 必修I",
+    "total": 970,
+    "tag": "",
+    "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/NewMiddleSchool.png"
   },
   {
     "id": "3",
@@ -20,13 +44,5 @@
     "total": 395,
     "tag": "A1",
     "cover": "https://spanish-hhw.oss-cn-shanghai.aliyuncs.com/system/DELE_A1.jpg"
-  },
-  {
-    "id": "NewMiddleSchool",
-    "name": "中学新教材 必修I",
-    "description": "中学新教材 必修I",
-    "total": 970,
-    "tag": "",
-    "cover": ""
   }
 ]

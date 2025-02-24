@@ -13,8 +13,10 @@ page {
 
   --navigationBarHeight: 90px;
 
+  --bg-image: url(https://s2.loli.net/2024/08/10/3x6wDj7s1OIXAeJ.png);
+
   background-color: #f4dbb1;
-  background-image: url(https://s2.loli.net/2024/08/10/3x6wDj7s1OIXAeJ.png);
+  background-image: var(--bg-image);
   background-size: cover;
   background-repeat: no-repeat;
 

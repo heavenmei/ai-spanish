@@ -107,7 +107,8 @@ Page({
 
   async gotoWord() {
     if (!(await this.checkLogin())) return;
-    wx.navigateTo({
+
+    wx.switchTab({
       url: `/pages/word-overview/index`,
     });
   },

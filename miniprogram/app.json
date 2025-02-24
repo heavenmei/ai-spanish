@@ -7,7 +7,9 @@
     "pages/scenarios/index",
     "pages/settings/index",
     "pages/settings/person-info/index",
-    "pages/settings/word-settings/wsetting"
+    "pages/settings/word-settings/wsetting",
+    "pages/settings/vip/vip",
+    "pages/settings/wallet/wallet"
   ],
   "subPackages": [
     {
@@ -24,21 +26,27 @@
     {
       "name": "chat",
       "root": "pages/chat",
-      "pages": ["index"]
+      "pages": [
+        "index"
+      ]
     },
     {
       "name": "echarts",
       "root": "echarts",
-      "pages": ["ec-canvas/ec-canvas", "baseChart/baseChart"]
+      "pages": [
+        "ec-canvas/ec-canvas",
+        "baseChart/baseChart"
+      ]
     }
   ],
   "preloadRule": {
     "pages/home/home": {
       "network": "all",
-      "packages": ["echarts"]
+      "packages": [
+        "echarts"
+      ]
     }
   },
-
   "tabBar": {
     "custom": true,
     "list": [

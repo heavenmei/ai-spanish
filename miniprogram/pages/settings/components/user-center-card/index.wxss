@@ -8,8 +8,8 @@
 }
 
 .user-center-card__header {
-  margin-top: 192rpx;
-  margin-bottom: 48rpx;
+  margin-top: 170rpx;
+  /* margin-bottom: 48rpx; */
   height: 96rpx;
   line-height: 48rpx;
   display: flex;

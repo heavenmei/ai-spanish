@@ -1,0 +1,51 @@
+<view class="container">
+  <!-- Container -->
+  <block>
+    <view wx:if="{{ messageList.length === 0}}">
+      <view class="title">{{chatOutput}}</view>
+    </view>
+
+    <scroll-view
+      id="message-list"
+      class="message-list-wrap scroll-content"
+      scroll-y="{{true}}"
+      scroll-with-animation="{{true}}"
+      scroll-into-view="{{scrollIntoViewId}}"
+      reverse="{{true}}"
+    >
+      <block
+        class="message-list"
+        wx:for="{{messageList}}"
+        wx:key="id"
+        wx:for-item="item"
+        wx:for-index="index"
+      >
+        <message-card
+          id="{{item.id}}"
+          cardId="{{item.id}}"
+          text="{{item.content}}"
+          speech="{{item.speech}}"
+          filename="{{item.filename}}"
+          seconds="{{'0:05'}}"
+          updatedAt="{{item.updatedAt}}"
+          isAiRes="{{item.isAiRes}}"
+          bind:playAudio="playAudio"
+        ></message-card>
+      </block>
+
+      <!-- last item -->
+      <view
+        wx:if="{{messageList.length > 0}}"
+        id="lastItem"
+        class="last-item"
+      ></view>
+    </scroll-view>
+
+    <load-more
+      list-is-empty="{{!messageList.length}}"
+      status="{{messageListLoadStatus}}"
+      bind:retry="onReTry"
+    />
+    <t-toast id="t-toast" />
+  </block>
+</view>

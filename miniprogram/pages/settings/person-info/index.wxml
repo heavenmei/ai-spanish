@@ -1,56 +1,46 @@
-<view class="person-info">
-  <t-cell-group>
+<view class="container">
+  <t-avatar
+    image="{{userInfo.avatarUrl || defaultAvatarUrl}}"
+    class="user-center-card__header__avatar"
+    size="large"
+    data-type="avatarUrl"
+    bind:click="onClickCell"
+  />
+
+  <t-cell-group class="person-info">
     <t-cell
-      title="头像"
-      center="{{true}}"
-      data-type="avatar"
-      bind:click="onClickCell"
-      arrow
-      t-class-left="order-group__left"
-    >
-      <t-image
-        slot="note"
-        src="{{personInfo.avatarUrl}}"
-        t-class="avatarUrl"
-        mode="aspectFill"
-      />
-    </t-cell>
-    <t-cell
-      title="昵称"
-      arrow
-      note="{{personInfo.nickName}}"
-      data-type="name"
-      bind:click="onClickCell"
-      t-class="t-cell-class"
-      t-class-left="order-group__left"
-    />
-    <!-- <t-cell
-      title="性别"
-      arrow
-      note="{{genderMap[personInfo.gender]}}"
-      data-type="gender"
-      bind:click="onClickCell"
-      t-class="t-cell-class"
-      t-class-left="order-group__left"
-    />
-    <t-cell
+      wx:for="{{cellList}}"
+      wx:key="item"
+      data-type="{{item.type}}"
+      title="{{item.title}}"
+      note="{{userInfo[item.value]}}"
+      url="{{item.url}}"
+      leftIcon="{{item.icon}}"
       bordered="{{false}}"
-      title="手机号"
-      arrow
-      note="{{personInfo.phoneNumber ? personInfo.phoneNumber : '去绑定手机号'}}"
-      data-type="phoneNumber"
       bind:click="onClickCell"
       t-class="t-cell-class"
       t-class-left="order-group__left"
-    /> -->
+      hover
+      arrow
+    />
   </t-cell-group>
+
+  <t-button
+    class="logout-btn"
+    theme="danger"
+    size="large"
+    style="width: 60%"
+    bind:tap="logout"
+    disabled="{{!hasUserInfo}}"
+    >退出登录</t-button
+  >
 </view>
 
 <t-select-picker
   show="{{typeVisible}}"
   picker-options="{{pickerOptions}}"
   title="选择性别"
-  value="{{personInfo.gender}}"
+  value="{{userInfo.gender}}"
   bind:confirm="onConfirm"
   bind:close="onClose"
 />
@@ -69,7 +59,7 @@
     class="dialog-input"
     clearable
     slot="content"
-    placeholder="{{personInfo.nickName}}"
+    placeholder="{{userInfo.nickName}}"
     placeholder-class="placeholder"
     bind:change="onInput"
   />

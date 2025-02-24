@@ -9,6 +9,7 @@ import {
   serverEnvs,
   successRes,
   UserParamsSchema,
+  generateRandomNickname,
 } from "@/utils";
 import axios from "axios";
 import { getCookie, setCookie } from "hono/cookie";
@@ -86,30 +87,47 @@ export async function login(c: Context<{ Variables: ContextVariables }>) {
   let curUser = null;
 
   if (type === "wechat") {
-    const { data } = await axios.get(
-      "https://api.weixin.qq.com/sns/jscode2session",
+    // const { data } = await axios.get(
+    //   "https://api.weixin.qq.com/sns/jscode2session",
+    //   {
+    //     params: {
+    //       appid: serverEnvs.WX_APPID,
+    //       secret: serverEnvs.WX_SECRET,
+    //       js_code: code,
+    //       grant_type: "authorization_code",
+    //     },
+    //   }
+    // );
+
+    const { data: access } = await axios.get(
+      "https://api.weixin.qq.com/cgi-bin/token",
       {
         params: {
           appid: serverEnvs.WX_APPID,
           secret: serverEnvs.WX_SECRET,
-          js_code: code,
-          grant_type: "authorization_code",
+          grant_type: "client_credential",
         },
       }
     );
-
+    const { data } = await axios.post(
+      `https://api.weixin.qq.com/wxa/business/getuserphonenumber?access_token=${access.access_token}`,
+      {
+        code: code,
+      }
+    );
+    const phoneNumber = data.phone_info.phoneNumber;
     try {
       curUser = await db.query.users.findFirst({
-        where: eq(users.id, data.openid),
+        where: eq(users.id, phoneNumber),
       });
 
-      logger.debug("curUser", curUser);
+      logger.debug("curUser", phoneNumber, curUser);
 
       // 注册
       if (!curUser) {
         curUser = {
-          id: data.openid,
-          nickName,
+          id: phoneNumber,
+          nickName: nickName || `西语#${generateRandomNickname(12)}`,
           avatarUrl,
           of_matrix: JSON.stringify(InitOFMatrix),
           wordSetting: JSON.stringify(InitWordSetting),
@@ -208,11 +226,10 @@ export async function login(c: Context<{ Variables: ContextVariables }>) {
 // GET
 export async function logout(c: Context<{ Variables: ContextVariables }>) {
   const session = c.get("session");
-  if (!session) {
-    return c.body(null, 401);
+  if (session) {
+    await lucia.invalidateSession(session.id);
+    c.header("Set-Cookie", lucia.createBlankSessionCookie().serialize());
   }
-  await lucia.invalidateSession(session.id);
-  c.header("Set-Cookie", lucia.createBlankSessionCookie().serialize());
   return c.json(successRes({}));
 }
 

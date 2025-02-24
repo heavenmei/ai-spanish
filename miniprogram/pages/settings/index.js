@@ -1,7 +1,45 @@
 import Toast from "tdesign-miniprogram/toast";
 import { logout } from "../../apis/index";
 import { updateDuration } from "../../common/recordStudyDuration";
-import { MenuData } from "./constants";
+
+const MenuData = [
+  {
+    title: "个人设置",
+    icon: "setting",
+    url: "/pages/settings/person-info/index",
+    type: "user",
+  },
+  {
+    title: "账户充值",
+    icon: "wallet",
+    url: "/pages/settings/wallet/wallet",
+    type: "wallet",
+  },
+  {
+    title: "会员升级",
+    icon: "user-vip",
+    url: "/pages/settings/vip/vip",
+    type: "coupon",
+  },
+  {
+    title: "对话统计",
+    icon: "chart-pie",
+    url: "",
+    type: "statistics",
+  },
+  {
+    title: "单词设置",
+    icon: "address-book",
+    url: "/pages/settings/word-settings/wsetting",
+    type: "word",
+  },
+  {
+    title: "技术支持",
+    icon: "service",
+    url: "",
+    type: "help-center",
+  },
+];
 
 const app = getApp();
 
@@ -61,6 +99,12 @@ Page({
     const { type } = currentTarget.dataset;
 
     switch (type) {
+      case "user": {
+        wx.navigateTo({
+          url: "/pages/setting/index",
+        });
+        break;
+      }
       case "coupon": {
         // wx.navigateTo({
         //   url: "/pages/coupon/coupon-list/index",
@@ -77,12 +121,7 @@ Page({
         });
         break;
       }
-      case "word": {
-        wx.navigateTo({
-          url: "/pages/settings/word-settings/wsetting",
-        });
-        break;
-      }
+
       case "help-center": {
         Toast({
           context: this,

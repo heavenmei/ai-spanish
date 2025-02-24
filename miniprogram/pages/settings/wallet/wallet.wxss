@@ -1,0 +1,34 @@
+.bgWrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -100;
+  background-image: linear-gradient(to bottom, var(--navbar-bg-color), #ffffff);
+}
+.card {
+  background-image: var(--bg-image);
+  background-size: 100% 500%;
+  width: 80%;
+  height: 300rpx;
+  margin: 10px auto;
+  padding: 24rpx;
+  border-radius: 10px;
+  box-shadow: 2rpx 2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+.card_title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: var(--text-color);
+  margin: 20rpx 0;
+}
+.detailWrap {
+  width: 100%;
+  padding: 0 24rpx;
+  margin: 20rpx 0;
+}
+.detailWrap .label {
+  font-size: 36rpx;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}

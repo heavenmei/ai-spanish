@@ -43,3 +43,14 @@ export function formatDate(date: Date) {
 
   return `${year}-${month}-${day}`;
 }
+
+export function generateRandomNickname(length) {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:,.<>?";
+  let nickname = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    nickname += chars[randomIndex];
+  }
+  return nickname;
+}

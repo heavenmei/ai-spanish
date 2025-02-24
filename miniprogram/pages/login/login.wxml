@@ -84,8 +84,18 @@
 </view>
 
 <view class="wxLoginWrapper">
-  <view class="loginBtn" hover-class="wasTaped" bindtap="wxLogin">
+  <!-- <view class="loginBtn" hover-class="wasTaped" bindtap="wxLogin">
     <image class="logo" src="../../images/wechat.png" mode="aspectFit"></image>
-  </view>
+  </view> -->
+
+  <button
+    class="loginBtn"
+    type="primary"
+    open-type="getRealtimePhoneNumber"
+    bindgetrealtimephonenumber="wxPhoneNumber"
+  >
+    <t-icon prefix="icon" name="wechat" size="48rpx" />
+  </button>
+
   <view class="wxLoginTip">微信登录无需注册哦~</view>
 </view>

@@ -1,6 +1,6 @@
 @font-face {
   font-family: "icon"; /* Project id 4645788 */
-  src: url('//at.alicdn.com/t/c/font_4645788_qhbwebnc92.woff2?t=1738914365864') format('woff2');
+  src: url('//at.alicdn.com/t/c/font_4645788_pj5ir0igne.woff2?t=1738995855617') format('woff2');
 }
 
 .icon {
@@ -9,6 +9,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tongji:before {
+  content: "\e64d";
+}
+
+.icon-VIP:before {
+  content: "\e876";
+}
+
+.icon-beidanci:before {
+  content: "\e601";
+}
+
+.icon-wechat:before {
+  content: "\e658";
 }
 
 .icon-words:before {

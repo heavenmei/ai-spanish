@@ -145,6 +145,21 @@ Page({
     this.afterLogin(res);
   },
 
+  async wxPhoneNumber(e) {
+    console.log(e);
+
+    wx.showLoading({
+      title: "",
+    });
+    if (e.detail.errMsg == "getPhoneNumber:ok") {
+      const res = await login({
+        code: e.detail.code,
+      });
+
+      this.afterLogin(res);
+    }
+  },
+
   afterLogin(res) {
     if (!res.success) {
       return;

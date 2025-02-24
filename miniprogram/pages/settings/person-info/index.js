@@ -1,15 +1,39 @@
-// import { phoneEncryption } from "../../../utils/util";
 import Toast from "tdesign-miniprogram/toast";
-import { updateUser } from "../../../apis/index";
+import { updateUser, logout } from "../../../apis/index";
+import { updateDuration } from "../../../common/recordStudyDuration";
+import { phoneEncryption } from "../../../utils/util";
 
 const app = getApp();
 
+const cellList = [
+  {
+    type: "name",
+    title: "昵称",
+    value: "nickName",
+  },
+  {
+    type: "gender",
+    title: "性别",
+    value: "gender",
+  },
+  {
+    type: "phoneNumber",
+    title: "手机号",
+    value: "phoneNumber",
+  },
+];
+
 Page({
   data: {
-    personInfo: {
+    defaultAvatarUrl:
+      "https://cdn-we-retail.ym.tencent.com/miniapp/usercenter/icon-user-center-avatar@2x.png",
+    cellList: cellList,
+    userInfo: {
       avatarUrl: "",
       nickName: "",
+      phoneNumber: "去绑定手机号",
     },
+    hasUserInfo: false,
     showUnbindConfirm: false,
     pickerOptions: [
       {
@@ -30,13 +54,17 @@ Page({
     const userinfo = wx.getStorageSync("userInfo");
     if (userinfo.id) {
       this.setData({
-        personInfo: {
+        userInfo: {
           ...userinfo,
-          // phoneNumber: phoneEncryption(userinfo.phoneNumber),
+          phoneNumber: userinfo.phoneNumber
+            ? phoneEncryption(userinfo.phoneNumber)
+            : "去绑定手机号",
         },
+        hasUserInfo: true,
       });
     }
   },
+
   onClickCell({ currentTarget }) {
     const { dataset } = currentTarget;
 
@@ -70,7 +98,7 @@ Page({
     this.setData(
       {
         typeVisible: false,
-        "personInfo.gender": value,
+        "userInfo.gender": value,
       },
       () => {
         Toast({
@@ -86,7 +114,7 @@ Page({
   onInput(e) {
     const nickName = e.detail.value;
     this.setData({
-      "personInfo.nickName": nickName,
+      "userInfo.nickName": nickName,
     });
   },
 
@@ -96,7 +124,7 @@ Page({
       showWithInput: false,
     });
 
-    const { nickName } = this.data.personInfo;
+    const { nickName } = this.data.userInfo;
     await updateUser({
       nickName: nickName,
     });
@@ -137,6 +165,33 @@ Page({
         selector: "#t-toast",
         message: error.errMsg || error.msg || "修改头像出错了",
         theme: "error",
+      });
+    }
+  },
+
+  async logout() {
+    const res = await logout();
+    if (res.success) {
+      wx.showToast({
+        title: "退出成功",
+        icon: "success",
+      });
+
+      const userId = wx.getStorageSync("userInfo").id;
+      wx.removeStorageSync("userInfo");
+      app && updateDuration(app, userId);
+
+      this.setData({
+        userInfo: {},
+        hasUserInfo: false,
+      });
+      wx.navigateTo({
+        url: `/pages/login/login`,
+      });
+    } else {
+      wx.showToast({
+        title: "退出失败",
+        icon: "error",
       });
     }
   },

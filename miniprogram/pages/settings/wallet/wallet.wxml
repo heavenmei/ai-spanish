@@ -1,0 +1,52 @@
+<view class="bgWrapper"></view>
+
+<view class="card">
+  <block>
+    <text class="card_title">账户积分</text>
+    <view class="card_content">0</view>
+  </block>
+  <block>
+    <text class="card_title">使用token</text>
+    <view class="card_content">0</view>
+  </block>
+</view>
+
+<view class="detailWrap">
+  <view class="label">使用明细</view>
+
+  <scroll-view
+    id="message-list"
+    class="message-list-wrap scroll-content"
+    scroll-y="{{true}}"
+    scroll-with-animation="{{true}}"
+    scroll-into-view="{{scrollIntoViewId}}"
+    reverse="{{true}}"
+  >
+    <block
+      class="message-list"
+      wx:for="{{messageList}}"
+      wx:key="id"
+      wx:for-item="item"
+      wx:for-index="index"
+    >
+      <message-card
+        id="{{item.id}}"
+        cardId="{{item.id}}"
+        text="{{item.content}}"
+        speech="{{item.speech}}"
+        filename="{{item.filename}}"
+        seconds="{{'0:05'}}"
+        updatedAt="{{item.updatedAt}}"
+        isAiRes="{{item.isAiRes}}"
+        bind:playAudio="playAudio"
+      ></message-card>
+    </block>
+
+    <!-- last item -->
+    <view
+      wx:if="{{messageList.length > 0}}"
+      id="lastItem"
+      class="last-item"
+    ></view>
+  </scroll-view>
+</view>
