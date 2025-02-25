@@ -6,11 +6,11 @@
     "t-navbar": "tdesign-miniprogram/navbar/navbar",
     "t-popup": "tdesign-miniprogram/popup/popup",
     "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-avatar": "tdesign-miniprogram/avatar/avatar",
     "t-toast": "tdesign-miniprogram/toast/toast",
     "t-cell": "tdesign-miniprogram/cell/cell",
     "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
     "t-button": "tdesign-miniprogram/button/button",
-    "user-center-card": "./components/user-center-card/index",
     "t-chart": "/echarts/baseChart/baseChart"
   },
   "componentPlaceholder": {

@@ -94,8 +94,8 @@
     open-type="getPhoneNumber"
     bindgetphonenumber="wxPhoneNumber"
   >
-    <t-icon prefix="icon" name="wechat" size="48rpx" />
+    <t-icon prefix="icon" name="phone" size="48rpx" />
   </button>
 
-  <view class="wxLoginTip">微信登录无需注册哦~</view>
+  <view class="wxLoginTip">手机号快捷登录</view>
 </view>

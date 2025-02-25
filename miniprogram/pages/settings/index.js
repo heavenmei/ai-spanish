@@ -52,34 +52,25 @@ Page({
     customerServiceInfo: {},
     showKefu: true,
     versionNo: "",
+    defaultAvatarUrl:
+      "https://cdn-we-retail.ym.tencent.com/miniapp/usercenter/icon-user-center-avatar@2x.png",
 
     // option: {},
   },
 
   onLoad() {
     this.getVersionInfo();
-
-    const userinfo = wx.getStorageSync("userInfo");
-    if (userinfo.name) {
-      this.setData({
-        userInfo: userinfo,
-        hasUserInfo: true,
-      });
-    }
   },
 
   onShow() {
     this.getTabBar().init();
 
     const userinfo = wx.getStorageSync("userInfo");
-    if (userinfo.id) {
-      this.setData({
-        userInfo: userinfo,
-        hasUserInfo: true,
-      });
-
-      // this.setChartData();
-    }
+    this.setData({
+      userInfo: userinfo ? userinfo : {},
+      hasUserInfo: Boolean(userinfo.id),
+    });
+    console.log("userinfo", userinfo);
   },
   onPullDownRefresh() {
     // this.setChartData();

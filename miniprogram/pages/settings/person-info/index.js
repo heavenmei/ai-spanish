@@ -45,6 +45,10 @@ Page({
         code: 2,
       },
     ],
+    genderOption: [
+      { label: "男", value: 1 },
+      { label: "女", value: 2 },
+    ],
     typeVisible: false,
     genderMap: ["", "男", "女"],
 
@@ -78,13 +82,6 @@ Page({
       });
     }
   },
-  async onUnload() {
-    const { nickName } = this.data.userInfo;
-    await updateUser(this.data.userInfo);
-    app.globalData.userInfo.nickName = nickName;
-    wx.setStorageSync("userInfo", app.globalData.userInfo);
-    console.log(app.globalData.userInfo);
-  },
 
   onClickCell({ currentTarget }) {
     const { dataset } = currentTarget;
@@ -114,24 +111,19 @@ Page({
       showWithInput: false,
     });
   },
-  onConfirm(e) {
+  async onConfirmGender(e) {
     const { value } = e.detail;
-    console.log(e.detail);
 
-    this.setData(
-      {
-        typeVisible: false,
-        "userInfo.gender": value,
-      },
-      () => {
-        // Toast({
-        //   context: this,
-        //   selector: "#t-toast",
-        //   message: "设置成功",
-        //   theme: "success",
-        // });
-      }
-    );
+    this.setData({
+      typeVisible: false,
+      "userInfo.gender": value,
+    });
+    await updateUser({
+      gender: value,
+    });
+    app.globalData.userInfo.gender = value;
+    wx.setStorageSync("userInfo", app.globalData.userInfo);
+    console.log(app.globalData.userInfo);
   },
 
   onInput(e) {

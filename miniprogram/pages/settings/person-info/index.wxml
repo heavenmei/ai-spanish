@@ -36,14 +36,19 @@
   >
 </view>
 
-<t-select-picker
-  show="{{typeVisible}}"
-  picker-options="{{pickerOptions}}"
+<t-picker
+  visible="{{typeVisible}}"
+  value="{{userInfo.gender}}"
+  data-key="gender"
   title="选择性别"
-  value="{{genderText}}"
-  bind:confirm="onConfirm"
-  bind:close="onClose"
-/>
+  cancelBtn="取消"
+  confirmBtn="确认"
+  bindconfirm="onConfirmGender"
+  bindcancel="onClose"
+>
+  <t-picker-item options="{{genderOption}}"></t-picker-item>
+</t-picker>
+
 <t-toast id="t-toast" />
 
 <t-dialog
