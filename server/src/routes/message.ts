@@ -166,3 +166,96 @@ export async function deleteMessage(c: Context) {
     );
   }
 }
+
+// GET
+export async function getAllMessages(c: Context) {
+  const user = c.get("user");
+
+  if (!user) {
+    return c.json(
+      failRes({
+        message: "请先登录",
+      })
+    );
+  }
+
+  try {
+    // 获取该用户的所有消息，并按消息的创建时间排序
+    const messagesList = await db
+      .select()
+      .from(messages)
+      .where(eq(messages.uid, user.id))  // 仅获取当前用户的消息
+      .orderBy(desc(messages.createdAt))  // 按创建时间降序排列（最新的消息排前）
+      .execute();
+
+    if (!messagesList || messagesList.length === 0) {
+      return c.json(
+        failRes({
+          message: "没有找到用户消息",
+        })
+      );
+    }
+
+    // 获取用户的剩余token
+    const userData = await db
+      .select({recordToken: users.recordToken})
+      .from(users)
+      .where(eq(users.id, user.id))
+      .limit(1)
+      .execute();
+
+    if (!userData || userData.length === 0) {
+      return c.json(
+        failRes({
+          message: "用户数据未找到",
+        })
+      );
+    }
+
+    let userTokensRemaining = userData[0].recordToken; // 初始剩余token
+
+    // 处理消息列表，将提问和回答合并并计算总token消耗
+    const resultMessages = [];
+    let totalConsumedToken = 0;
+
+    for (let i = 0; i < messagesList.length; i++) {
+      const message = messagesList[i];
+
+      // 获取用户提问的token和AI回答的token
+      const userToken = message.isAiRes ? 0 : message.token;
+      const aiToken = message.isAiRes ? message.token : 0;  
+      const questionTotalToken = userToken + aiToken;
+
+      // 计算剩余的token
+      userTokensRemaining += questionTotalToken;
+
+      // 合并用户提问和AI回答，返回一条记录
+      if (i === 0 || messagesList[i].historyId !== messagesList[i - 1]?.historyId) {
+        resultMessages.push({
+          historyId: message.historyId, // 当前问题的唯一标识
+          questionTotalToken: questionTotalToken, // 当前问题的总token消耗
+          userTokensRemaining,  // 提问后的剩余token
+          messages: [message],  // 保存当前消息
+        });
+      } else {
+        // 合并同一问题的提问和回答内容
+        resultMessages[resultMessages.length - 1].messages.push(message);
+      }
+    }
+
+    // 返回消息列表（合并后的消息记录）和剩余的token
+    return c.json(
+      successRes({
+        message: "获取用户消息成功",
+        data: resultMessages,  // 返回合并后的消息记录
+      })
+    );
+  } catch (e: any) {
+    console.log(e);
+    return c.json(
+      failRes({
+        message: e.detail || "获取消息失败",
+      })
+    );
+  }
+}

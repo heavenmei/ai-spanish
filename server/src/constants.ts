@@ -15,6 +15,7 @@ export const API_URLS = {
   "API_MESSAGE_GETMESSAGELIST": "/api/message/getMessageList",
   "API_MESSAGE_UPDATEMESSAGE2": "/api/message/updateMessage2",
   "API_MESSAGE_DELETEMESSAGE": "/api/message/deleteMessage",
+  "API_MESSAGE_GETALLMESSAGES": "/api/message/getAllMessages",
   "API_SCENARIO_GETSCENARIOLIST": "/api/scenario/getScenarioList",
   "API_USER_INFO": "/api/user/info",
   "API_USER_LOGIN": "/api/user/login",

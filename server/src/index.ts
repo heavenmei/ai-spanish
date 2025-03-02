@@ -71,6 +71,7 @@ app.post("/api/history/deleteHistory", history.deleteHistory);
 app.get("/api/message/getMessageList", message.getMessageList);
 app.post("/api/message/updateMessage2", message.updateMessage2);
 app.post("/api/message/deleteMessage", message.deleteMessage);
+app.get("/api/message/getAllMessages", message.getAllMessages);
 app.get("/api/scenario/getScenarioList", scenario.getScenarioList);
 app.get("/api/user/info", user.info);
 app.post("/api/user/login", user.login);
