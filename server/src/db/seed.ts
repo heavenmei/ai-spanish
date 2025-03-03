@@ -9,15 +9,10 @@ import DELE_A1_inBook from "../../public/DELE_A1/DELE_A1_inBook.json";
 await db.insert(schema.word).values(DELE_A1);
 await db.insert(schema.wordInBook).values(DELE_A1_inBook);
 
-import modernSpanish1 from "../../public/modernSpanish1/modernSpanish1.json";
-import modernSpanish1_inBook from "../../public/modernSpanish1/modernSpanish1_inBook.json";
-await db.insert(schema.word).values(modernSpanish1);
-await db.insert(schema.wordInBook).values(modernSpanish1_inBook);
-
-import modernSpanish2 from "../../public/modernSpanish2/modernSpanish2.json";
-import modernSpanish2_inBook from "../../public/modernSpanish2/modernSpanish2_inBook.json";
-await db.insert(schema.word).values(modernSpanish2);
-await db.insert(schema.wordInBook).values(modernSpanish2_inBook);
+import modernSpanish from "../../public/modernSpanish/modernSpanish.json";
+import modernSpanish_inBook from "../../public/modernSpanish/modernSpanish_inBook.json";
+await db.insert(schema.word).values(modernSpanish);
+await db.insert(schema.wordInBook).values(modernSpanish_inBook);
 
 import NewMiddleSchool from "../../public/NewMiddleSchool/NewMiddleSchool.json";
 import NewMiddleSchool_inBook from "../../public/NewMiddleSchool/NewMiddleSchool_inBook.json";

@@ -53,6 +53,8 @@ Page({
 
     // favorite
     notebookWord: [],
+
+    wbPage: 1,
   },
 
   /**
@@ -186,6 +188,22 @@ Page({
       allBkData: allBkData,
     });
   },
+
+  async loadMoreWBData() {
+    const wbList = (
+      await getAllWBData({
+        page: this.data.wbPage + 1,
+      })
+    ).list;
+
+    this.setData({
+      allBkData: this.data.allBkData.concat(wbList),
+      wbPage: this.data.wbPage + 1,
+    });
+
+    console.log("loadMoreWBData", this.data.wbPage, wbList);
+  },
+
   onBookListVisible(e) {
     this.setData({
       bookListVisible: e.detail.visible,

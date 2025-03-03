@@ -35,7 +35,7 @@
 
 <view class="container">
   <view class="bookCard contentWrap">
-    <text class="title">单词本</text>
+    <text class="title">{{bkDetail.name || "单词本"}}</text>
     <view class="cardTop">
       <view class="bookWrapper">
         <view class="book" bindtap="showBookList">
@@ -251,7 +251,11 @@
   bind:visible-change="onBookListVisible"
   placement="bottom"
 >
-  <scroll-view class="changeBookWrapper" scroll-y="{{true}}">
+  <scroll-view
+    class="changeBookWrapper"
+    scroll-y="{{true}}"
+    bindscrolltolower="loadMoreWBData"
+  >
     <view
       class="book"
       wx:for="{{allBkData}}"
@@ -261,14 +265,14 @@
       bindtap="changeWordBook"
     >
       <view class="bookCover">
-          <image
-            wx:if="{{item.cover}}"
-            t-class="logo__img"
-            src="{{item.cover}}"
-            style="height: 100%; width: 100%"
-          />
-          <view wx:else class="name">{{item.name}}</view>
-        </view>
+        <image
+          wx:if="{{item.cover}}"
+          t-class="logo__img"
+          src="{{item.cover}}"
+          style="height: 100%; width: 100%"
+        />
+        <view wx:else class="name">{{item.name}}</view>
+      </view>
       <view class="info">
         <view class="bookName">{{item.name}}</view>
         <view class="des">{{item.description}}</view>
