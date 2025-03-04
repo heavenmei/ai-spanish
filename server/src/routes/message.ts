@@ -167,7 +167,7 @@ export async function deleteMessage(c: Context) {
   }
 }
 
-// GET
+//GET
 export async function getAllMessages(c: Context) {
   const user = c.get("user");
 
@@ -180,12 +180,12 @@ export async function getAllMessages(c: Context) {
   }
 
   try {
-    // 获取该用户的所有消息，并按消息的创建时间排序
+    // 获取该用户的所有消息，并按创建时间排序（升序）
     const messagesList = await db
       .select()
       .from(messages)
       .where(eq(messages.uid, user.id))  // 仅获取当前用户的消息
-      .orderBy(desc(messages.createdAt))  // 按创建时间降序排列（最新的消息排前）
+      .orderBy(asc(messages.createdAt))  // 按创建时间升序排列
       .execute();
 
     if (!messagesList || messagesList.length === 0) {
@@ -196,9 +196,9 @@ export async function getAllMessages(c: Context) {
       );
     }
 
-    // 获取用户的剩余token
+    // 获取用户的剩余 token
     const userData = await db
-      .select({recordToken: users.recordToken})
+      .select({"recordToken": users.recordToken})
       .from(users)
       .where(eq(users.id, user.id))
       .limit(1)
@@ -212,42 +212,37 @@ export async function getAllMessages(c: Context) {
       );
     }
 
-    let userTokensRemaining = userData[0].recordToken; // 初始剩余token
-
-    // 处理消息列表，将提问和回答合并并计算总token消耗
+    let userTokensRemaining = userData[0].recordToken; // 初始剩余 token
     const resultMessages = [];
-    let totalConsumedToken = 0;
-
+    
     for (let i = 0; i < messagesList.length; i++) {
-      const message = messagesList[i];
+      const userMessage = messagesList[i];
 
-      // 获取用户提问的token和AI回答的token
-      const userToken = message.isAiRes ? 0 : message.token;
-      const aiToken = message.isAiRes ? message.token : 0;  
-      const questionTotalToken = userToken + aiToken;
+      if (userMessage.isAiRes) continue;
 
-      // 计算剩余的token
-      userTokensRemaining += questionTotalToken;
+      const aiMessage = messagesList[i + 1] && messagesList[i + 1].isAiRes ? messagesList[i + 1] : null;
 
-      // 合并用户提问和AI回答，返回一条记录
-      if (i === 0 || messagesList[i].historyId !== messagesList[i - 1]?.historyId) {
-        resultMessages.push({
-          historyId: message.historyId, // 当前问题的唯一标识
-          questionTotalToken: questionTotalToken, // 当前问题的总token消耗
-          userTokensRemaining,  // 提问后的剩余token
-          messages: [message],  // 保存当前消息
-        });
-      } else {
-        // 合并同一问题的提问和回答内容
-        resultMessages[resultMessages.length - 1].messages.push(message);
-      }
+      const userToken = userMessage.token || 0;
+      const aiToken = aiMessage ? aiMessage.token || 0 : 0;
+      const totalTokenConsumed = userToken + aiToken;
+
+      userTokensRemaining -= totalTokenConsumed;
+
+      resultMessages.push({
+        questionId: userMessage.id,
+        totalTokenConsumed, 
+        userTokensRemaining, 
+        userMessage, 
+        aiMessage, 
+      });
+
+      if (aiMessage) i++;
     }
 
-    // 返回消息列表（合并后的消息记录）和剩余的token
     return c.json(
       successRes({
         message: "获取用户消息成功",
-        data: resultMessages,  // 返回合并后的消息记录
+        data: resultMessages,  
       })
     );
   } catch (e: any) {
